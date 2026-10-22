@@ -49,7 +49,7 @@ async function guest(page){assert.equal((await (await page.request.get(base+'/ap
   await page.locator('.detail-save .save-button').click();await page.locator('.detail-save .save-button[aria-pressed="false"]').waitFor();
   await saved(tab,'ourense',false);await tab.close();
   await page.locator('.detail-save .save-button').click();await page.locator('.detail-save .save-button[aria-pressed="true"]').waitFor();
-  await page.goto(base+'/guardados?vista=calendario&mes=2026-11');await page.locator('.calendar-view').waitFor();
+  await page.goto(base+'/calendario?guardados=1&mes=2026-11');await page.locator('.calendar-view').waitFor();
   await page.locator('[data-day="2026-11-07"] .calendar-day-button').click();
   await page.locator('[data-calendar-event="ourense"]').waitFor();
   assert.deepEqual(mutations,[],'Visitors must not write favorites to the API');

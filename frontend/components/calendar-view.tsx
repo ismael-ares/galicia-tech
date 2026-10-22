@@ -7,14 +7,14 @@ import { type Event, topic } from '@/lib/data';
 import { useI18n } from './i18n';
 import { CommunityLogo } from './community-logo';
 
-type Props={events:Event[];month:string;today:string;onMonthChange:(month:string)=>void;renderPoster:(event:Event)=>ReactNode};
+type Props={events:Event[];month:string;today:string;onMonthChange:(month:string)=>void;renderPoster:(event:Event)=>ReactNode;renderSave?:(event:Event)=>ReactNode};
 function tone(event:Event){
  if(/devfest/i.test(event.title))return 'conference';
  if(/wordpress/i.test(event.community))return 'community';
  if(/python/i.test(event.community))return 'code';
  return 'tech';
 }
-export function CalendarView({events,month,today,onMonthChange,renderPoster}:Props){
+export function CalendarView({events,month,today,onMonthChange,renderPoster,renderSave}:Props){
  const {t,eventText,formatDate}=useI18n();
  const [selection,setSelection]=useState<string|null>(null);
  const buttons=useRef(new Map<string,HTMLButtonElement>());
@@ -82,7 +82,7 @@ export function CalendarView({events,month,today,onMonthChange,renderPoster}:Pro
    <aside className="calendar-day-panel" id="calendar-day-panel" aria-labelledby="calendar-day-title">
     <header><div className="calendar-selected-date"><strong aria-hidden="true">{Number(selected.slice(-2))}</strong><div><span>{selected===today?t('Hoy'):formatDate(selected+'T12:00:00Z',{weekday:'long'})}</span><h3 id="calendar-day-title">{formatDate(selected+'T12:00:00Z',{day:'numeric',month:'long'})}</h3></div></div><div className="calendar-day-panel-toolbar"><p role="status">{selectedEvents.length} {selectedEvents.length===1?t('encuentro'):t('encuentros')}</p><div><button className="icon-button" type="button" aria-label={t('Día anterior con encuentros')} disabled={!previousBusy} onClick={()=>previousBusy&&select(previousBusy)}><ChevronLeft size={15}/></button><button className="icon-button" type="button" aria-label={t('Siguiente día con encuentros')} disabled={!nextBusy} onClick={()=>nextBusy&&select(nextBusy)}><ChevronRight size={15}/></button></div></div></header>
     {selectedEvents.length?<div className="calendar-day-events" key={selected}>{selectedEvents.map(event=><article className="calendar-day-event" key={event.id} data-calendar-event={event.id}>
-     <div className="calendar-event-community"><span><CommunityLogo identity={event.community} size={17}/></span><small>{event.community}</small></div>
+     <div className="calendar-day-event-top"><div className="calendar-event-community"><span><CommunityLogo identity={event.community} size={17}/></span><small>{event.community}</small></div>{renderSave?.(event)}</div>
      <div className="calendar-day-event-heading"><div><Link href={'/evento/'+event.id}><h4>{eventText(event.title)}</h4></Link>{event.description[0]&&<p className="calendar-event-summary">{eventText(event.description[0])}</p>}</div><Link className="calendar-thumbnail" href={'/evento/'+event.id} aria-label={t('Ver ficha')+': '+eventText(event.title)} tabIndex={-1}>{renderPoster(event)}</Link></div>
      <div className="calendar-day-event-meta"><span><Clock3 size={13}/>{time(event,selected)}</span><span><MapPin size={13}/>{event.city}</span><span><Ticket size={13}/>{t(event.price)}</span></div>
      <div className="calendar-day-tags"><span data-tone={tone(event)}>{t(topic(event))}</span>{/finalizaci/i.test(event.statusNote)&&<span className="calendar-schedule-note">{t('Fin por confirmar')}</span>}</div>

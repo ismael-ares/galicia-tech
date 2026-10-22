@@ -17,8 +17,9 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
  try{
   manage("from core.models import User; assert not User.objects.filter(is_superuser=True).exists(), 'Use an isolated QA deployment, never an owner-managed database'");
   const page=await browser.newPage({locale:'es-ES',viewport:{width:1440,height:1050},reducedMotion:'reduce'});page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(base);await page.locator('.event-view-switch').waitFor();
-  assert.equal(await page.getByRole('button',{name:'Agenda',exact:true}).getAttribute('aria-pressed'),'true');
+  await page.goto(base);await page.locator('.desktop-nav').waitFor();
+  assert.equal(await page.locator('.desktop-nav').getByRole('link',{name:'Agenda',exact:true}).getAttribute('aria-current'),'page');
+  assert.equal(await page.locator('.event-view-switch').count(),0);
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
   // Test sample import is explicit and leaves a visible sample banner.
   execFileSync(docker,['compose','exec','-T','backend','python','manage.py','import_sample'],{cwd:root,stdio:'pipe'});
@@ -42,7 +43,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   const catalogue=await (await page.request.get(base+'/api/v1/catalog/')).json();assert(catalogue.events.find(e=>e.id==='hackathon').end.includes('19:00:00'));
   await page.goto(base);await page.locator('.meet-card').first().getByRole('button',{name:/^Guardar:/}).click();await page.getByRole('status').getByText('Encuentro guardado.',{exact:true}).waitFor();
   await page.goto(base+'/guardados');await page.locator('.meet-card').first().waitFor();assert.equal(await page.locator('.meet-card').count(),1);await page.reload();await page.locator('.meet-card').first().waitFor();
-  await page.goto(base+'/?vista=calendario&mes=2026-11#events-heading');await page.locator('.calendar-view').waitFor();await page.locator('[data-day="2026-11-04"] .calendar-day-button').click();await page.locator('[data-calendar-event="santiago"]').waitFor();
+  await page.goto(base+'/calendario?mes=2026-11');await page.locator('.calendar-view').waitFor();await page.locator('[data-day="2026-11-04"] .calendar-day-button').click();await page.locator('[data-calendar-event="santiago"]').waitFor();
   await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-light.png')});
   await page.getByRole('button',{name:'Activar modo oscuro'}).click();await page.locator('.language-button').click();assert.equal(await page.locator('html').getAttribute('lang'),'gl');
   await page.setViewportSize({width:390,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-mobile-dark.png')});

@@ -6,6 +6,8 @@ Ya existe la primera base funcional con Next.js, Django, PostgreSQL, Redis, Q2 y
 
 Puedes guardar eventos sin iniciar sesión: se conservan en este navegador. Con una cuenta se guardan en el servidor y puedes incorporar expresamente tu selección local desde Guardados.
 
+La navegación principal separa **Agenda** (`/`), **Calendario** (`/calendario`) y **Guardados** (`/guardados`). El calendario permite mostrar todos los eventos o solo los guardados; Guardados organiza tu selección en todos, por venir y pasados.
+
 ```sh
 python3 tools/init_env.py
 sh infra/start.sh

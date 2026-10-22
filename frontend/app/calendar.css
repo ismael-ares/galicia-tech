@@ -1,8 +1,5 @@
 /* Calendar has its own visual system. Agenda cards are deliberately untouched. */
 .event-browser-toolbar{align-items:center;gap:18px}
-.event-view-switch{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2);flex-shrink:0}
-.event-view-switch button{display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 13px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:12px;line-height:1.4;min-height:34px;transition:background-color var(--motion-fast),color var(--motion-fast)}
-.event-view-switch button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 4px #0000000c}
 .calendar-view{margin:8px 0 32px;--cal-tech-bg:#e7eef6;--cal-tech-ink:#294d71;--cal-conference-bg:#eeeafa;--cal-conference-ink:#574178;--cal-community-bg:#f1ece3;--cal-community-ink:#675137;--cal-code-bg:#e4eeeb;--cal-code-ink:#315e51}
 [data-theme=dark] .calendar-view{--cal-tech-bg:#2d4055;--cal-tech-ink:#c8dff7;--cal-conference-bg:#3b334c;--cal-conference-ink:#ddd0f5;--cal-community-bg:#413a31;--cal-community-ink:#e5d6be;--cal-code-bg:#2b403a;--cal-code-ink:#c0e2d3}
 .calendar-view [data-tone=tech]{--event-bg:var(--cal-tech-bg);--event-ink:var(--cal-tech-ink)}
@@ -115,8 +112,6 @@
 @media(max-width:760px){.calendar-toolbar h3{font-size:28px}.calendar-month-controls{gap:6px}.calendar-month-picker{width:38px;padding:0;border:0;background:transparent;position:relative}.calendar-month-picker>svg{position:absolute;inset:11px;pointer-events:none}.calendar-month-picker input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.calendar-month-picker input::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:100%;height:100%;cursor:pointer}.calendar-event-city{display:none}.calendar-event strong{font-size:10px}.calendar-month td{height:132px}}
 @media(max-width:640px){
  .event-browser-toolbar{flex-wrap:wrap;align-items:flex-start;gap:14px}
- .event-view-switch{width:100%;padding:3px;border-radius:12px}
- .event-view-switch button{flex:1;min-height:36px;font-size:11px;padding:7px 11px}
  .calendar-view{margin-top:6px}
  .calendar-toolbar{margin-bottom:17px;gap:10px;align-items:center;flex-wrap:wrap}
  .calendar-month-heading{flex:1 1 160px}
@@ -170,7 +165,7 @@
  .calendar-day-event-bottom>a,.calendar-day-event-bottom>.calendar-original-source{font-size:11px;min-height:32px}
 }
 @media(max-width:380px){.calendar-month-heading{flex-basis:100%}.calendar-toolbar{gap:12px}.calendar-month-controls{width:100%}.calendar-month-picker{margin-left:auto}.calendar-month td{height:54px}.calendar-day-number{width:25px;height:25px}.calendar-day-event-heading{grid-template-columns:minmax(0,1fr) 67px}.calendar-thumbnail{height:82px}}
-@media(prefers-reduced-motion:reduce){.event-view-switch button,.calendar-event{transition:none}.calendar-day-events{animation:none}}
+@media(prefers-reduced-motion:reduce){.calendar-event{transition:none}.calendar-day-events{animation:none}}
 
 /* Official community marks in the shared page heading, never letter avatars. */
 .mini-avatars>span{background:#fff!important;border-color:var(--bg)!important}

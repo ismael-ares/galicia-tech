@@ -49,6 +49,16 @@ Al iniciar sesión se muestran los guardados de la cuenta, mantenidos en Postgre
 
 Prueba de navegador específica (requiere Playwright y una muestra local cargada): `node tools/check_guest_favorites.cjs`. Admite `PLAYWRIGHT_MODULE`, `PLAYWRIGHT_CHANNEL`, `DOCKER_BIN` y `APP_URL`. Crea y elimina una cuenta normal temporal, sin modificar cuentas existentes. Las capturas y el resultado quedan en `output/guest-favorites/`.
 
+## Agenda, calendario y selección personal
+
+La navegación principal ofrece tres destinos: Agenda (`/`, entrada predeterminada), Calendario (`/calendario`) y Guardados (`/guardados`). En escritorio se agrupan en la cabecera; en móvil y tablet se mantienen en la barra inferior junto a Mi cuenta. La administración sigue dentro de la cuenta con permisos.
+
+Agenda conserva el carrusel y las tarjetas aprobadas. Calendario tiene una pantalla propia, sin carrusel ni selector Agenda/Calendario. El mes (`mes=AAAA-MM`), la búsqueda (`q`), ciudad (`ciudad`), comunidad (`comunidad`) y alcance (`guardados=1` para la selección personal) se reflejan en la URL. Mes y alcance permiten Atrás/Adelante; la búsqueda y los filtros reemplazan la entrada actual del historial. Los marcadores también están disponibles en las fichas del día seleccionado.
+
+Guardados es una colección con filtros Todos, Por venir y Pasados, búsqueda y un acceso «Ver en calendario» con `guardados=1`. Los eventos de varios días que siguen en curso se incluyen en Por venir. El enlace abre el mes del siguiente guardado o, si todos han pasado, el del último. La selección local y la cuenta mantienen el comportamiento descrito arriba.
+
+Los enlaces anteriores `/?vista=calendario&mes=...` y `/guardados?vista=calendario&mes=...` redirigen a la nueva ruta, conservando el mes válido y, para Guardados, el alcance personal. `node tools/check_navigation.cjs` comprueba navegación, filtros, historial, teclado, enlaces anteriores, marcadores, estados vacíos y GL/ES con ambos temas. Las evidencias quedan en `output/navigation/`.
+
 ## Consulta de fuentes y gasto
 
 `COLLECTION_ENABLED=false` es el valor inicial. Al habilitarlo y recrear backend/worker, el programador comprueba cada hora si toca descargar. La configuración permite una consulta diaria o lunes/jueves. El botón Consultar en Fuentes encola una lectura manual. Solo se permiten los dominios de `FETCH_ALLOWED_HOSTS`; añadir una fuente nueva no amplía esa lista automáticamente.
