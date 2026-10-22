@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="60" viewBox="0 0 286 60" role="img" aria-labelledby="title desc">
+<title id="title">Galicia Tech · Vieira del Camino</title><desc id="desc">Vieira jacobea orientada hacia la derecha: nueve radios amarillos convergen en la bisagra sobre fondo azul.</desc>
+<rect x="2" y="2" width="56" height="56" rx="17" fill="#F4E8CF"/>
+<g class="component-shell" fill="#175B4C" stroke="#175B4C" stroke-linejoin="round">
+<g class="component-ribs"><path class="component-rib" d="M14.85 26.52 L32.07 0.98 L35.92 3.99 L15.31 26.88 Z"/>
+<path class="component-rib" d="M15.57 27.14 L38.10 6.13 L41.17 9.92 L15.94 27.59 Z"/>
+<path class="component-rib" d="M16.14 27.90 L42.81 12.50 L44.95 16.89 L16.39 28.43 Z"/>
+<path class="component-rib" d="M16.52 28.77 L45.97 19.77 L47.07 24.52 L16.65 29.34 Z"/>
+<path class="component-rib" d="M16.69 29.71 L47.41 27.56 L47.41 32.44 L16.69 30.29 Z"/>
+<path class="component-rib" d="M16.65 30.66 L47.07 35.48 L45.97 40.23 L16.52 31.23 Z"/>
+<path class="component-rib" d="M16.39 31.57 L44.95 43.11 L42.81 47.50 L16.14 32.10 Z"/>
+<path class="component-rib" d="M15.94 32.41 L41.17 50.08 L38.10 53.87 L15.57 32.86 Z"/>
+<path class="component-rib" d="M15.31 33.12 L35.92 56.01 L32.07 59.02 L14.85 33.48 Z"/></g>
+<path class="shell-hinge" d="M15.5 21.7 C11.8 21.4 8.7 23.6 8.7 26.4 C6.9 28.1 7 30.4 9.1 32 C8.2 35.2 10.7 38.3 14.3 38.4 C18.2 38.5 20.5 34.5 20.5 30.1 C20.5 25.8 18.2 22.2 15.5 21.7 Z"/>
+</g>
+<circle class="component-node" cx="13.2" cy="30" r="1.45" fill="#F4E8CF" stroke="#175B4C" stroke-width=".8"/>
+<text class="component-wordmark" x="70" y="29" fill="#20332F" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="21" font-weight="750" letter-spacing="-.8">Galicia Tech</text>
+<text class="component-tagline" x="71" y="46" fill="#65756F" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="10.5" font-weight="600" letter-spacing=".25">COMUNIDADES Y ENCUENTROS</text>
+</svg>

@@ -1,0 +1,606 @@
+{
+  "version": 1,
+  "evaluatedAt": "2026-10-19",
+  "timezone": "Europe/Madrid",
+  "sourceInput": "mock/cover-sources.json",
+  "events": [
+    {
+      "id": "flutter",
+      "title": "Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+        "imageSource": "JSON-LD Event.image con nombre del evento coincidente",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+        "evidenceType": "jsonld-event-image",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "status": "selected",
+        "checkedAt": "2026-10-19T21:11:14Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA at Google Developer Groups GDG Ourense",
+          "candidates": 3
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+          "kind": "jsonld-event-image",
+          "evidence": "JSON-LD Event.image con nombre del evento coincidente",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "score": 195,
+          "ok": true,
+          "content_type": "image/png",
+          "width": 2000,
+          "height": 2000,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_8xZEgtu",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "hackathon",
+      "title": "Hackathon ETSE · Vibe Coding · Ideas que Transforman",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+        "imageSource": "JSON-LD Event.image con nombre del evento coincidente",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+        "evidenceType": "jsonld-event-image",
+        "contentType": "image/jpeg",
+        "width": 994,
+        "height": 994,
+        "status": "selected",
+        "checkedAt": "2026-10-19T21:11:15Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See Hackathon ETSE Vibe Coding - Ideas que Transforman at Google Developer Groups GDG Santiago de Compostela",
+          "candidates": 3
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+          "kind": "jsonld-event-image",
+          "evidence": "JSON-LD Event.image con nombre del evento coincidente",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "score": 195,
+          "ok": true,
+          "content_type": "image/jpeg",
+          "width": 994,
+          "height": 994,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_ELxBf4P",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/avte_A7vot7C.jpg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_fbXxEcT",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/etse-colab.jpg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_yBTYHzD",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_RX0RbBY",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Kquvdq4",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "santiago",
+      "title": "DevFest Santiago de Compostela 2026",
+      "selected": null,
+      "status": "no-image",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See DevFest Santiago de Compostela 2026 at Google Developer Groups GDG Santiago de Compostela",
+          "candidates": 0
+        },
+        {
+          "requested_url": "https://devfest.gdg-sdc.org/",
+          "url": "https://devfest.gdg-sdc.org/",
+          "kind": "official-page",
+          "status": "ok",
+          "title": "DevFest Santiago de Compostela 2026",
+          "candidates": 1
+        },
+        {
+          "requested_url": "https://devfest.gdg-sdc.org/agenda",
+          "url": "https://devfest.gdg-sdc.org/agenda",
+          "kind": "official-page",
+          "status": "ok",
+          "title": "Agenda - DevFest Santiago de Compostela 2026",
+          "candidates": 2
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://cdn.sessionize.com/image/cc19-400o400o1-9XDA7oRBVBUsnQQGGDUUEY.png",
+          "kind": "embedded-event-image",
+          "evidence": "Estado embebido con título del evento coincidente",
+          "page": "https://devfest.gdg-sdc.org/agenda",
+          "score": 160,
+          "ok": true,
+          "content_type": "image/png",
+          "width": 400,
+          "height": 400,
+          "final_url": "https://cdn.sessionize.com/image/cc19-400o400o1-9XDA7oRBVBUsnQQGGDUUEY.png"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_900,q_auto:good,w_1200/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_SocialSharingThumbnail_KFxxrrs.png",
+          "kind": "og:image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_DefaultEventBanner_g3sdRZ4.png",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/images_YQ0m0GE.png",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/etse-colab.jpg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/368px-Google_2015_logo.svg.png",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/logo-Raiola-Networks-Plata_5AxqKLe.jpeg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Kquvdq4",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_DefaultEventThumbnail_2_va1kAS9.png",
+          "kind": "embedded-event-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fb516-400o400o1-DgpXTZARgTbWfNKpteAdXn.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fd3cd-400o400o1-atpnsW3HoKBNruBvbuzkEE.png&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F83e1-400o400o1-XR76iKsToVDjBTkx8P3ibS.png&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F28c7-400o400o1-EXV84TdhQcMdnNZpSuJwHu.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fcc19-400o400o1-9XDA7oRBVBUsnQQGGDUUEY.png&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F9483-400o400o1-VoBGwZ8MUus3iMworDtfE3.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fce72-400o400o1-huWs8SzKUmYkNsWktHnJqm.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F8856-400o400o1-NDsnrBJb1vYUYenswbJKGk.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F6541-400o400o1-GDtHtBD1EZHGDhMXcYN8K9.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F899c-400o400o1-BH2y93gtXWmZk9n6N2nRFL.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F23ba-400o400o1-SsucdgFaMUYUMVAaSTAUa7.png&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F1e7f-400o400o1-JR1PUdXo8dVnXaHh2pA8Mg.jpeg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Ff7d5-400o400o1-SfMhSmhZDMpcupHF4Me12c.jpg&w=300&q=75",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "ourense",
+      "title": "DevFest Ourense 2026",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+        "imageSource": "JSON-LD Event.image con nombre del evento coincidente",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+        "evidenceType": "jsonld-event-image",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "status": "selected",
+        "checkedAt": "2026-10-19T21:11:17Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See DevFest 2026 at Google Developer Groups GDG Ourense",
+          "candidates": 2
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+          "kind": "jsonld-event-image",
+          "evidence": "JSON-LD Event.image con nombre del evento coincidente",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "score": 195,
+          "ok": true,
+          "content_type": "image/png",
+          "width": 2000,
+          "height": 2000,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_mWI1BiY",
+          "kind": "html-image",
+          "reason": "No hay evidencia contextual suficiente de que la imagen pertenezca a este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_O8GQpOh",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_44fb1lV",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Cm556ml",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_FFYNU1n",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/1_EOTOXZi.png",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Rl8YKob",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/2_t4YidHx.png",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_bpGMSCY",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_wR7aKXl",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_b1SgXdk",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Cb9QeRY",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://storage.googleapis.com/platform-data-goog/event_banners/blob_mWI1BiY",
+          "kind": "embedded-event-image",
+          "reason": "Parece logo, avatar, socio, placeholder o recurso de interfaz, no portada del evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

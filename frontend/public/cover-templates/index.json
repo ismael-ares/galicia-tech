@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "id": "orbits",
+      "name": "Órbitas",
+      "number": 1,
+      "tone": "ink",
+      "layout": "editorial",
+      "file": "01-orbits.svg",
+      "sha256": "2f91841c8726192e4be35444953316b9fec5396d9769341cf26da99981ec8ea4"
+    },
+    {
+      "id": "tiles",
+      "name": "Módulos",
+      "number": 2,
+      "tone": "paper",
+      "layout": "corner",
+      "file": "02-tiles.svg",
+      "sha256": "f95a29cc12618a7ca7353072f223153261bad0219a048b361b5d018d6f825582"
+    },
+    {
+      "id": "waves",
+      "name": "Ondas",
+      "number": 3,
+      "tone": "steel",
+      "layout": "stripe",
+      "file": "03-waves.svg",
+      "sha256": "ebcb9614a98965bd5a15eb5fb817c83d150f10d83614d9c8c273908c43ab545e"
+    },
+    {
+      "id": "rays",
+      "name": "Radios",
+      "number": 4,
+      "tone": "ink",
+      "layout": "center",
+      "file": "04-rays.svg",
+      "sha256": "195d2a67d15a6141fd2a0fc6c48393cccf7d5c07c22661c45634eb11589d1af9"
+    },
+    {
+      "id": "steps",
+      "name": "Trama escalonada",
+      "number": 5,
+      "tone": "paper",
+      "layout": "rule",
+      "file": "05-steps.svg",
+      "sha256": "e1cab37bdeb7da9b06dd5a8de69ac2824135a4c77778a81218abec4a5c8967ae"
+    },
+    {
+      "id": "network",
+      "name": "Conexiones",
+      "number": 6,
+      "tone": "steel",
+      "layout": "editorial",
+      "file": "06-network.svg",
+      "sha256": "e113aa597a7b31de57ab5c5511b0fba28c3e39738a51cfcc875d3697a9460bb2"
+    },
+    {
+      "id": "contours",
+      "name": "Topografía",
+      "number": 7,
+      "tone": "ink",
+      "layout": "rule",
+      "file": "07-contours.svg",
+      "sha256": "e050e83d470abfd5acb0408ebc397a4a8aa43438c9f491b1873af22d0b72316a"
+    },
+    {
+      "id": "circuit",
+      "name": "Circuito",
+      "number": 8,
+      "tone": "paper",
+      "layout": "editorial",
+      "file": "08-circuit.svg",
+      "sha256": "53e7e5b3d799a0db541ddd9e44ac78937edb14ac06297fdbddcc84ad395048bb"
+    },
+    {
+      "id": "portals",
+      "name": "Pórticos",
+      "number": 9,
+      "tone": "ink",
+      "layout": "corner",
+      "file": "09-portals.svg",
+      "sha256": "0e624ba4547030f34384ed74bd919ded24f9debe17a355bd965fa0140ef8383f"
+    },
+    {
+      "id": "horizon",
+      "name": "Horizonte",
+      "number": 10,
+      "tone": "steel",
+      "layout": "rule",
+      "file": "10-horizon.svg",
+      "sha256": "78f9d7e3a285bdcb06246d3fbed6b91da38ce664d0702a0a207902818b31aba4"
+    },
+    {
+      "id": "checker",
+      "name": "Tablero",
+      "number": 11,
+      "tone": "paper",
+      "layout": "corner",
+      "file": "11-checker.svg",
+      "sha256": "7418f56fdd3b079e74b914da06516a8cdfb43681a75dc9d27b419f3df9e092e2"
+    },
+    {
+      "id": "constellation",
+      "name": "Constelación",
+      "number": 12,
+      "tone": "ink",
+      "layout": "center",
+      "file": "12-constellation.svg",
+      "sha256": "10a2edb3e99bb76d620152d8158fcdf11e6f17c483cee6491a9daf16108f4cfe"
+    },
+    {
+      "id": "ribbons",
+      "name": "Cintas",
+      "number": 13,
+      "tone": "steel",
+      "layout": "stripe",
+      "file": "13-ribbons.svg",
+      "sha256": "45a87aea1b967fcae9eb6e9c3455f27f44cc89cdef32368b6a8913eff07a5389"
+    },
+    {
+      "id": "frame",
+      "name": "Encuadre",
+      "number": 14,
+      "tone": "paper",
+      "layout": "rule",
+      "file": "14-frame.svg",
+      "sha256": "bbaee468dabcfe23441f467b9a68dc08a75ea7d75cbb7008d356f8c3f2591957"
+    },
+    {
+      "id": "sunrise",
+      "name": "Amanecer",
+      "number": 15,
+      "tone": "ink",
+      "layout": "editorial",
+      "file": "15-sunrise.svg",
+      "sha256": "0cc273d0579f16ed49e8fd9e13f7d0671b3e72ac47d893f4d5b6c351930b67d2"
+    },
+    {
+      "id": "dotmatrix",
+      "name": "Matriz",
+      "number": 16,
+      "tone": "steel",
+      "layout": "corner",
+      "file": "16-dotmatrix.svg",
+      "sha256": "a6570459dd435e3446e421e7ba47df19c198ad98941df4dd8f8102f00b1d1dcb"
+    },
+    {
+      "id": "helix",
+      "name": "Hélice",
+      "number": 17,
+      "tone": "paper",
+      "layout": "stripe",
+      "file": "17-helix.svg",
+      "sha256": "418e7b2a044c0c1ab5bea849c1d7a86db587979a9b7f0ae94c4f21aad0bdb23d"
+    },
+    {
+      "id": "chevrons",
+      "name": "Vectores",
+      "number": 18,
+      "tone": "ink",
+      "layout": "rule",
+      "file": "18-chevrons.svg",
+      "sha256": "fdab070dfe4cc7dea47b65602bd9569a52367992fd8cc181c8254035edffa48e"
+    },
+    {
+      "id": "folds",
+      "name": "Pliegues",
+      "number": 19,
+      "tone": "paper",
+      "layout": "editorial",
+      "file": "19-folds.svg",
+      "sha256": "dc5144defadc1ad310040c611d5a6067be7ee8dd070ec80d393944d2b36d75ef"
+    },
+    {
+      "id": "diagonals",
+      "name": "Diagonales",
+      "number": 20,
+      "tone": "steel",
+      "layout": "center",
+      "file": "20-diagonals.svg",
+      "sha256": "ad41b05e86e4a85538dccbc0edaa55296421f3da32d6fc9537031a969f423a2a"
+    }
+  ]
+}

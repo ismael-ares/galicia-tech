@@ -1,0 +1,4 @@
+/* Vista de propuesta: no consulta YAML ni modifica ajustes del servidor. */
+(()=>{
+const $=id=>document.getElementById(id);document.querySelectorAll('[data-config-mode]').forEach(button=>button.addEventListener('click',()=>{const yaml=button.dataset.configMode==='yaml';document.querySelectorAll('[data-config-mode]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));$('settings-fields').disabled=yaml;$('settings-web-actions').hidden=yaml;$('settings-yaml').hidden=!yaml;$('settings-origin').textContent=yaml?'Solo lectura · esta sección estaría gestionada por config.yaml en el servidor.':'Administrado desde la interfaz web. Los cambios se guardarían en la base de datos.'}));$('settings-form').addEventListener('submit',event=>{event.preventDefault();window.GaliciaManagement.notify('Cambios de muestra aplicados a esta vista. No se ha modificado el servidor.')});
+})();

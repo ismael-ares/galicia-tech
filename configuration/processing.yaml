@@ -1,0 +1,6 @@
+# Used only when CONFIG_AUTHORITY=yaml; paid calls cannot be enabled in v0.1.
+processing:
+  retrieval: daily
+  frequency: twice-weekly
+  budget_eur: 5.00
+  paid_calls_enabled: false

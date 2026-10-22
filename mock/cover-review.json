@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "events": {
+    "santiago": {
+      "rejected": [
+        {
+          "url": "https://devfest.gdg-sdc.org/open-graph-image.png",
+          "sha256": "ffbb9bcd3abd6e873ab19294d1be263dd73b596e06c3b61cd794101d678caae4",
+          "reason": "Inspección visual manual: marca DevFest genérica azul; no identifica Santiago de Compostela, fecha ni edición 2026."
+        }
+      ]
+    },
+    "hacktoberfest": {
+      "rejected": [
+        {
+          "url": "https://secure-content.meetupstatic.com/images/classic-events/510663345/676x676.jpg",
+          "reason": "Inspección visual manual: es el logo genérico de Python Coruña, sin nombre, fecha ni edición del evento."
+        },
+        {
+          "url": "https://secure-content.meetupstatic.com/images/classic-events/510663345/676x507.jpg",
+          "reason": "Inspección visual manual: es el logo genérico de Python Coruña, sin nombre, fecha ni edición del evento."
+        },
+        {
+          "url": "https://secure-content.meetupstatic.com/images/classic-events/510663345/676x380.jpg",
+          "reason": "Inspección visual manual: es el logo genérico de Python Coruña, sin nombre, fecha ni edición del evento."
+        }
+      ],
+      "rejectedAssets": [
+        {
+          "provider": "meetup",
+          "id": "510663345",
+          "reason": "Inspección visual manual: logo genérico de Python Coruña. Se excluyen también los recortes y alias de CDN del mismo recurso."
+        }
+      ]
+    }
+  }
+}

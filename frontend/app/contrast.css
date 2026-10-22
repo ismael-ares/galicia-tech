@@ -1,0 +1,20 @@
+/* Controles y estados usan bordes propios, separados de los divisores decorativos. */
+.search-field,.select-field,.filter-button,.account-button,.outlined,.chip:not(.active),.button.secondary,.input-with-icon,.review-fields input,.review-fields select,.review-fields textarea,.settings-grid input,.settings-grid select,.expanded-filters select{border-color:var(--control-line)}
+.search-field:focus-within,.select-field:focus-within,.input-with-icon:focus-within{outline:2px solid var(--primary);outline-offset:2px}
+.encounter-save .save-button{border-color:var(--control-line);color:var(--muted)}
+.encounter-save .save-button.is-saved{background:var(--accent-soft);color:var(--primary);border-color:var(--primary)}
+.save-button:hover,.save-button.is-saved{color:var(--primary)}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:1}
+.dots button{background:var(--control-line)}
+.dots button[aria-pressed=true]{background:var(--primary)}
+.encounter-fact>svg{opacity:1}
+.source-toggle.paused{box-shadow:inset 0 0 0 1px var(--control-line)}
+.role-options button{border-color:var(--control-line)}
+.role-options button.selected{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+.checkbox-label input{outline-offset:3px}
+.review-card .error-message{color:var(--warning);font-weight:550}
+.warning-pill{border:1px solid var(--warning)}
+.poster-bottom strong{color:var(--poster-ink)}
+.poster-bottom>span,.automatic-label{color:var(--poster-muted)}
+.poster-top{color:var(--poster-ink)}
+@media(forced-colors:active){.chip.active,.desktop-nav a.active,.admin-tabs .active,.role-options button.selected{outline:2px solid Highlight}.save-button.is-saved{outline:2px solid Highlight}}

@@ -1,0 +1,74 @@
+{
+  "events": [
+    {
+      "id": "flutter",
+      "title": "Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA",
+      "year": "2026",
+      "event_page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+      "official_pages": []
+    },
+    {
+      "id": "hackathon",
+      "title": "Hackathon ETSE · Vibe Coding · Ideas que Transforman",
+      "year": "2026",
+      "event_page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+      "official_pages": []
+    },
+    {
+      "id": "santiago",
+      "title": "DevFest Santiago de Compostela 2026",
+      "year": "2026",
+      "event_page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/",
+      "official_pages": [
+        "https://devfest.gdg-sdc.org/",
+        "https://devfest.gdg-sdc.org/agenda"
+      ]
+    },
+    {
+      "id": "ourense",
+      "title": "DevFest Ourense 2026",
+      "year": "2026",
+      "event_page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+      "official_pages": []
+    },
+    {
+      "id": "wordpress-vigo-octubre",
+      "title": "¡Levanta, c4br0n, que la vida sigue!",
+      "year": "2026",
+      "event_page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+      "official_pages": []
+    },
+    {
+      "id": "gpul-terminal",
+      "title": "Introdución á terminal",
+      "year": "2026",
+      "event_page": "https://gpul.org/eventos/2026/intro-terminal/",
+      "official_pages": []
+    },
+    {
+      "id": "extreme-ai-engineering",
+      "title": "Extreme AI engineering",
+      "year": "2026",
+      "event_page": "https://www.eventbrite.es/e/extreme-ai-engineering-tickets-2002328209576",
+      "official_pages": [
+        "https://corunajug.org/"
+      ]
+    },
+    {
+      "id": "un-dia-con-ia",
+      "title": "Un día con IA",
+      "year": "2026",
+      "event_page": "https://www.eventbrite.es/e/un-dia-con-ia-tickets-2002328703052",
+      "official_pages": [
+        "https://cascarillatech.org/events/one-ai-day/"
+      ]
+    },
+    {
+      "id": "hacktoberfest",
+      "title": "HacktoberfestES Python Coruña 2026",
+      "year": "2026",
+      "event_page": "https://www.meetup.com/python-a-coruna/events/316973470/",
+      "official_pages": []
+    }
+  ]
+}

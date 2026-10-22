@@ -1,0 +1,7 @@
+{
+  "command": "python -m unittest discover -s tests -v",
+  "runtime": "Python 3.13.5",
+  "exitCode": 1,
+  "scope": "Fixtures locales del colector y búsqueda de portadas; no LXC, backend ni llamadas LLM",
+  "utc": "2026-10-21T06:48:16.2967049Z"
+}

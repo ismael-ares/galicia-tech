@@ -1,0 +1,36 @@
+/* SVG motion is independent of gallery layout and of the source palette. */
+.logo-stage :is(.component-tile,.component-node){transform-box:fill-box;transform-origin:center}
+.logo-stage svg:focus-visible{outline:3px solid #7051a2;outline-offset:6px;border-radius:10px}
+.component-controls button:disabled{opacity:.45;cursor:default}
+.logo-stage[data-logo-kind="shell"] :is(.component-outline,.component-rib,.component-route){stroke-dasharray:1;stroke-dashoffset:0}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="shell"] .component-outline,
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-outline{animation:shell-trace .78s cubic-bezier(.22,.75,.25,1) both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="ribs"] .component-rib,
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-rib{animation:rib-open .6s cubic-bezier(.2,.8,.25,1) both;animation-delay:calc(var(--rib-index,0)*32ms)}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-rib{animation-delay:calc(180ms + var(--rib-index,0)*32ms)}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="route"] .component-route{animation:route-sweep .48s ease-out both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-route{animation:route-sweep .48s ease-out .72s both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="nodes"] .component-node,
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-node{animation:node-pulse .52s cubic-bezier(.2,.8,.2,1) both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-node{animation-delay:1.04s}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-tile{animation:tile-pop .5s cubic-bezier(.2,.85,.25,1) both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="wordmark"] .component-wordmark,
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-wordmark{animation:word-arrive .42s cubic-bezier(.2,.75,.25,1) both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-wordmark{animation-delay:1.15s}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="wordmark"] .component-tagline,
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-tagline{animation:word-arrive .38s ease-out .08s both}
+.logo-stage[data-logo-kind="shell"].is-playing[data-target="all"] .component-tagline{animation-delay:1.3s}
+@keyframes shell-trace{0%{stroke-dashoffset:1;fill-opacity:.25}72%{stroke-dashoffset:0;fill-opacity:.7}100%{stroke-dashoffset:0;fill-opacity:1}}
+@keyframes rib-open{from{stroke-dashoffset:1;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes route-sweep{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes node-pulse{0%{opacity:0;transform:scale(.5)}65%{opacity:1;transform:scale(1.35)}100%{opacity:1;transform:scale(1)}}
+@keyframes tile-pop{0%{transform:scale(.97)}70%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes word-arrive{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.logo-stage[data-logo-kind="shell"].is-playing *{animation:none!important}}
+
+/* Entry, hover and focus: replay the shell, keeping the wordmark still. */
+.app-brand.is-playing[data-target="brand"] .component-outline{animation:brand-shell .46s cubic-bezier(.2,.8,.25,1) both}
+.app-brand.is-playing[data-target="brand"] .component-rib{animation:rib-open .38s ease-out both;animation-delay:calc(var(--rib-index,0)*24ms)}
+.app-brand.is-playing[data-target="brand"] .component-tile{animation:tile-pop .42s ease-out both}
+@keyframes brand-shell{from{fill-opacity:.65;stroke-dashoffset:.35}to{fill-opacity:1;stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.app-brand.is-playing *{animation:none!important}}

@@ -1,0 +1,843 @@
+{
+  "capturedAt": "2026-10-20",
+  "events": [
+    {
+      "id": "flutter",
+      "title": "Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA",
+      "start": "2026-10-21T18:00:00+02:00",
+      "end": "2026-10-21T20:00:00+02:00",
+      "dateLabel": "Miércoles, 21 de octubre de 2026",
+      "timeLabel": "18:00–20:00 · hora de Galicia",
+      "city": "Ourense",
+      "community": "GDG Ourense",
+      "place": "Escola Superior de Enxeñería Informática (ESEI), Edificio Politécnico, Ourense",
+      "price": "Gratis",
+      "requirements": "La ficha no indica requisitos de acceso.",
+      "statusNote": "",
+      "description": [
+        "La sesión parte de un cambio en el diseño de interfaces: dejar atrás pantallas rígidas basadas solo en reglas de maquetación y pensar en experiencias capaces de adaptarse a cada persona.",
+        "Explora cómo combinar Flutter con Generative UI y Server-Driven UI para crear interfaces que se reconfiguran en tiempo real. La ficha propone debatir estrategias de personalización y revisar casos de estudio y ejemplos prácticos para aplicaciones modernas."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · GDG Ourense",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        }
+      ],
+      "registration": {
+        "label": "Inscripción en GDG",
+        "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+      },
+      "sourceIds": [
+        "ourense"
+      ]
+    },
+    {
+      "id": "hackathon",
+      "title": "Hackathon ETSE · Vibe Coding · Ideas que Transforman",
+      "start": "2026-10-22T12:00:00+02:00",
+      "end": "2026-10-22T19:30:00+02:00",
+      "dateLabel": "Jueves, 22 de octubre de 2026",
+      "timeLabel": "12:00–19:30 · hora de Galicia",
+      "city": "Santiago de Compostela",
+      "community": "GDG Santiago de Compostela",
+      "place": "USC · Escola Técnica Superior de Enxeñaría (ETSE), Rúa de Lope Gómez de Marzoa, Santiago de Compostela",
+      "price": "Gratis",
+      "requirements": "Para estudiantes de la USC; la convocatoria destaca especialmente ETSE, Física y Matemáticas. Plazo de inscripción indicado: 21 de octubre. Incluye café y aperitivos gratuitos y menciona 1 crédito universitario.",
+      "cardNote": "Acceso USC · plazo 21 oct.",
+      "statusNote": "Hora de finalización por confirmar: la ficha estructurada indica 19:30; el texto descriptivo dice 19:00.",
+      "description": [
+        "Una jornada para idear y programar en equipo, participar en talleres y mejorar habilidades con apoyo de mentores. La convocatoria anima tanto a quienes empiezan como a quienes ya programan.",
+        "El acceso se limita a estudiantes de la USC, con especial mención a ETSE, Física y Matemáticas. También anuncia café y aperitivos gratuitos y un crédito universitario por asistir. El plazo que publica es el 21 de octubre.",
+        "Aviso de horario: el intervalo estructurado de la ficha termina a las 19:30 (hora de Galicia), mientras que el texto descriptivo dice 19:00. Se conserva el intervalo de la ficha hasta que la organización lo confirme."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · GDG Santiago",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        }
+      ],
+      "registration": {
+        "label": "Inscripción en GDG",
+        "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+      },
+      "sourceIds": [
+        "santiago"
+      ]
+    },
+    {
+      "id": "santiago",
+      "title": "DevFest Santiago de Compostela 2026",
+      "start": "2026-11-04T16:30:05+01:00",
+      "end": "2026-11-05T20:30:05+01:00",
+      "dateLabel": "4–5 de noviembre de 2026",
+      "timeLabel": "4 nov 16:30 → 5 nov 20:30 · hora de Galicia",
+      "city": "Santiago de Compostela",
+      "community": "GDG Santiago de Compostela",
+      "place": "USC · Escola Técnica Superior de Enxeñaría (ETSE), Rúa de Lope Gómez de Marzoa, Santiago de Compostela",
+      "price": "Gratis",
+      "requirements": "La ficha consultada no especifica requisitos de acceso. El rango publicado abarca dos días; no confirma el horario separado de cada jornada.",
+      "statusNote": "Horario por jornada no confirmado.",
+      "description": [
+        "DevFest Santiago propone dos días de charlas sobre inteligencia artificial y desarrollo web, talleres prácticos y espacios para conocer a otras personas del sector. La ficha anuncia participación de Google Experts y profesionales de la industria.",
+        "También menciona una pausa de café gratuita, networking, sorteos y actividades. El horario general publicado va del 4 de noviembre a las 16:30 al 5 de noviembre a las 20:30 (hora de Galicia); no se debe interpretar como el horario de cada día.",
+        "La organización remite a la web oficial para consultar la agenda actualizada y conseguir entrada. La entrada figura como gratuita."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · GDG Santiago",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "label": "Web oficial · DevFest Santiago",
+          "url": "https://devfest.gdg-sdc.org/"
+        },
+        {
+          "label": "Agenda por jornadas",
+          "url": "https://devfest.gdg-sdc.org/agenda"
+        }
+      ],
+      "registration": {
+        "label": "Entradas · web oficial",
+        "url": "https://devfest.gdg-sdc.org/"
+      },
+      "sourceIds": [
+        "santiago"
+      ]
+    },
+    {
+      "id": "ourense",
+      "title": "DevFest Ourense 2026",
+      "start": "2026-11-07T09:00:00+01:00",
+      "end": "2026-11-07T21:00:00+01:00",
+      "dateLabel": "Sábado, 7 de noviembre de 2026",
+      "timeLabel": "09:00–21:00 · hora de Galicia",
+      "city": "Ourense",
+      "community": "GDG Ourense",
+      "place": "Escola Superior de Enxeñería Informática (ESEI), Edificio Politécnico, Ourense",
+      "price": "5 €",
+      "requirements": "La ficha indica que personas que empiezan, desarrolladores con experiencia y quienes sienten curiosidad por la tecnología son bienvenidos.",
+      "statusNote": "",
+      "description": [
+        "Una jornada de aprendizaje e intercambio tecnológico que reúne a la comunidad en la ESEI de Ourense. La convocatoria presenta temas de inteligencia artificial y agentes autónomos, desarrollo web y móvil, cloud computing, Green Tech y tecnologías emergentes como computación cuántica y bioinformática.",
+        "El programa anunciado combina ponencias de profesionales y Google Developer Experts, talleres prácticos en formato codelab y espacios de networking con empresas y talento local. La ficha invita a personas con distintos niveles de experiencia."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · GDG Ourense",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        }
+      ],
+      "registration": {
+        "label": "Entradas · ficha GDG",
+        "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+      },
+      "sourceIds": [
+        "ourense"
+      ]
+    },
+    {
+      "id": "wordpress-vigo-octubre",
+      "title": "¡Levanta, c4br0n, que la vida sigue!",
+      "start": "2026-10-22T19:00:00+02:00",
+      "end": "2026-10-22T21:00:00+02:00",
+      "dateLabel": "Jueves, 22 de octubre de 2026",
+      "timeLabel": "19:00–21:00 · hora de Galicia",
+      "city": "Vigo",
+      "community": "WordPress Vigo",
+      "sourceIds": [
+        "wordpress-vigo"
+      ],
+      "place": "Círculo de Empresarios de Galicia · Rúa de García Barbón, 62, Vigo",
+      "price": "Precio no indicado",
+      "requirements": "La convocatoria da la bienvenida a personas de cualquier nivel de WordPress. La inscripción cierra el 22 de octubre a las 12:00, según la ficha.",
+      "statusNote": "",
+      "cardNote": "Inscripción previa · cierre 22 oct, 12:00",
+      "description": [
+        "Encuentro de WordPress Vigo sobre trayectorias profesionales y cambios de rumbo en la carrera laboral, con un espacio posterior para conversar y hacer contactos. La convocatoria invita a participar con cualquier nivel de experiencia en WordPress o en el mundo web.",
+        "El horario publicado en la ficha es de 19:00 a 21:00 en Galicia.",
+        "La ficha solicita inscribirse solo si se puede asistir y cancelar la plaza si surge un imprevisto. No se ha identificado un precio explícito en la lectura consultada."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · WordPress Vigo",
+          "url": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        }
+      ],
+      "registration": {
+        "label": "Inscripción en Meetup",
+        "url": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+      }
+    },
+    {
+      "id": "extreme-ai-engineering",
+      "title": "Extreme AI engineering",
+      "start": "2026-10-22T19:30:00+02:00",
+      "end": "2026-10-22T21:30:00+02:00",
+      "dateLabel": "Jueves, 22 de octubre de 2026",
+      "timeLabel": "19:30–21:30 · hora de Galicia",
+      "city": "A Coruña",
+      "community": "CoruñaJUG",
+      "sourceIds": [
+        "corunajug"
+      ],
+      "place": "Cidade das TIC · Av. de Pedralonga, A Coruña",
+      "price": "Gratis",
+      "requirements": "Inscripción en Eventbrite. La ficha consultada no indica restricciones de acceso.",
+      "statusNote": "",
+      "description": [
+        "Charla de Roberto Sócrates, CTO de VSDron, sobre ingeniería de inteligencia artificial. La convocatoria propone compartir experiencias sobre cómo afrontar los cambios que introduce la IA en el desarrollo.",
+        "Organizada conjuntamente por CoruñaJUG y Cascarilla Tech en Cidade das TIC. El horario coincide entre la web de la comunidad, su feed y la ficha de Eventbrite; las entradas figuran con precio cero en la ficha consultada."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Convocatoria · CoruñaJUG",
+          "url": "https://corunajug.org/"
+        },
+        {
+          "label": "Ficha del organizador · Eventbrite",
+          "url": "https://www.eventbrite.es/e/extreme-ai-engineering-tickets-2002328209576"
+        }
+      ],
+      "registration": {
+        "label": "Inscripción en Eventbrite",
+        "url": "https://www.eventbrite.es/e/extreme-ai-engineering-tickets-2002328209576"
+      }
+    },
+    {
+      "id": "un-dia-con-ia",
+      "title": "Un día con IA",
+      "start": "2026-11-21T09:00:00+01:00",
+      "end": "2026-11-21T18:30:00+01:00",
+      "dateLabel": "Sábado, 21 de noviembre de 2026",
+      "timeLabel": "09:00–18:30 · hora de Galicia",
+      "city": "A Coruña",
+      "community": "CoruñaJUG",
+      "sourceIds": [
+        "corunajug"
+      ],
+      "place": "Oficinas de Odeene · Cidade das TIC, Av. de Pedralonga, A Coruña",
+      "price": "Desde 20 €",
+      "requirements": "Entrada de pago. Consulta el importe final y las condiciones de gestión e IVA al reservar; la web anuncia descuento para socios de Cascarilla Tech.",
+      "statusNote": "",
+      "cardNote": "Programa parcialmente confirmado",
+      "description": [
+        "Una jornada para conectar a la comunidad tecnológica y las empresas de A Coruña, organizada por Cascarilla Tech y CoruñaJUG. El programa combina una apertura con desayuno, una charla inicial, cuatro ponencias y espacios para comer y conversar.",
+        "La web oficial ya anuncia varias charlas sobre desarrollo, negocio e integraciones, y mantiene una ponencia pendiente de confirmar. Las puertas abren a las 09:00 y cierran a las 18:30.",
+        "La organización anuncia entradas desde 20 euros y explica que su importe se destina a la comida, descontando los gastos de gestión y el IVA. Consulta el programa y las condiciones de la entrada en las fuentes originales."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Programa oficial · Cascarilla Tech",
+          "url": "https://cascarillatech.org/events/one-ai-day/"
+        },
+        {
+          "label": "Ficha del organizador · Eventbrite",
+          "url": "https://www.eventbrite.es/e/un-dia-con-ia-tickets-2002328703052"
+        }
+      ],
+      "registration": {
+        "label": "Entradas en Eventbrite",
+        "url": "https://www.eventbrite.es/e/un-dia-con-ia-tickets-2002328703052"
+      }
+    },
+    {
+      "id": "hacktoberfest",
+      "title": "Hacktoberfest 2026",
+      "start": "2026-10-24T10:00:00+02:00",
+      "end": "2026-10-24T21:00:00+02:00",
+      "dateLabel": "Sábado, 24 de octubre de 2026",
+      "timeLabel": "10:00–21:00 · hora de Galicia",
+      "city": "A Coruña",
+      "community": "Python A Coruña",
+      "communities": [
+        "GDG A Coruña",
+        "Python A Coruña",
+        "GPUL"
+      ],
+      "sourceIds": [
+        "coruna",
+        "python-coruna"
+      ],
+      "place": "Centro Universitario de Riazor · UDC, Rúa Almirante Lángara, A Coruña",
+      "price": "Precio no indicado",
+      "requirements": "La convocatoria no indica requisitos de acceso.",
+      "statusNote": "",
+      "description": [
+        "Una jornada para contribuir a proyectos de software libre, aprender y conocer a la comunidad. La convocatoria da la bienvenida a participantes de cualquier nivel, e incluye propuestas para personas que empiezan y para quienes ya contribuyen habitualmente.",
+        "Python A Coruña y la convocatoria de GDG anuncian la misma fecha, horario y lugar. El texto de Python identifica a Python España, Python Coruña, GDG A Coruña y GPUL entre los organizadores; se conserva una sola ficha con los dos enlaces de procedencia.",
+        "El programa incluye una introducción, presentación de proyectos, trabajo colaborativo y pausas para conversar. La inscripción se realiza en la ficha de Meetup enlazada."
+      ],
+      "image": null,
+      "imageSource": null,
+      "sources": [
+        {
+          "label": "Ficha del evento · GDG A Coruña",
+          "url": "https://gdg.community.dev/events/details/google-gdg-a-coruna-presents-hacktoberfest-2026-1/"
+        },
+        {
+          "label": "Convocatoria e inscripción · Python A Coruña",
+          "url": "https://www.meetup.com/python-a-coruna/events/316973470/"
+        }
+      ],
+      "registration": {
+        "url": "https://www.meetup.com/python-a-coruna/events/316973470/",
+        "label": "Inscripción revisada"
+      }
+    }
+  ],
+  "ranking": [
+    {
+      "id": "flutter",
+      "reason": "Esta semana · entrada gratuita · ficha completa y sin restricción de acceso indicada."
+    },
+    {
+      "id": "santiago",
+      "reason": "Dos jornadas · entrada gratuita · acceso abierto; la web oficial publica agenda y entradas."
+    },
+    {
+      "id": "ourense",
+      "reason": "7 de noviembre · acceso general · lugar, horario y precio indicados."
+    }
+  ],
+  "sources": [
+    {
+      "id": "coruna",
+      "name": "GDG A Coruña",
+      "url": "https://gdg.community.dev/gdg-a-coruna/",
+      "city": "A Coruña",
+      "platform": "GDG",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-19",
+      "method": "Lectura del colector"
+    },
+    {
+      "id": "ourense",
+      "name": "GDG Ourense",
+      "url": "https://gdg.community.dev/gdg-ourense/",
+      "city": "Ourense",
+      "platform": "GDG",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-19",
+      "method": "Lectura del colector"
+    },
+    {
+      "id": "santiago",
+      "name": "GDG Santiago de Compostela",
+      "url": "https://gdg.community.dev/gdg-santiago-de-compostela/",
+      "city": "Santiago de Compostela",
+      "platform": "GDG",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-19",
+      "method": "Lectura del colector"
+    },
+    {
+      "id": "wordpress",
+      "name": "WordPress Coruña · Meetup",
+      "url": "https://www.meetup.com/wordpresscoruna/",
+      "city": "A Coruña",
+      "platform": "Meetup",
+      "note": "Sin próximos eventos en la lectura del 19 de octubre; el evento observado ya había pasado.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-19",
+      "method": "Lectura del colector"
+    },
+    {
+      "id": "gpul",
+      "name": "GPUL",
+      "url": "https://gpul.org/",
+      "city": "A Coruña",
+      "platform": "Web",
+      "note": "Una convocatoria próxima, pendiente de confirmar la hora. Dispone de RSS de eventos: https://gpul.org/rss/eventos.xml.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-vigo",
+      "name": "WordPress Vigo",
+      "url": "https://www.meetup.com/vigo-wordpress-meetup/",
+      "city": "Vigo",
+      "platform": "Meetup",
+      "note": "Una convocatoria próxima comprobada en la ficha del evento. Hora normalizada a Europe/Madrid.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-lugo",
+      "name": "WordPress Lugo",
+      "url": "https://www.meetup.com/wordpresslugo/",
+      "city": "Lugo",
+      "platform": "Meetup",
+      "note": "Sin próximas convocatorias visibles. La última observada fue el 24 de septiembre de 2026.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-santiago",
+      "name": "WordPress Santiago",
+      "url": "https://www.meetup.com/santiago-de-compostela-wordpress-meetup-group/",
+      "city": "Santiago de Compostela",
+      "platform": "Meetup",
+      "note": "Sin próximas convocatorias visibles. La última observada fue el 23 de septiembre de 2026.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-pontevedra",
+      "name": "WordPress Pontevedra",
+      "url": "https://www.meetup.com/pontevedra-wordpress-meetup/",
+      "city": "Pontevedra",
+      "platform": "Meetup",
+      "note": "Sin próximas convocatorias visibles. La última observada fue el 11 de septiembre de 2026.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-ferrolterra",
+      "name": "Ferrolterra WordPress",
+      "url": "https://www.meetup.com/ferrolterrawordpress/",
+      "city": "Ferrol",
+      "platform": "Meetup",
+      "note": "Sin próximas convocatorias visibles. La última observada fue el 19 de junio de 2026.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "wordpress-ourense",
+      "name": "WordPress Ourense",
+      "url": "https://www.meetup.com/wordpressourense/",
+      "city": "Ourense",
+      "platform": "Meetup",
+      "note": "Sin próximas convocatorias visibles. La última observada fue el 26 de marzo de 2025.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "corunajug",
+      "name": "CoruñaJUG",
+      "url": "https://corunajug.org/",
+      "city": "A Coruña",
+      "platform": "Web",
+      "note": "Dos próximas convocatorias verificadas con las fichas del organizador. Dispone de un feed de eventos estructurado.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    },
+    {
+      "id": "python-coruna",
+      "name": "Python A Coruña",
+      "url": "https://www.meetup.com/python-a-coruna/",
+      "city": "A Coruña",
+      "platform": "Meetup",
+      "note": "Hacktoberfest del 24 de octubre: coorganizado con GDG A Coruña y GPUL. Se reúne con la convocatoria GDG en una sola ficha.",
+      "enabled": true,
+      "snapshot": true,
+      "checkedAt": "2026-10-20",
+      "method": "Lectura manual verificada"
+    }
+  ],
+  "cases": [
+    {
+      "id": "registration",
+      "eventId": "hacktoberfest",
+      "title": "Hacktoberfest 2026",
+      "city": "A Coruña",
+      "community": "GDG A Coruña · Python A Coruña",
+      "sourceIds": [
+        "coruna",
+        "python-coruna"
+      ],
+      "date": "24 oct · 10:00–21:00",
+      "type": "Inscripción",
+      "published": false,
+      "heading": "Inscripción del evento coorganizado",
+      "summary": "La duda original surgió por dos títulos distintos. La convocatoria de Python A Coruña identifica expresamente a GDG A Coruña y GPUL como coorganizadores y coincide en fecha, lugar y horario.",
+      "observedAt": "20 de octubre de 2026",
+      "defaultDecision": {
+        "status": "approved",
+        "value": "https://www.meetup.com/python-a-coruna/events/316973470/",
+        "note": "Corroborado al incorporar la fuente seleccionada Python A Coruña: coorganizadores, fecha, lugar y horario coincidentes. Se ofrece la inscripción directa de Meetup.",
+        "at": "2026-10-20T08:13:30+00:00",
+        "origin": "source"
+      },
+      "field": {
+        "kind": "url",
+        "label": "Enlace de inscripción verificado",
+        "help": "Pega el enlace que hayas contrastado con la convocatoria oficial.",
+        "path": "registration.url",
+        "linkLabel": "Inscripción revisada"
+      },
+      "evidence": [
+        {
+          "label": "Convocatoria original",
+          "value": "Hacktoberfest 2026",
+          "detail": "24 de octubre · Riazor, A Coruña. Publicada por GDG A Coruña.",
+          "url": "https://gdg.community.dev/events/details/google-gdg-a-coruna-presents-hacktoberfest-2026-1/",
+          "linkLabel": "Abrir convocatoria GDG"
+        },
+        {
+          "label": "Convocatoria coorganizada",
+          "value": "HacktoberfestES Python Coruña 2026",
+          "detail": "24 de octubre, 10:00–21:00, Centro Universitario Riazor. El texto identifica a GDG A Coruña y GPUL entre los organizadores.",
+          "url": "https://www.meetup.com/python-a-coruna/events/316973470/",
+          "linkLabel": "Abrir convocatoria Python"
+        }
+      ],
+      "candidate": {
+        "id": "hacktoberfest",
+        "title": "Hacktoberfest 2026",
+        "start": "2026-10-24T10:00:00+02:00",
+        "end": "2026-10-24T21:00:00+02:00",
+        "dateLabel": "Sábado, 24 de octubre de 2026",
+        "timeLabel": "10:00–21:00 · hora de Galicia",
+        "city": "A Coruña",
+        "community": "Python A Coruña",
+        "communities": [
+          "GDG A Coruña",
+          "Python A Coruña",
+          "GPUL"
+        ],
+        "sourceIds": [
+          "coruna",
+          "python-coruna"
+        ],
+        "place": "Centro Universitario de Riazor · UDC, Rúa Almirante Lángara, A Coruña",
+        "price": "Precio no indicado",
+        "requirements": "La convocatoria no indica requisitos de acceso.",
+        "statusNote": "",
+        "description": [
+          "Una jornada para contribuir a proyectos de software libre, aprender y conocer a la comunidad. La convocatoria da la bienvenida a participantes de cualquier nivel, e incluye propuestas para personas que empiezan y para quienes ya contribuyen habitualmente.",
+          "Python A Coruña y la convocatoria de GDG anuncian la misma fecha, horario y lugar. El texto de Python identifica a Python España, Python Coruña, GDG A Coruña y GPUL entre los organizadores; se conserva una sola ficha con los dos enlaces de procedencia.",
+          "El programa incluye una introducción, presentación de proyectos, trabajo colaborativo y pausas para conversar. La inscripción se realiza en la ficha de Meetup enlazada."
+        ],
+        "image": null,
+        "imageSource": null,
+        "sources": [
+          {
+            "label": "Ficha del evento · GDG A Coruña",
+            "url": "https://gdg.community.dev/events/details/google-gdg-a-coruna-presents-hacktoberfest-2026-1/"
+          },
+          {
+            "label": "Convocatoria e inscripción · Python A Coruña",
+            "url": "https://www.meetup.com/python-a-coruna/events/316973470/"
+          }
+        ],
+        "registration": null
+      }
+    },
+    {
+      "id": "end-time",
+      "eventId": "hackathon",
+      "title": "Hackathon ETSE · Vibe Coding",
+      "city": "Santiago de Compostela",
+      "community": "GDG Santiago de Compostela",
+      "sourceIds": [
+        "santiago"
+      ],
+      "date": "22 oct · desde las 12:00",
+      "type": "Horario",
+      "published": true,
+      "heading": "Confirmar la hora de finalización",
+      "summary": "La ficha y la descripción publican horas distintas. El evento sigue visible con un aviso.",
+      "observedAt": "19 de octubre de 2026",
+      "field": {
+        "kind": "choice",
+        "label": "Hora de finalización confirmada",
+        "options": [
+          {
+            "value": "19:00",
+            "label": "19:00",
+            "hint": "Según la descripción",
+            "patch": {
+              "end": "2026-10-22T19:00:00+02:00",
+              "timeLabel": "12:00–19:00 · hora de Galicia"
+            }
+          },
+          {
+            "value": "19:30",
+            "label": "19:30",
+            "hint": "Según la ficha",
+            "patch": {
+              "end": "2026-10-22T19:30:00+02:00",
+              "timeLabel": "12:00–19:30 · hora de Galicia"
+            }
+          }
+        ]
+      },
+      "approvedPatch": {
+        "statusNote": "",
+        "description": [
+          "Una jornada para idear y programar en equipo, participar en talleres y mejorar habilidades con apoyo de mentores. La convocatoria anima tanto a quienes empiezan como a quienes ya programan.",
+          "El acceso se limita a estudiantes de la USC, con especial mención a ETSE, Física y Matemáticas. También anuncia café y aperitivos gratuitos y un crédito universitario por asistir. El plazo que publica es el 21 de octubre."
+        ]
+      },
+      "evidence": [
+        {
+          "label": "Ficha estructurada",
+          "value": "19:30",
+          "detail": "Hora de fin guardada en los datos del evento.",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "linkLabel": "Abrir ficha GDG"
+        },
+        {
+          "label": "Texto de la convocatoria",
+          "value": "19:00",
+          "detail": "Hora de fin indicada en la descripción.",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "linkLabel": "Abrir descripción"
+        }
+      ]
+    },
+    {
+      "id": "gpul-start-time",
+      "eventId": "gpul-terminal",
+      "title": "Introdución á terminal",
+      "city": "A Coruña",
+      "community": "GPUL",
+      "sourceIds": [
+        "gpul"
+      ],
+      "date": "21 oct · hora por confirmar",
+      "type": "Horario",
+      "published": false,
+      "heading": "Confirmar la hora de inicio",
+      "summary": "El texto anuncia las 17:00. El JSON-LD usa 17:00 UTC, que equivale a las 19:00 en Galicia. La convocatoria queda en espera.",
+      "observedAt": "20 de octubre de 2026",
+      "field": {
+        "kind": "choice",
+        "label": "Hora de inicio confirmada",
+        "options": [
+          {
+            "value": "17:00",
+            "label": "17:00",
+            "hint": "Texto de la convocatoria",
+            "patch": {
+              "start": "2026-10-21T17:00:00+02:00",
+              "timeLabel": "17:00 · fin no indicado"
+            }
+          },
+          {
+            "value": "19:00",
+            "label": "19:00",
+            "hint": "JSON-LD normalizado",
+            "patch": {
+              "start": "2026-10-21T19:00:00+02:00",
+              "timeLabel": "19:00 · fin no indicado"
+            }
+          }
+        ]
+      },
+      "approvedPatch": {
+        "statusNote": ""
+      },
+      "candidate": {
+        "id": "gpul-terminal",
+        "title": "Introdución á terminal",
+        "start": "2026-10-21T17:00:00+02:00",
+        "end": null,
+        "dateLabel": "Miércoles, 21 de octubre de 2026",
+        "timeLabel": "17:00 según el texto · hora por confirmar",
+        "city": "A Coruña",
+        "community": "GPUL",
+        "sourceIds": [
+          "gpul"
+        ],
+        "place": "Laboratorio 0.6 · Facultade de Informática, Campus de Elviña, A Coruña",
+        "price": "Precio no indicado",
+        "requirements": "Llevar portátil para seguir el taller y practicar.",
+        "statusNote": "Hora por confirmar: el texto indica 17:00 y los datos estructurados equivalen a las 19:00 en Galicia.",
+        "description": [
+          "Taller de iniciación a la terminal de GNU/Linux dentro de GPUL School. Propone aprender tareas habituales como gestionar paquetes, configurar el sistema y editar archivos. La convocatoria pide llevar portátil para seguir los ejercicios.",
+          "La organización lo presenta como el inicio de un ciclo sobre herramientas de terminal, personalización y scripting. No se indica hora de finalización ni un precio explícito."
+        ],
+        "image": null,
+        "imageSource": null,
+        "sources": [
+          {
+            "label": "Convocatoria oficial · GPUL",
+            "url": "https://gpul.org/eventos/2026/intro-terminal/"
+          }
+        ],
+        "registration": null
+      },
+      "evidence": [
+        {
+          "label": "Texto visible",
+          "value": "17:00",
+          "detail": "En la ficha se lee «Hora: 17:00» para el 21 de octubre.",
+          "url": "https://gpul.org/eventos/2026/intro-terminal/",
+          "linkLabel": "Abrir convocatoria GPUL"
+        },
+        {
+          "label": "Datos estructurados",
+          "value": "19:00",
+          "detail": "startDate: 2026-10-21T17:00:00.000Z. Convertido a Europe/Madrid: 19:00 CEST.",
+          "url": "https://gpul.org/eventos/2026/intro-terminal/",
+          "linkLabel": "Abrir fuente original"
+        }
+      ]
+    }
+  ],
+  "covers": [
+    {
+      "id": "flutter",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "sha256": "ef15ba58a58e411cdd3bebf5f85faabd0877b48f6560c7897a518a41fa747c75",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:29Z"
+      }
+    },
+    {
+      "id": "hackathon",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 994,
+        "height": 994,
+        "sha256": "139467adbdce623a78e0fd1dd36c35afdf41c499442bc5b27676707309c81936",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:30Z"
+      }
+    },
+    {
+      "id": "santiago",
+      "selected": null
+    },
+    {
+      "id": "ourense",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "sha256": "b2fe1fba0daf448d285c0baad3f34a534ea4f9d851f0032158487322aad4160e",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:32Z"
+      }
+    },
+    {
+      "id": "wordpress-vigo-octubre",
+      "selected": {
+        "url": "https://secure-content.meetupstatic.com/images/classic-events/536487483/676x380.jpg",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 676,
+        "height": 380,
+        "sha256": "df6f47e229d9575a7b6b288bce376a4970b856fb2875f2280e472917110d7fcf",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:32Z"
+      }
+    },
+    {
+      "id": "gpul-terminal",
+      "selected": {
+        "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ.png",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gpul.org/eventos/2026/intro-terminal/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/png",
+        "width": 1920,
+        "height": 1080,
+        "sha256": "0634c3cb065f623c329f6253fa3df3034d23755a3ea72e5dda24dee29d627216",
+        "sha256Scope": "prefix-256000-bytes",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:32Z"
+      }
+    },
+    {
+      "id": "extreme-ai-engineering",
+      "selected": {
+        "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194767538%2F2714515847261%2F1%2Foriginal.20260930-213217?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.902&fp-y=0.561&s=5ee168b2fd662f78145ef346496bc596",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://www.eventbrite.es/e/extreme-ai-engineering-tickets-2002328209576",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 940,
+        "height": 494,
+        "sha256": "38e8a5015192fb2f409a97b58fb3c9438a9f56657b2c9b5226401be556e8bb31",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:32Z"
+      }
+    },
+    {
+      "id": "un-dia-con-ia",
+      "selected": {
+        "url": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1194463560%2F2714515847261%2F1%2Foriginal.20260927-174244?crop=focalpoint&fit=crop&w=940&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.958&fp-y=0.4&s=043ef0d06b7869f55c2fd59285134324",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://www.eventbrite.es/e/un-dia-con-ia-tickets-2002328703052",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 940,
+        "height": 494,
+        "sha256": "8dc747e78101a6162fac8c28c39c5eb28d277939fb3e97877442af6bf5d374b2",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T08:16:32Z"
+      }
+    },
+    {
+      "id": "hacktoberfest",
+      "selected": null
+    }
+  ]
+}

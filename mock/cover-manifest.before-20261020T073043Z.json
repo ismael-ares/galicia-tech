@@ -1,0 +1,1448 @@
+{
+  "version": 1,
+  "evaluatedAt": "2026-10-20",
+  "timezone": "Europe/Madrid",
+  "sourceInput": "mock/cover-sources.json",
+  "events": [
+    {
+      "id": "flutter",
+      "title": "Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "sha256": "ef15ba58a58e411cdd3bebf5f85faabd0877b48f6560c7897a518a41fa747c75",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T07:28:22Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See Interfaces líquidas: Adaptabilidad y Generative UI en Flutter en la era de la IA at Google Developer Groups GDG Ourense",
+          "candidates": 2
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+          "kind": "jsonld-event-image",
+          "specificity": "specific",
+          "evidence": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+          "ok": true,
+          "content_type": "image/png",
+          "width": 2000,
+          "height": 2000,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+          "sha256": "ef15ba58a58e411cdd3bebf5f85faabd0877b48f6560c7897a518a41fa747c75",
+          "sha256_scope": "full"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+          "kind": "twitter:image",
+          "status": "uncertain",
+          "reason": "Metadato social sin texto, ruta u objeto de imagen que identifique específicamente este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_8xZEgtu",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/blob_Ddjf86R",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rub%C3%A9n_fern%C3%A1ndez_9e38b608.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/ces%C3%A1reo_gonz%C3%A1lez_rodr%C3%ADguez_baeb2416.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/manuel_alonso_carracedo_O06HpNI.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/brais_font%C3%A1n_Q3VdEjh.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/javier_p%C3%A9rez_robles.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/marta_gonz%C3%A1lez_gonz%C3%A1lez_E7GXaYD.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/lorena_otero.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/gabriel_font%C3%A1n_rodi%C3%B1o_Zb5awq0.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/carlos_manuel_fernandez_feijoo_F4Twf0t.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/luis_garbayo_3542c5b5.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/jacobo_montero_naranjo_9526e699.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "hackathon",
+      "title": "Hackathon ETSE · Vibe Coding · Ideas que Transforman",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 994,
+        "height": 994,
+        "sha256": "139467adbdce623a78e0fd1dd36c35afdf41c499442bc5b27676707309c81936",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T07:28:23Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See Hackathon ETSE Vibe Coding - Ideas que Transforman at Google Developer Groups GDG Santiago de Compostela",
+          "candidates": 2
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+          "kind": "jsonld-event-image",
+          "specificity": "specific",
+          "evidence": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+          "ok": true,
+          "content_type": "image/jpeg",
+          "width": 994,
+          "height": 994,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+          "sha256": "139467adbdce623a78e0fd1dd36c35afdf41c499442bc5b27676707309c81936",
+          "sha256_scope": "full"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+          "kind": "twitter:image",
+          "status": "uncertain",
+          "reason": "Metadato social sin texto, ruta u objeto de imagen que identifique específicamente este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_ELxBf4P",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/avte_A7vot7C.jpg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_fbXxEcT",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/etse-colab.jpg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_yBTYHzD",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_RX0RbBY",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Kquvdq4",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/judit_gonz%C3%A1lez_prol_y4SAA2L.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/laura_antelo_3Yvg1J1.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/mateo_bodenlle_villarino_aYqhA4T.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/diego_crist%C3%B3bal_K4fnj8J.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/iago_feij%C3%B3o_rey_1OKUGlo.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sara_castro.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "santiago",
+      "title": "DevFest Santiago de Compostela 2026",
+      "selected": null,
+      "status": "no-image",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See DevFest Santiago de Compostela 2026 at Google Developer Groups GDG Santiago de Compostela",
+          "candidates": 0
+        },
+        {
+          "requested_url": "https://devfest.gdg-sdc.org/",
+          "url": "https://devfest.gdg-sdc.org/",
+          "kind": "official-page",
+          "status": "ok",
+          "title": "DevFest Santiago de Compostela 2026",
+          "candidates": 0
+        },
+        {
+          "requested_url": "https://devfest.gdg-sdc.org/agenda",
+          "url": "https://devfest.gdg-sdc.org/agenda",
+          "kind": "official-page",
+          "status": "ok",
+          "title": "Agenda - DevFest Santiago de Compostela 2026",
+          "candidates": 0
+        }
+      ],
+      "candidates_checked": [],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_900,q_auto:good,w_1200/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_SocialSharingThumbnail_KFxxrrs.png",
+          "kind": "og:image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_DefaultEventBanner_g3sdRZ4.png",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "El objeto Event se refiere al evento, pero el recurso usa un nombre genérico de imagen social/default; falta evidencia específica de la imagen.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/images_YQ0m0GE.png",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/etse-colab.jpg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/368px-Google_2015_logo.svg.png",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La referencia explícita de año no coincide con 2026.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/logo-Raiola-Networks-Plata_5AxqKLe.jpeg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Kquvdq4",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/judit_gonz%C3%A1lez_prol_y4SAA2L.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/laura_antelo_3Yvg1J1.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/mateo_bodenlle_villarino_aYqhA4T.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/diego_crist%C3%B3bal_K4fnj8J.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/iago_feij%C3%B3o_rey_1OKUGlo.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sara_castro.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_DefaultEventThumbnail_2_va1kAS9.png",
+          "kind": "embedded-event-image",
+          "status": "brand-only",
+          "reason": "El objeto Event se refiere al evento, pero el recurso usa un nombre genérico de imagen social/default; falta evidencia específica de la imagen.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-devfest-santiago-de-compostela-2026/"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/open-graph-image.png",
+          "kind": "og:image",
+          "status": "brand-only",
+          "reason": "Revisión manual: Inspección visual manual: marca DevFest genérica azul; no identifica Santiago de Compostela, fecha ni edición 2026. SHA-256 ffbb9bcd3abd6e873ab19294d1be263dd73b596e06c3b61cd794101d678caae4 El mismo metadato de compartir se repite en páginas oficiales del sitio y no identifica una pieza específica del evento.",
+          "page": "https://devfest.gdg-sdc.org/"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/open-graph-image.png",
+          "kind": "og:image",
+          "status": "brand-only",
+          "reason": "Revisión manual: Inspección visual manual: marca DevFest genérica azul; no identifica Santiago de Compostela, fecha ni edición 2026. SHA-256 ffbb9bcd3abd6e873ab19294d1be263dd73b596e06c3b61cd794101d678caae4 El mismo metadato de compartir se repite en páginas oficiales del sitio y no identifica una pieza específica del evento.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fb516-400o400o1-DgpXTZARgTbWfNKpteAdXn.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fb516-400o400o1-DgpXTZARgTbWfNKpteAdXn.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fd3cd-400o400o1-atpnsW3HoKBNruBvbuzkEE.png&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fd3cd-400o400o1-atpnsW3HoKBNruBvbuzkEE.png&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F83e1-400o400o1-XR76iKsToVDjBTkx8P3ibS.png&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F83e1-400o400o1-XR76iKsToVDjBTkx8P3ibS.png&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F28c7-400o400o1-EXV84TdhQcMdnNZpSuJwHu.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F28c7-400o400o1-EXV84TdhQcMdnNZpSuJwHu.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fcc19-400o400o1-9XDA7oRBVBUsnQQGGDUUEY.png&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fcc19-400o400o1-9XDA7oRBVBUsnQQGGDUUEY.png&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F9483-400o400o1-VoBGwZ8MUus3iMworDtfE3.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F9483-400o400o1-VoBGwZ8MUus3iMworDtfE3.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fce72-400o400o1-huWs8SzKUmYkNsWktHnJqm.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Fce72-400o400o1-huWs8SzKUmYkNsWktHnJqm.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F8856-400o400o1-NDsnrBJb1vYUYenswbJKGk.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F8856-400o400o1-NDsnrBJb1vYUYenswbJKGk.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F6541-400o400o1-GDtHtBD1EZHGDhMXcYN8K9.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F6541-400o400o1-GDtHtBD1EZHGDhMXcYN8K9.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F899c-400o400o1-BH2y93gtXWmZk9n6N2nRFL.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F899c-400o400o1-BH2y93gtXWmZk9n6N2nRFL.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F23ba-400o400o1-SsucdgFaMUYUMVAaSTAUa7.png&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F23ba-400o400o1-SsucdgFaMUYUMVAaSTAUa7.png&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F1e7f-400o400o1-JR1PUdXo8dVnXaHh2pA8Mg.jpeg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2F1e7f-400o400o1-JR1PUdXo8dVnXaHh2pA8Mg.jpeg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Ff7d5-400o400o1-SfMhSmhZDMpcupHF4Me12c.jpg&w=300&q=75",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        },
+        {
+          "url": "https://devfest.gdg-sdc.org/_next/image?url=https%3A%2F%2Fcdn.sessionize.com%2Fimage%2Ff7d5-400o400o1-SfMhSmhZDMpcupHF4Me12c.jpg&w=64&q=75",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://devfest.gdg-sdc.org/agenda"
+        }
+      ],
+      "errors": [],
+      "retention_note": "Se mostrará la portada automática local."
+    },
+    {
+      "id": "ourense",
+      "title": "DevFest Ourense 2026",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/png",
+        "width": 2000,
+        "height": 2000,
+        "sha256": "b2fe1fba0daf448d285c0baad3f34a534ea4f9d851f0032158487322aad4160e",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T07:28:25Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "url": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "See DevFest 2026 at Google Developer Groups GDG Ourense",
+          "candidates": 2
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+          "kind": "jsonld-event-image",
+          "specificity": "specific",
+          "evidence": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+          "ok": true,
+          "content_type": "image/png",
+          "width": 2000,
+          "height": 2000,
+          "final_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/blob_I71plLp",
+          "sha256": "b2fe1fba0daf448d285c0baad3f34a534ea4f9d851f0032158487322aad4160e",
+          "sha256_scope": "full"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_I71plLp",
+          "kind": "twitter:image",
+          "status": "uncertain",
+          "reason": "Metadato social sin texto, ruta u objeto de imagen que identifique específicamente este evento.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_vMWBFT9.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_dLx9sfU.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/blob_mWI1BiY",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Date_sMFTBzv.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_WebIcons_Location_o00TWea.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/blob_WMdWsTz",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/Retratos-Barcelona-Corporate-Headshots-MERKLE%2520Day%25201-054WebSize.jpg",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/Susanna_Wong.jpg",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/blob_VBvHDch",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/IMG_1458.jpg",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/blob_5Mb3tNS",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_face,h_400,q_auto:good,w_400/v1/gcs/platform-data-goog/events/blob_gMdSeCo",
+          "kind": "css-background",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_O8GQpOh",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_44fb1lV",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Cm556ml",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_FFYNU1n",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/1_EOTOXZi.png",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Rl8YKob",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/events/2_t4YidHx.png",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_bpGMSCY",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_wR7aKXl",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_b1SgXdk",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/sponsors/blob_Cb9QeRY",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rub%C3%A9n_fern%C3%A1ndez_9e38b608.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/ces%C3%A1reo_gonz%C3%A1lez_rodr%C3%ADguez_baeb2416.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/manuel_alonso_carracedo_O06HpNI.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/brais_font%C3%A1n_Q3VdEjh.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/javier_p%C3%A9rez_robles.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/marta_gonz%C3%A1lez_gonz%C3%A1lez_E7GXaYD.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/lorena_otero.jpeg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/gabriel_font%C3%A1n_rodi%C3%B1o_Zb5awq0.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/carlos_manuel_fernandez_feijoo_F4Twf0t.png",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/luis_garbayo_3542c5b5.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/jacobo_montero_naranjo_9526e699.jpg",
+          "kind": "css-background",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/GDG-Lockup-1Line-Black_fOEjqaH.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-goog/contentbuilder/gdg-logo-dark_YLmawcd.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        },
+        {
+          "url": "https://gdg.community.dev/static/images/powered_by_bevy.svg",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "wordpress-vigo-octubre",
+      "title": "¡Levanta, c4br0n, que la vida sigue!",
+      "selected": {
+        "url": "https://secure-content.meetupstatic.com/images/classic-events/536487483/676x380.jpg",
+        "imageSource": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+        "imagePage": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+        "evidenceType": "jsonld-event-image",
+        "specificity": "specific",
+        "contentType": "image/jpeg",
+        "width": 676,
+        "height": 380,
+        "sha256": "df6f47e229d9575a7b6b288bce376a4970b856fb2875f2280e472917110d7fcf",
+        "sha256Scope": "full",
+        "status": "selected",
+        "checkedAt": "2026-10-20T07:28:25Z"
+      },
+      "status": "selected",
+      "pages": [
+        {
+          "requested_url": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+          "url": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "¡Levanta, c4br0n, que la vida sigue!, Thu, Oct 22, 2026, 7:00 PM   | Meetup Bending Spoons",
+          "candidates": 3
+        }
+      ],
+      "candidates_checked": [
+        {
+          "url": "https://secure-content.meetupstatic.com/images/classic-events/536487483/676x380.jpg",
+          "kind": "jsonld-event-image",
+          "specificity": "specific",
+          "evidence": "JSON-LD Event.image dentro de objeto Event con nombre coincidente y URL no genérica",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/",
+          "ok": true,
+          "content_type": "image/jpeg",
+          "width": 676,
+          "height": 380,
+          "final_url": "https://secure-content.meetupstatic.com/images/classic-events/536487483/676x380.jpg",
+          "sha256": "df6f47e229d9575a7b6b288bce376a4970b856fb2875f2280e472917110d7fcf",
+          "sha256_scope": "full"
+        }
+      ],
+      "rejected": [
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/6/b/5/b/600_536487483.jpeg",
+          "kind": "og:image",
+          "status": "uncertain",
+          "reason": "Metadato social sin texto, ruta u objeto de imagen que identifique específicamente este evento.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://www.facebook.com/tr?id=792405807634160&ev=PageView&noscript=1",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/member/5/8/6/0/thumb_264682624.jpeg?w=64",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/member/5/8/6/0/thumb_264682624.jpeg?w=32",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=3840",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=32",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=48",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=64",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=96",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=128",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=256",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=384",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=640",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=750",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=828",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=1080",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=1200",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=1920",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/event/9/7/a/8/event_517178824.jpeg?w=2048",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/check.webp?w=64",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/check.webp?w=32",
+          "kind": "srcset-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/calendar.webp?w=64",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/calendar.webp?w=32",
+          "kind": "srcset-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/pin.webp?w=64",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/next/images/complex-icons/branded/pin.webp?w=32",
+          "kind": "srcset-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/sponsor/c/2/3/3/iab120x90_2749715.jpeg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/sponsor/c/d/b/f/iab120x90_2752671.png",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/sponsor/c/d/b/e/iab120x90_2752670.png",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        },
+        {
+          "url": "https://secure.meetupstatic.com/photos/sponsor/d/0/9/b/iab120x90_2753403.png",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://www.meetup.com/vigo-wordpress-meetup/events/316875139/"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "gpul-terminal",
+      "title": "Introdución á terminal",
+      "selected": null,
+      "status": "no-image",
+      "pages": [
+        {
+          "requested_url": "https://gpul.org/eventos/2026/intro-terminal/",
+          "url": "https://gpul.org/eventos/2026/intro-terminal/",
+          "kind": "event-page",
+          "status": "ok",
+          "title": "GPUL - Introdución á terminal",
+          "candidates": 0
+        }
+      ],
+      "candidates_checked": [],
+      "rejected": [
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ.png",
+          "kind": "og:image",
+          "status": "uncertain",
+          "reason": "Metadato social sin texto, ruta u objeto de imagen que identifique específicamente este evento.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/logo-small.DA8wWUJz_bYo5k.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/logo-small.DA8wWUJz_Zo9X5j.svg",
+          "kind": "srcset-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_5caTD.webp",
+          "kind": "html-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_zW4mk.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_Z1tBni.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_1V2t5W.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_10Ec8A.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_Z1Kq0mv.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/intro-terminal.D1DwRPLQ_1WzVJd.webp",
+          "kind": "srcset-image",
+          "status": "uncertain",
+          "reason": "La imagen no contiene contexto propio suficiente para identificar evento y edición.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/logo-small.DA8wWUJz_ErVRP.svg",
+          "kind": "html-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        },
+        {
+          "url": "https://gpul.org/_astro/logo-small.DA8wWUJz_wL8uH.svg",
+          "kind": "srcset-image",
+          "status": "brand-only",
+          "reason": "La ruta identifica logo, avatar, socio o recurso de marca/interfaz.",
+          "page": "https://gpul.org/eventos/2026/intro-terminal/"
+        }
+      ],
+      "errors": [],
+      "retention_note": "Se mostrará la portada automática local."
+    }
+  ]
+}

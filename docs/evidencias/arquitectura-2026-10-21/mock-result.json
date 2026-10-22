@@ -1,0 +1,7 @@
+{
+  "command": "node tests/test_mock_state.cjs",
+  "runtime": "v24.19.0",
+  "exitCode": 0,
+  "scope": "Modelo del mock en memoria; no autenticación ni backend real",
+  "utc": "2026-10-21T06:48:15.6521787Z"
+}

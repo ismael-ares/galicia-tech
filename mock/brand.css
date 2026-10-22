@@ -1,0 +1,13 @@
+/* The parent anchor retains the navigation action and accessible name. */
+a.brand{border-radius:14px}
+a.brand:focus-visible{outline:3px solid var(--focus,#227364);outline-offset:5px}
+.app-brand{display:inline-flex;flex-shrink:0;vertical-align:middle;line-height:0}
+.app-brand svg.brand-logo{display:block;width:236px;max-width:min(236px,48vw);height:auto;overflow:visible}
+.app-brand .component-tile{fill:var(--brand-tile)}
+.app-brand .shell-outline{fill:var(--brand-shell);stroke:var(--brand-edge)}
+.app-brand .component-ribs{stroke:var(--brand-rib)}
+.app-brand .component-wordmark{fill:var(--brand-text)}
+.app-brand .component-tagline{fill:var(--brand-muted)}
+.app-brand svg:hover{filter:none}
+@media(max-width:560px){.app-brand svg.brand-logo{width:196px;max-width:46vw}}
+@media(max-width:680px){.top .app-brand svg.brand-logo{width:200px;max-width:70vw}}

@@ -1,0 +1,441 @@
+{
+  "asOf": "2026-10-20",
+  "scope": "Research snapshot with later user selection applied to the mock",
+  "activeSourceCount": 13,
+  "candidates": [
+    {
+      "id": "gdg-lugo",
+      "name": "GDG Lugo",
+      "family": "GDG",
+      "url": "https://www.meetup.com/es-es/gdg-lugo/",
+      "priority": "low",
+      "status": "historical_activity",
+      "observation": "Grupo existente. Dos eventos visibles de 2019; sin próximos observados.",
+      "evidenceUrls": [
+        "https://www.meetup.com/es-es/gdg-lugo/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "wp-lugo",
+      "name": "WordPress Lugo",
+      "family": "WordPress",
+      "url": "https://www.meetup.com/wordpresslugo/",
+      "priority": "high",
+      "status": "recent_past_only",
+      "observation": "Última convocatoria visible: 24/09/2026.",
+      "evidenceUrls": [
+        "https://www.meetup.com/wordpresslugo/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "wp-santiago",
+      "name": "WordPress Santiago",
+      "family": "WordPress",
+      "url": "https://www.meetup.com/santiago-de-compostela-wordpress-meetup-group/",
+      "priority": "high",
+      "status": "recent_past_only",
+      "observation": "Última convocatoria visible: 23/09/2026.",
+      "evidenceUrls": [
+        "https://www.meetup.com/santiago-de-compostela-wordpress-meetup-group/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "wp-pontevedra",
+      "name": "WordPress Pontevedra",
+      "family": "WordPress",
+      "url": "https://www.meetup.com/pontevedra-wordpress-meetup/",
+      "priority": "high",
+      "status": "recent_past_only",
+      "observation": "Última convocatoria visible: 11/09/2026.",
+      "evidenceUrls": [
+        "https://www.meetup.com/pontevedra-wordpress-meetup/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "wp-ferrol",
+      "name": "Ferrolterra WordPress",
+      "family": "WordPress",
+      "url": "https://www.meetup.com/ferrolterrawordpress/",
+      "priority": "medium",
+      "status": "recent_past_only",
+      "observation": "Última convocatoria visible: 19/06/2026.",
+      "evidenceUrls": [
+        "https://www.meetup.com/ferrolterrawordpress/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "wp-ourense",
+      "name": "WordPress Ourense",
+      "family": "WordPress",
+      "url": "https://www.meetup.com/wordpressourense/",
+      "priority": "low",
+      "status": "historical_activity",
+      "observation": "Última convocatoria visible: 26/03/2025.",
+      "evidenceUrls": [
+        "https://www.meetup.com/wordpressourense/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "gpul-meetup",
+      "name": "GPUL / Atlántica Labs en Meetup",
+      "family": "GPUL",
+      "url": "https://www.meetup.com/gpul-labs/",
+      "priority": "high",
+      "status": "upcoming_observed",
+      "observation": "Misma asociación, otro canal. Próximos 21 y 27 de octubre; taller de terminal 17:00 local.",
+      "evidenceUrls": [
+        "https://www.meetup.com/gpul-labs/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "mancomun",
+      "name": "Mancomún Axenda",
+      "family": "aggregator",
+      "url": "https://mancomun.gal/axenda/",
+      "priority": "high",
+      "status": "upcoming_observed",
+      "observation": "Convocatorias del 22 de octubre y de noviembre en lectura directa.",
+      "evidenceUrls": [
+        "https://mancomun.gal/axenda/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "corunajug",
+      "name": "CoruñaJUG",
+      "family": "community",
+      "url": "https://corunajug.org/",
+      "priority": "high",
+      "status": "upcoming_observed",
+      "observation": "Extreme AI engineering: 22/10/2026 19:30. Feed JSON público con eventos y zona horaria.",
+      "evidenceUrls": [
+        "https://corunajug.org/",
+        "https://corunajug.org/feed.json",
+        "https://www.eventbrite.es/e/extreme-ai-engineering-tickets-2002328209576"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "cntg",
+      "name": "CNTG",
+      "family": "training",
+      "url": "https://cntg.xunta.gal/gl",
+      "priority": "high",
+      "status": "upcoming_observed",
+      "observation": "Seminario presencial de Open source 22/10/2026; cursos sujetos a inscripción y requisitos.",
+      "evidenceUrls": [
+        "https://cntg.xunta.gal/gl/seminario/x20261022/open-source-mais-alo-do-codigo-licenzas-comunidades-e-modelos-de-negocio"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "python-coruna",
+      "name": "Python A Coruña",
+      "family": "community",
+      "url": "https://www.meetup.com/python-a-coruna/",
+      "priority": "high",
+      "status": "upcoming_observed",
+      "observation": "Hacktoberfest 24/10/2026; deduplicar con otros coorganizadores.",
+      "evidenceUrls": [
+        "https://www.meetup.com/python-a-coruna/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": true,
+      "selectionDate": "2026-10-20"
+    },
+    {
+      "id": "galpon",
+      "name": "GALPon",
+      "family": "free_software",
+      "url": "https://www.galpon.org/",
+      "priority": "medium_high",
+      "status": "current_activity",
+      "observation": "Web propia comprobada; canal Mobilizon enlazado, cobertura externa no validada.",
+      "evidenceUrls": [
+        "https://www.galpon.org/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "coruna-events",
+      "name": "CorunaEvents",
+      "family": "aggregator",
+      "url": "https://coruna.events/en",
+      "priority": "medium",
+      "status": "mixed_coverage",
+      "observation": "Agenda de diferentes ámbitos, con comunidades técnicas y recurrencias a largo plazo.",
+      "evidenceUrls": [
+        "https://coruna.events/en"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "amigus",
+      "name": "Amigus",
+      "family": "makers",
+      "url": "https://www.amigus.org/",
+      "priority": "medium",
+      "status": "recent_past_only",
+      "observation": "Taller de impresión 3D en As Pontes 26/09/2026; mezcla contenido tecnológico y local.",
+      "evidenceUrls": [
+        "https://www.amigus.org/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "pintega",
+      "name": "Píntega Conf / Lareira",
+      "family": "conference",
+      "url": "https://lareiraconf.es/",
+      "priority": "high",
+      "status": "announced_future",
+      "observation": "9–10/04/2027. Charlas el 10 en Rectorado UDC; lugar del preevento pendiente.",
+      "evidenceUrls": [
+        "https://lareiraconf.es/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "atlantica",
+      "name": "AtlánticaConf",
+      "family": "GPUL",
+      "url": "https://atlanticaconf.com/",
+      "priority": "high",
+      "status": "partial_date",
+      "observation": "Anuncia junio de 2027 en A Coruña; no se inventa el día.",
+      "evidenceUrls": [
+        "https://atlanticaconf.com/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "bricolabs",
+      "name": "BricoLabs / OSHWDem",
+      "family": "makers",
+      "url": "https://www.oshwdem.org/",
+      "priority": "medium",
+      "status": "current_edition_past",
+      "observation": "Feria de hardware abierto; siguiente convocatoria futura no validada.",
+      "evidenceUrls": [
+        "https://www.bricolabs.cc/",
+        "https://www.oshwdem.org/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "wordcamp-galicia",
+      "name": "WordCamp Galicia",
+      "family": "WordPress",
+      "url": "https://galicia.wordcamp.org/2026/",
+      "priority": "medium",
+      "status": "past",
+      "observation": "Edición 16–18/10/2026, A Coruña, ya pasada.",
+      "evidenceUrls": [
+        "https://galicia.wordcamp.org/2026/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "datolada",
+      "name": "La Datolada",
+      "family": "data",
+      "url": "https://eventos.datola.es/",
+      "priority": "medium",
+      "status": "announced_without_date",
+      "observation": "La página actual anuncia quinta edición próximamente; sin fecha confirmada.",
+      "evidenceUrls": [
+        "https://eventos.datola.es/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "makerfaire",
+      "name": "Maker Faire Galicia",
+      "family": "makers",
+      "url": "https://makerfairegalicia.es/",
+      "priority": "medium",
+      "status": "current_edition_past",
+      "observation": "Web 2026; no se confirma una nueva fecha futura.",
+      "evidenceUrls": [
+        "https://makerfairegalicia.es/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "corunawtf",
+      "name": "CoruñaWTF",
+      "family": "community",
+      "url": "https://www.eventbrite.es/o/corunawtf-58544773663",
+      "priority": "medium",
+      "status": "channel_confirmed",
+      "observation": "Organizador identificado; próxima convocatoria no validada en lectura directa.",
+      "evidenceUrls": [
+        "https://www.eventbrite.es/o/corunawtf-58544773663"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "sysarmy",
+      "name": "Sysarmy Galicia",
+      "family": "systems",
+      "url": "https://coruna.events/en/community/sysarmy-galicia",
+      "priority": "medium",
+      "status": "channel_pending",
+      "observation": "Dominio propio no resolvió. Validar canal oficial antes de incorporar recurrentes del directorio.",
+      "evidenceUrls": [
+        "https://coruna.events/en/community/sysarmy-galicia"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "cesga",
+      "name": "CESGA Formación",
+      "family": "training",
+      "url": "https://www.cesga.es/que-hacemos/formacion/",
+      "priority": "medium",
+      "status": "recent_past_only",
+      "observation": "Cursos oficiales de supercomputación y cuántica; sin próxima convocatoria validada en esta sección.",
+      "evidenceUrls": [
+        "https://www.cesga.es/que-hacemos/formacion/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "citic",
+      "name": "CITIC / XoveTIC",
+      "family": "research",
+      "url": "https://citic.udc.es/",
+      "priority": "medium",
+      "status": "access_requires_check",
+      "observation": "Actividades de investigación; programa XoveTIC octubre 2026. Revisar destinatarios.",
+      "evidenceUrls": [
+        "https://citic.udc.es/",
+        "https://xovetic.citic.udc.es/programa/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "cpeig",
+      "name": "CPEIG Novas",
+      "family": "professional",
+      "url": "https://cpeig.gal/comunicacion/novas",
+      "priority": "medium",
+      "status": "mixed_news",
+      "observation": "Noticias, cursos y jornadas; distinguir convocatoria de crónica.",
+      "evidenceUrls": [
+        "https://cpeig.gal/comunicacion/novas"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "ghandalf",
+      "name": "GHANDALF",
+      "family": "free_software",
+      "url": "https://ghandalf.org/",
+      "priority": "low",
+      "status": "historical_activity",
+      "observation": "Sitio accesible sin www. Última entrada visible de 2019.",
+      "evidenceUrls": [
+        "https://ghandalf.org/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "ozulo",
+      "name": "Comunidade O Zulo",
+      "family": "free_software",
+      "url": "https://mancomun.gal/novas/mugardos-acolle-a-xornada-de-software-e-cultura-libre-2026/",
+      "priority": "medium",
+      "status": "organizer_channel_pending",
+      "observation": "Jornada 14/11/2026 Mugardos; canal propio estable pendiente de validar.",
+      "evidenceUrls": [
+        "https://mancomun.gal/novas/mugardos-acolle-a-xornada-de-software-e-cultura-libre-2026/"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "pulpocon",
+      "name": "PulpoCon",
+      "family": "conference",
+      "url": "https://pulpocon.es/",
+      "priority": "low",
+      "status": "no_2026_edition",
+      "observation": "Organizador confirma que no habrá edición 2026; considera 2027 sin fecha. Web aún en 2025.",
+      "evidenceUrls": [
+        "https://pulpocon.es/",
+        "https://es.linkedin.com/posts/pulpocon_nos-entristece-confirmar-que-este-a%C3%B1o-no-activity-7499551975743623168-n4B7"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    },
+    {
+      "id": "aquelarre",
+      "name": "Aquelarre Dixital",
+      "family": "community",
+      "url": "https://github.com/Aquelarre-Dixital",
+      "priority": "low",
+      "status": "channel_pending",
+      "observation": "Identificado desde GDG A Coruña. Agenda pública estable no validada.",
+      "evidenceUrls": [
+        "https://github.com/Aquelarre-Dixital"
+      ],
+      "checkedOn": "2026-10-20",
+      "approved": false
+    }
+  ],
+  "excludedByUser": [
+    "VigoTech",
+    "Python Vigo",
+    "A Industriosa",
+    "Cloud Native Galicia"
+  ],
+  "notConfirmedCurrentGDGChapters": [
+    "Vigo",
+    "Pontevedra"
+  ],
+  "officialGDGDirectoryGalicia": [
+    "A Coruña",
+    "Ourense",
+    "Santiago de Compostela"
+  ],
+  "researchReport": "investigacion-fuentes-2026-10-20.md"
+}

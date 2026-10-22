@@ -1,0 +1,57 @@
+:root{--motion-fast:140ms;--motion-base:240ms;--motion-slow:360ms;--ease-out:cubic-bezier(.2,.8,.2,1);--ease-settle:cubic-bezier(.22,1,.36,1)}
+.route-stage{animation:page-enter var(--motion-slow) var(--ease-out) both}
+@keyframes page-enter{from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:none}}
+.button,.icon-button,.account-button,.chip,.save-button,.source-toggle,.palette-option,.role-options button,.admin-tabs a,.desktop-nav a{transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease,border-color var(--motion-fast) ease,box-shadow var(--motion-base) var(--ease-out),transform var(--motion-fast) var(--ease-out)}
+.button:active,.icon-button:active,.account-button:active,.chip:active,.palette-option:active,.role-options button:active{transform:scale(.97)}
+.button>svg,.encounter-open>svg,.text-action>svg,.source-name a>svg{transition:transform var(--motion-base) var(--ease-out)}
+@media(hover:hover) and (pointer:fine){.button:hover>svg,.encounter-card:hover .encounter-open>svg,.text-action:hover>svg,.source-name a:hover>svg{transform:translate(2px,-1px)}.encounter-card .poster{transition:transform var(--motion-slow) var(--ease-settle)}.encounter-card:hover .poster{transform:scale(1.025)}}
+@media(hover:none){.button:hover,.encounters-view .encounter-card:hover{transform:none}}
+.encounters-view .encounter-card{transition:border-color var(--motion-fast) ease,box-shadow var(--motion-base) var(--ease-out),transform var(--motion-base) var(--ease-out)}
+.encounters-view .encounter-card:hover,.encounters-view .encounter-card:focus-within{transform:translateY(-2px)}
+.search-field,.select-field,.input-with-icon,.review-fields input,.review-fields select,.review-fields textarea,.settings-grid input,.settings-grid select{transition:border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease,background-color var(--motion-fast) ease}
+.search-field:focus-within,.select-field:focus-within,.input-with-icon:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 13%,transparent)}
+.motion-disclosure{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows var(--motion-base) var(--ease-out),opacity var(--motion-fast) ease,visibility var(--motion-base)}
+.motion-disclosure[data-open=true]{grid-template-rows:1fr;opacity:1;visibility:visible}
+.motion-disclosure-clip{min-height:0;overflow:hidden}
+.motion-disclosure .inline-note{margin:8px 0}
+.featured-card{animation:none;--slide-offset:12px}
+.featured-card[data-direction=previous]{--slide-offset:-12px}
+.featured-copy{animation:featured-enter 280ms var(--ease-out) both}
+.featured-image-link{animation:poster-enter 320ms var(--ease-out) both}
+@keyframes featured-enter{from{opacity:.4;transform:translateX(var(--slide-offset))}to{opacity:1;transform:none}}
+@keyframes poster-enter{from{opacity:.6}to{opacity:1}}
+.dots button{transition:width var(--motion-base) var(--ease-out),background-color var(--motion-fast) ease}
+.tiny-count,.count-badge{animation:count-enter var(--motion-base) var(--ease-out)}
+@keyframes count-enter{from{opacity:.45;transform:scale(.85)}to{opacity:1;transform:none}}
+.save-button.is-saved svg{animation:bookmark-confirm 300ms var(--ease-settle)}
+@keyframes bookmark-confirm{0%{transform:scale(.8) translateY(1px)}55%{transform:scale(1.14) translateY(-1px)}100%{transform:scale(1) translateY(0)}}
+.source-toggle>span{transition:background-color var(--motion-fast) ease,transform var(--motion-base) var(--ease-out)}
+.source-toggle.paused>span{transform:scale(.75)}
+.radio-indicator{transition:border-width var(--motion-fast) ease,border-color var(--motion-fast) ease}
+.error-message{animation:message-enter var(--motion-base) var(--ease-out)}
+.login-success,.empty-state{animation:message-enter var(--motion-slow) var(--ease-out)}
+@keyframes message-enter{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+.toast{animation:toast-enter 260ms var(--ease-settle)}
+@keyframes toast-enter{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.theme-glyph{display:flex;animation:theme-glyph-enter 260ms var(--ease-out)}
+@keyframes theme-glyph-enter{from{opacity:.4;transform:rotate(-30deg) scale(.75)}to{opacity:1;transform:none}}
+.shell-play{animation:brand-pulse 900ms var(--ease-settle)}
+.shell-play .component-shell{transform-box:fill-box;transform-origin:0 50%;animation:shell-fan 720ms var(--ease-settle)}
+.shell-play .component-rib{animation:rib-draw 600ms var(--ease-out) both}
+.shell-play .component-rib:nth-child(2){animation-delay:35ms}.shell-play .component-rib:nth-child(3){animation-delay:70ms}.shell-play .component-rib:nth-child(4){animation-delay:105ms}.shell-play .component-rib:nth-child(5){animation-delay:140ms}
+@keyframes brand-pulse{0%,100%{transform:scale(1)}30%{transform:scale(.94)}65%{transform:scale(1.05)}}
+@keyframes shell-fan{0%,100%{transform:scaleX(1) rotate(0)}30%{transform:scaleX(.85) rotate(-5deg)}65%{transform:scaleX(1.05) rotate(2deg)}}
+/* El navegador compone las dos apariencias; no hay un barrido sobre la página. */
+html.theme-changing::view-transition-group(root){animation-duration:220ms}
+html.theme-changing::view-transition-old(root){animation:theme-fade-out 180ms ease both;mix-blend-mode:normal}
+html.theme-changing::view-transition-new(root){animation:theme-fade-in 220ms ease both;mix-blend-mode:normal}
+html::view-transition{pointer-events:none}
+@keyframes theme-fade-out{from{opacity:1}to{opacity:0}}
+@keyframes theme-fade-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .route-stage,.featured-copy,.featured-image-link{opacity:1;transform:none}
+ .encounters-view .encounter-card:hover,.encounters-view .encounter-card:focus-within,.button:hover,.button:active,.icon-button:active,.chip:active,.palette-option:active{transform:none}
+ html::view-transition-group(root),html::view-transition-old(root),html::view-transition-new(root){animation:none!important}
+}

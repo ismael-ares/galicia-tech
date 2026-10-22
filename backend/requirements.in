@@ -1,0 +1,10 @@
+Django==5.2.18
+djangorestframework==3.18.3
+django-allauth[headless,mfa,socialaccount]==65.20.1
+django-q2==1.11.1
+psycopg[binary]==3.3.6
+redis==8.1.0
+gunicorn==26.2.0
+argon2-cffi==25.1.0
+PyYAML==6.0.3
+urllib3==2.8.0

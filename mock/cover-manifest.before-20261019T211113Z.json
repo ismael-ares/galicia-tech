@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "evaluatedAt": "2026-10-19",
+  "timezone": "Europe/Madrid",
+  "events": [
+    {
+      "id": "flutter",
+      "title": "flutter",
+      "status": "retained",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_o4KLATK",
+        "imageSource": "Ficha del evento de GDG Ourense",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-interfaces-liquidas-adaptabilidad-y-generative-ui-en-flutter-en-la-era-de-la-ia/",
+        "evidenceType": "previously verified event-page cover",
+        "contentType": "image/unknown",
+        "width": 1080,
+        "height": 1080,
+        "status": "selected",
+        "checkedAt": "2026-10-19T00:00:00Z"
+      }
+    },
+    {
+      "id": "hackathon",
+      "title": "hackathon",
+      "status": "retained",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_1nNbuwp",
+        "imageSource": "Ficha del evento de GDG Santiago",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-santiago-de-compostela-presents-hackathon-etse-vibe-coding-ideas-que-transforman/",
+        "evidenceType": "previously verified event-page cover",
+        "contentType": "image/unknown",
+        "width": 1080,
+        "height": 1080,
+        "status": "selected",
+        "checkedAt": "2026-10-19T00:00:00Z"
+      }
+    },
+    {
+      "id": "ourense",
+      "title": "ourense",
+      "status": "retained",
+      "selected": {
+        "url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/blob_I71plLp",
+        "imageSource": "Ficha del evento de GDG Ourense",
+        "imagePage": "https://gdg.community.dev/events/details/google-gdg-ourense-presents-devfest-2026/",
+        "evidenceType": "previously verified event-page cover",
+        "contentType": "image/unknown",
+        "width": 1080,
+        "height": 1080,
+        "status": "selected",
+        "checkedAt": "2026-10-19T00:00:00Z"
+      }
+    }
+  ]
+}

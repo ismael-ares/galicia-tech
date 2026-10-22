@@ -1,0 +1,37 @@
+{
+  "capturedUtc": "2026-10-21T06:54:43.1231054Z",
+  "scope": "Inventario local; no inspecciona Proxmox ni LXC",
+  "files": [
+    {
+      "path": "eventos_galicia.py",
+      "sha256": "9e02c678a8a9fc3df66382d9b0576089ee5719ee2ae6878a5fd85e00b7154c44",
+      "bytes": 23684
+    },
+    {
+      "path": "cover_discovery.py",
+      "sha256": "7d211f2a13bf547329281088fe78d9c910037d60739e300046f460b9df45737e",
+      "bytes": 34452
+    },
+    {
+      "path": "tests/test_eventos_galicia.py",
+      "sha256": "7919109c74c7c8184a283ceabfef8b656d8800109bf86ce9ea0c149215e79b92",
+      "bytes": 7895
+    },
+    {
+      "path": "tests/test_cover_discovery.py",
+      "sha256": "c550648677bec5fbd83e07c4410d4e961848ebc834c2cac6e7cb4495c14ef52b",
+      "bytes": 11000
+    },
+    {
+      "path": "tests/test_mock_state.cjs",
+      "sha256": "b4160ff47bf7058b83320a6c51e407f68ce3bde794ee0c07f3d17bc36775ed39",
+      "bytes": 5838
+    },
+    {
+      "path": "mock/source-catalog.json",
+      "sha256": "fc7d153529a997f3e8ef608028871e7b35819f6e21262d6b283576ded90ed815",
+      "bytes": 5914
+    }
+  ],
+  "implementationArtifacts": []
+}

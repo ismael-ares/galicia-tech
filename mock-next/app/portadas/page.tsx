@@ -1,0 +1,8 @@
+'use client';
+import { useI18n } from '@/components/i18n';
+import Link from 'next/link';
+import { ArrowLeft, ArrowUpRight, Info } from 'lucide-react';
+import { Poster } from '@/components/catalog';
+import { events } from '@/lib/data';
+import templates from '@/lib/cover-templates.json';
+export default function Page(){const {t,eventText}=useI18n();return <><Link href="/#events-heading" className="back-link"><ArrowLeft size={15}/>{t("Volver a los encuentros")}</Link><div className="page-heading compact"><div><div className="eyebrow">{t("Identidad · Pizarra y tinta")}</div><h1>{t("20 plantillas")}<span className="heading-dot">.</span></h1><p>{t("Motivos, tonos y composiciones guardados como SVG editables y reutilizables.")}</p></div><a className="button primary" href="/cover-templates.zip" download>{t("Descargar las 20 · ZIP")}</a></div><div className="inline-note cover-gallery-note"><Info size={17}/><span>{t("La vista previa aplica cada plantilla a un evento de muestra. Los archivos descargables incluyen campos de título, comunidad, localidad y fecha para sustituir. La agenda sigue dando prioridad a la imagen original.")}</span></div><div className="cover-gallery">{templates.map((template,index)=>{const event=events[index%events.length];return <figure className="cover-example" key={template.id} data-template-id={template.id}><div className="cover-example-art"><Poster event={event} automatic templateId={template.id}/></div><figcaption><strong>{String(template.number).padStart(2,'0')} · {t(template.name)}</strong><span>{t("Ejemplo:")} {eventText(event.title)}</span><a href={'/cover-templates/'+template.file} download>{t("Guardar SVG")} <ArrowUpRight size={13}/></a></figcaption></figure>;})}</div></>;}

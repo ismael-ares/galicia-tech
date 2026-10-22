@@ -1,0 +1,9 @@
+.mfa-enrollment{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:20px;min-width:0}
+.mfa-enrollment>img{background:#fff;padding:10px;border-radius:12px}
+.mfa-enrollment>code{padding:12px;background:var(--surface-2);border-radius:8px;overflow-wrap:anywhere;max-width:100%;font-size:12px}
+.mfa-enrollment>label{display:flex;flex-direction:column;gap:8px}
+.recovery-codes{margin-top:20px}.recovery-codes pre{padding:18px;background:var(--surface-2);border-radius:10px;margin:14px 0;line-height:1.8}
+.source-create{margin-bottom:20px}.source-create summary{cursor:pointer;font-size:13px;font-weight:600}.source-create form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding-top:20px}.source-create label{display:flex;flex-direction:column;gap:6px;font-size:12px}.source-create .error-message{grid-column:1/-1}
+@media(max-width:640px){.source-create form{grid-template-columns:1fr}}
+
+.source-logo,.calendar-event-logo,.calendar-event-community>span,.mini-avatars>span{color:#34597c}

@@ -1,0 +1,7 @@
+/* Perfiles visuales sin sesión, credenciales ni roles guardados en el navegador. */
+(()=>{
+const $=id=>document.getElementById(id),params=new URLSearchParams(location.search),profiles=['visitante','usuario','admin'];let profile=profiles.includes(params.get('perfil'))?params.get('perfil'):'visitante';
+const methods={local:'Acceso local de muestra',github:'GitHub · acceso simulado',google:'Google · acceso simulado'};
+function render(){const guest=profile==='visitante',admin=profile==='admin';$('account-guest').hidden=!guest;$('account-member').hidden=guest;$('account-admin').hidden=!admin;$('account-description').textContent=guest?'Accede a tu perfil y a tus preferencias.':'Perfil y preferencias de tu cuenta.';$('account-profile-title').textContent=admin?'Administrador de muestra':'Usuario de muestra';$('account-avatar').textContent=admin?'A':'U';$('account-role').textContent=admin?'Administrador':'Usuario';$('account-method').textContent=methods[params.get('metodo')]||'Acceso de demostración';document.querySelectorAll('[data-demo-profile]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.demoProfile===profile)))}
+document.querySelectorAll('[data-demo-profile]').forEach(button=>button.addEventListener('click',()=>{const next=button.dataset.demoProfile;if(!profiles.includes(next))return;const url=new URL(location.href);url.searchParams.set('perfil',next);url.searchParams.delete('metodo');location.assign(url.href)}));render();
+})();
