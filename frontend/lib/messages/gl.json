@@ -410,5 +410,18 @@
   "Guardar configuración": "Gardar configuración",
   "Configuración guardada.": "Configuración gardada.",
   "Las llamadas pagadas permanecen desactivadas en esta versión. La configuración queda guardada para la siguiente fase.": "As chamadas de pago permanecen desactivadas nesta versión. A configuración queda gardada para a seguinte fase.",
-  "Las consultas externas se habilitan con COLLECTION_ENABLED en el servidor. No se ejecutan desde el navegador.": "As consultas externas actívanse con COLLECTION_ENABLED no servidor. Non se executan desde o navegador."
+  "Las consultas externas se habilitan con COLLECTION_ENABLED en el servidor. No se ejecutan desde el navegador.": "As consultas externas actívanse con COLLECTION_ENABLED no servidor. Non se executan desde o navegador.",
+  "Dónde se guardan tus eventos": "Onde se gardan os teus eventos",
+  "Guardados en tu cuenta": "Gardados na túa conta",
+  "Guardados en este navegador": "Gardados neste navegador",
+  "Disponibles al iniciar sesión desde otros dispositivos.": "Dispoñibles ao iniciar sesión desde outros dispositivos.",
+  "No necesitas iniciar sesión. Se eliminan si borras los datos de este sitio.": "Non precisas iniciar sesión. Elimínanse se borras os datos deste sitio.",
+  "Añadiendo…": "Engadindo…",
+  "Añadir guardados del navegador": "Engadir gardados do navegador",
+  "Iniciar sesión para sincronizar": "Iniciar sesión para sincronizar",
+  "Guardados añadidos a tu cuenta.": "Gardados engadidos á túa conta.",
+  "El navegador no permite guardar encuentros en este equipo.": "O navegador non permite gardar encontros neste equipo.",
+  "Tu sesión ha caducado. Puedes seguir guardando en este navegador.": "A túa sesión caducou. Podes seguir gardando neste navegador.",
+  "Usa el marcador de un evento para guardarlo.": "Usa o marcador dun evento para gardalo.",
+  "Sincroniza tus eventos guardados entre dispositivos.": "Sincroniza os teus eventos gardados entre dispositivos."
 }

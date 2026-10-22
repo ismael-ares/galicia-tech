@@ -86,6 +86,23 @@ def favorite(request, event_id):
         Favorite.objects.filter(user=request.user, event=event).delete()
     return Response(status=204)
 
+class FavoriteImportSerializer(serializers.Serializer):
+    ids = serializers.ListField(child=serializers.RegexField(r'^[A-Za-z0-9_-]{1,100}$'),
+                                allow_empty=False, max_length=1000)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuth])
+@permission_classes([IsAuthenticated])
+@transaction.atomic
+def import_favorites(request):
+    serializer = FavoriteImportSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    # A single authenticated request copies only public events into this account.
+    # Unknown or withdrawn IDs never expose unpublished event data.
+    events = Event.objects.filter(pk__in=set(serializer.validated_data['ids']), published=True)
+    Favorite.objects.bulk_create([Favorite(user=request.user, event=event) for event in events], ignore_conflicts=True)
+    return Response({'favorites': list(Favorite.objects.filter(user=request.user).values_list('event_id', flat=True))})
+
 class SourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Source

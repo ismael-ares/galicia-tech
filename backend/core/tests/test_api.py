@@ -72,6 +72,41 @@ class ApiTests(TestCase):
         self.assertEqual(self.client.patch(url, {'status':'approved','value':'19:30','version':case.version}, format='json').status_code, 409)
         self.assertEqual(self.client.patch(url, {'status':'approved','value':'invented','version':case.version+1}, format='json').status_code, 400)
         self.assertEqual(AuditLog.objects.filter(action='review.approved').count(), 1)
+    def test_guest_favorites_import_requires_account(self):
+        result = self.client.post('/api/v1/favorites/import/', {'ids':['santiago']}, format='json')
+        self.assertEqual(result.status_code, 401)
+        self.assertFalse(Favorite.objects.exists())
+    def test_guest_favorites_import_is_idempotent_and_only_imports_published(self):
+        self.client.force_login(self.other)
+        Event.objects.filter(pk='santiago').update(published=False)
+        published = Event.objects.filter(published=True).first().pk
+        values = {'ids':[published, published, 'santiago', 'missing-event']}
+        for _ in range(2):
+            result = self.client.post('/api/v1/favorites/import/', values, format='json')
+            self.assertEqual(result.status_code, 200)
+            self.assertEqual(result.json()['favorites'], [published])
+        self.assertEqual(Favorite.objects.count(), 1)
+        self.admin()
+        self.assertEqual(self.client.get('/api/v1/session/').json()['favorites'], [])
+    def test_guest_favorites_import_adds_without_replacing_account_favorites(self):
+        self.client.force_login(self.other)
+        Favorite.objects.create(user=self.other, event_id='santiago')
+        another = Event.objects.filter(published=True).exclude(pk='santiago').first().pk
+        result = self.client.post('/api/v1/favorites/import/', {'ids':[another]}, format='json')
+        self.assertEqual(result.status_code, 200)
+        self.assertCountEqual(result.json()['favorites'], ['santiago', another])
+    def test_guest_favorites_import_validates_whole_batch(self):
+        self.client.force_login(self.other)
+        for values in ({}, {'ids':[]}, {'ids':'santiago'}, {'ids':['santiago','../private']},
+                       {'ids':['santiago', None]}, {'ids':['santiago']*1001}):
+            with self.subTest(values=str(values)[:80]):
+                self.assertEqual(self.client.post('/api/v1/favorites/import/', values, format='json').status_code, 400)
+                self.assertFalse(Favorite.objects.exists())
+    def test_guest_favorites_import_requires_csrf_with_session(self):
+        client = APIClient(enforce_csrf_checks=True)
+        client.force_login(self.other)
+        self.assertEqual(client.post('/api/v1/favorites/import/', {'ids':['santiago']}, format='json').status_code, 403)
+        self.assertFalse(Favorite.objects.exists())
     def test_unpublished_review_and_unsafe_registration(self):
         self.admin()
         case = ReviewCase.objects.get(pk='registration')

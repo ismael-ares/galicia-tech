@@ -7,13 +7,14 @@ import { flushSync } from 'react-dom';
 import { ArrowUpRight, Bookmark, Check, Compass, LogOut, Moon, Settings2, ShieldCheck, Sun, UserRound, X } from 'lucide-react';
 import { shellSvg } from '@/lib/shell';
 import { type Catalog, type Decision, type ReviewCase, type User } from '@/lib/data';
-import { api } from '@/lib/api';
+import { api, ApiError } from '@/lib/api';
+import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/guest-favorites';
 import { reducedMotion } from './motion';
 type State={user:User|null;favorites:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
 const initial:State={user:null,favorites:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true};
 const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admin',disabled:[] as string[],ready:false,error:'',
- refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
+ guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
 export const useApp=()=>useContext(Context);
 export const useMock=useApp;
 export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI18n();
@@ -21,6 +22,13 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
  const transitionRef=useRef<{skipTransition:()=>void}|null>(null);const themeGeneration=useRef(0);const requestedTheme=useRef<boolean|null>(null);
  useEffect(()=>{const preference=window.matchMedia('(prefers-reduced-motion: reduce)');const stop=()=>{if(preference.matches){transitionRef.current?.skipTransition();setMotion(false);}};preference.addEventListener('change',stop);return()=>{preference.removeEventListener('change',stop);transitionRef.current?.skipTransition();};},[]);
  const [error,setError]=useState('');
+ const [guestFavorites,setGuestFavorites]=useState<string[]>([]);
+ useEffect(()=>{
+  const reload=()=>{try{setGuestFavorites(readGuestFavorites(window.localStorage));}catch{setGuestFavorites([]);}};
+  const changed=(event:StorageEvent)=>{if(event.key===guestFavoritesKey||event.key===null)reload();};
+  reload();window.addEventListener('storage',changed);
+  return()=>window.removeEventListener('storage',changed);
+ },[]);
  async function refresh(){
   const [session,catalog]=await Promise.all([api<Omit<State,'catalog'|'cases'>>('/api/v1/session/'),api<Catalog>('/api/v1/catalog/')]);
   let cases:ReviewCase[]=[];
@@ -40,9 +48,29 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
   try{document.documentElement.classList.add('theme-changing');const transition=document.startViewTransition(apply);transitionRef.current=transition;transition.ready.catch(()=>{});transition.finished.catch(()=>{}).finally(()=>{if(generation===themeGeneration.current){document.documentElement.classList.remove('theme-changing');transitionRef.current=null;}});}catch{apply();document.documentElement.classList.remove('theme-changing');}
  }
  const role:'visitor'|'user'|'admin'=state.user?.role||'visitor';
- const value={...state,role,ready,error,disabled:state.catalog.sources.filter(s=>!s.enabled).map(s=>s.id),refresh,notify:setToast,
+ const favorites=state.user?state.favorites:guestFavorites;
+ const publishedIds=new Set(state.catalog.events.map(event=>event.id));
+ const pendingGuestFavorites=guestFavorites.filter(id=>publishedIds.has(id)&&!state.favorites.includes(id));
+ const value={...state,favorites,guestFavorites,pendingGuestFavorites,role,ready,error,disabled:state.catalog.sources.filter(s=>!s.enabled).map(s=>s.id),refresh,notify:setToast,
   logout:async()=>{await api('/_allauth/browser/v1/auth/session',{method:'DELETE'}).catch(e=>{if(e.status!==401)throw e;});await refresh();},
-  toggleFavorite:async(id:string)=>{if(!state.user)throw new Error(t('Inicia sesión para guardar encuentros.'));await api('/api/v1/favorites/'+id+'/',{method:state.favorites.includes(id)?'DELETE':'PUT'});await refresh();},
+  toggleFavorite:async(id:string)=>{
+   if(!state.user){
+    try{setGuestFavorites(toggleGuestFavorite(window.localStorage,id));}
+    catch{throw new Error(t('El navegador no permite guardar encuentros en este equipo.'));}
+    return;
+   }
+   try{await api('/api/v1/favorites/'+id+'/',{method:state.favorites.includes(id)?'DELETE':'PUT'});await refresh();}
+   catch(error){if(error instanceof ApiError&&error.status===401){await refresh();throw new Error(t('Tu sesión ha caducado. Puedes seguir guardando en este navegador.'));}throw error;}
+  },
+  importGuestFavorites:async()=>{
+   if(!state.user)return;
+   const ids=pendingGuestFavorites.slice(0,1000);
+   if(!ids.length)return;
+   await api('/api/v1/favorites/import/',{method:'POST',body:JSON.stringify({ids})});
+   // Keep the original local list: logging out must restore the visitor's
+   // own selection, never a copy of the account's private saved events.
+   await refresh();
+  },
   toggleSource:async(id:string)=>{const source=state.catalog.sources.find(s=>s.id===id);if(!source)return;await api('/api/v1/admin/sources/'+id+'/',{method:'PATCH',body:JSON.stringify({enabled:!source.enabled})});await refresh();},
   decide:async(id:string,decision:Decision)=>{const item=state.cases.find(c=>c.id===id);if(!item)return;await api('/api/v1/admin/reviews/'+id+'/',{method:'PATCH',body:JSON.stringify({...decision,version:item.version})});await refresh();},
  };
@@ -51,7 +79,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
   {state.catalog.sample&&<div className="preview-bar"><span>{t('Datos de muestra · octubre 2026')}</span><span>{t('Versión 0.1 · homelab')}</span></div>}
   <header className="site-header"><div className="header-inner">
    <div className="brand"><button className={'brand-symbol '+(motion?'shell-play':'')} onClick={()=>{setMotion(false);if(!reducedMotion())requestAnimationFrame(()=>setMotion(true));}} onAnimationEnd={e=>{if(e.target===e.currentTarget)setMotion(false);}} aria-label={t("Animar la vieira")} dangerouslySetInnerHTML={{__html:shellSvg}}/><Link href="/" className="brand-word">galicia<span>tech<span className="brand-period">.</span></span></Link></div>
-   <nav className="desktop-nav" aria-label={t("Principal")}><Link href="/" className={pathname==='/'?'active':''}><Compass size={17}/>{t("Explorar")}</Link><Link href="/guardados" className={pathname==='/guardados'?'active':''}><Bookmark size={16}/>{t("Guardados")}{state.favorites.length>0&&<span className="tiny-count">{state.favorites.length}</span>}</Link></nav>
+   <nav className="desktop-nav" aria-label={t("Principal")}><Link href="/" className={pathname==='/'?'active':''}><Compass size={17}/>{t("Explorar")}</Link><Link href="/guardados" className={pathname==='/guardados'?'active':''}><Bookmark size={16}/>{t("Guardados")}{favorites.length>0&&<span className="tiny-count">{favorites.length}</span>}</Link></nav>
    <div className="header-actions"><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
   </div></header>
   <main id="main" className="page-container">{error?<div className="empty-state" role="alert"><h1>{t('No se ha podido cargar la agenda')}</h1><p>{error}</p><button className="button primary" onClick={()=>refresh().catch(e=>setError(e.message))}>{t('Reintentar')}</button></div>:!ready?<div className="empty-state" role="status">{t('Cargando agenda…')}</div>:children}</main>

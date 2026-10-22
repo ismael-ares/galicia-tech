@@ -8,7 +8,7 @@ Implementación inicial para probar en el homelab. El mock aprobado se conserva 
 - Catálogo en PostgreSQL, relaciones evento/fuentes, observaciones, revisiones y auditoría. Ningún selector del navegador concede privilegios.
 - Sesiones Django en base de datos; cookies HttpOnly, CSRF, permisos de servidor y registro público cerrado. Cuenta propietaria creada desde consola, sin credenciales por defecto.
 - django-allauth headless: contraseña, reautenticación antes de configurar TOTP, QR local, secretos MFA cifrados, códigos de recuperación y desafío TOTP en accesos posteriores. Administración exige TOTP por defecto. Sesión limitada a 30 minutos de inactividad y 8 horas de duración máxima.
-- Guardados por cuenta, creación/pausa de fuentes desde la interfaz, revisión con comprobación de versión para evitar sobrescribir otra decisión, configuración persistente con autoridad web o YAML. Pausar una fuente conserva los eventos publicados.
+- Guardados sin cuenta en el navegador o asociados a una cuenta en el servidor, creación/pausa de fuentes desde la interfaz, revisión con comprobación de versión para evitar sobrescribir otra decisión, configuración persistente con autoridad web o YAML. Pausar una fuente conserva los eventos publicados.
 - Cola Q2 persistida en PostgreSQL; Redis dedicado a caché y límites de acceso. El limitador adicional usa incremento atómico con TTL y bloquea autenticaciones cuando Redis no está disponible.
 - Consulta estructurada básica de fuentes HTTPS permitidas: GDG/JSON-LD/enlaces a fichas. Descargas con tamaño/tiempo acotados, IP pública comprobada y conexión TLS fijada a la dirección resuelta; las redirecciones se vuelven a comprobar. Cada observación nueva pasa por revisión. No encontrar un evento no lo cancela.
 - Configuración GL/ES y claro/oscuro. Las traducciones de la muestra están asociadas a los textos originales; un texto cambiado no reutiliza una traducción anterior.
@@ -38,6 +38,16 @@ docker compose exec backend python manage.py import_sample
 ```
 
 La web muestra entonces «Datos de muestra · octubre 2026». El importador conserva revisiones y cambios de fuentes existentes. En la prueba local del desarrollo se ha cargado esta muestra; las cuentas temporales utilizadas por las pruebas se eliminan.
+
+## Guardados sin iniciar sesión
+
+Los visitantes guardan únicamente identificadores de eventos en `localStorage`, con la clave versionada `galicia-tech-guest-favorites-v1`. La selección persiste al cerrar y volver a abrir el navegador y se actualiza entre pestañas del mismo origen. Agenda, detalle y calendario comparten esta selección; guardar o quitar un evento como visitante no escribe favoritos en el servidor.
+
+Los guardados pertenecen a ese navegador y origen (protocolo, dirección y puerto). Borrar los datos del sitio los elimina; en navegación privada su duración depende del navegador. No se almacena el catálogo completo para consultarlo sin conexión. Si el navegador deniega el almacenamiento, se avisa y el marcador no aparenta haberse guardado.
+
+Al iniciar sesión se muestran los guardados de la cuenta, mantenidos en PostgreSQL. No se sube automáticamente la selección local: en Guardados aparece «Añadir guardados del navegador» para copiar expresamente los eventos publicados que falten. La operación autenticada `POST /api/v1/favorites/import/` es aditiva, transaccional, protegida por CSRF e idempotente. La lista local se conserva al importar y al cerrar sesión; los favoritos privados de la cuenta nunca se copian al almacenamiento local.
+
+Prueba de navegador específica (requiere Playwright y una muestra local cargada): `node tools/check_guest_favorites.cjs`. Admite `PLAYWRIGHT_MODULE`, `PLAYWRIGHT_CHANNEL`, `DOCKER_BIN` y `APP_URL`. Crea y elimina una cuenta normal temporal, sin modificar cuentas existentes. Las capturas y el resultado quedan en `output/guest-favorites/`.
 
 ## Consulta de fuentes y gasto
 
@@ -74,7 +84,7 @@ Se restauró una copia `pg_dump` en otra base de datos temporal y se comprobó e
 
 Evidencias locales en `output/v1/`: resultados de navegador y operación, capturas y copia de la prueba de restauración. Las suites de navegador/operación modifican la muestra y reinician servicios de este proyecto: ejecutarlas únicamente en un despliegue de prueba.
 
-Verificado: construcción de imágenes, TypeScript, 23 pruebas Django sobre PostgreSQL real, cuenta/contraseña/TOTP, permisos, CSRF, guardados y fuentes persistentes, revisión, calendario, GL/ES y ambos temas. Operación: tarea encolada mientras worker estaba parado y ejecutada después; recreación de PostgreSQL conservando volumen; autenticación bloqueada y catálogo público disponible con Redis detenido; seis healthchecks.
+Verificado: construcción de imágenes, TypeScript, 28 pruebas Django sobre PostgreSQL real, cuenta/contraseña/TOTP, permisos, CSRF, guardados y fuentes persistentes, revisión, calendario, GL/ES y ambos temas. Guardados sin cuenta: reinicio real de Chrome, pestañas, detalle/calendario, importación expresa, separación entre cuenta y navegador, errores de almacenamiento y vista móvil de 320/390 px. Operación (validación inicial de 0.1): tarea encolada mientras worker estaba parado y ejecutada después; recreación de PostgreSQL conservando volumen; autenticación bloqueada y catálogo público disponible con Redis detenido; seis healthchecks.
 
 Pendiente de la siguiente fase: despliegue y medición en el LXC real, TLS, alta de la cuenta propietaria definitiva, pruebas OAuth reales, integración/evaluación LLM con reservas de presupuesto, traducciones nuevas, conectores completos, administración editorial ampliada, política de copias externa y validación de carga. Esta versión no se declara preparada para exposición pública.
 

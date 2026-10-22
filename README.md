@@ -4,6 +4,8 @@
 
 Ya existe la primera base funcional con Next.js, Django, PostgreSQL, Redis, Q2 y Nginx. Se despliega con el [Compose de la raíz](compose.yaml) y arranca en `http://127.0.0.1:8088/`. La agenda es la entrada principal. Consulta la [guía de instalación, alcance y verificación](docs/primera-version-0.1.md) antes de desplegar en el LXC.
 
+Puedes guardar eventos sin iniciar sesión: se conservan en este navegador. Con una cuenta se guardan en el servidor y puedes incorporar expresamente tu selección local desde Guardados.
+
 ```sh
 python3 tools/init_env.py
 sh infra/start.sh
