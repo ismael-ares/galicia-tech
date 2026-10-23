@@ -11,11 +11,11 @@ import { api, ApiError } from '@/lib/api';
 import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/guest-favorites';
 import { reducedMotion } from './motion';
 import {BrowseNavigation} from './browse-navigation';
-type State={user:User|null;favorites:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean};
+type State={user:User|null;favorites:string[];attended:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
-const initial:State={user:null,favorites:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false};
+const initial:State={user:null,favorites:[],attended:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false};
 const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admin',disabled:[] as string[],ready:false,error:'',appearance:'light' as 'light'|'dark',setAppearance:(_: 'light'|'dark')=>{},
- guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
+ guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},setAttendance:async(_:string,__:boolean)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
 export const useApp=()=>useContext(Context);
 export const useMock=useApp;
 export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI18n();
@@ -37,7 +37,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
    const [reviews,sources]=await Promise.all([api<ReviewCase[]>('/api/v1/admin/reviews/'),api<Catalog['sources']>('/api/v1/admin/sources/')]);
    cases=reviews;catalog.sources=sources;
   }
-  setState({...session,catalog,cases});setError('');setReady(true);
+  setState({...session,attended:session.attended??[],catalog,cases});setError('');setReady(true);
  }
  useEffect(()=>{let active=true;refresh().catch(e=>{if(active){setError(e.message);setReady(true);}});setDark(document.documentElement.dataset.theme==='dark');return()=>{active=false;};},[]);
  useEffect(()=>{if(!toast)return; const timer=setTimeout(()=>setToast(''),4500);return()=>clearTimeout(timer);},[toast]);
@@ -71,6 +71,10 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
    await api('/api/v1/favorites/import/',{method:'POST',body:JSON.stringify({ids})});
    // Keep the original local list: logging out must restore the visitor's
    // own selection, never a copy of the account's private saved events.
+   await refresh();
+  },
+  setAttendance:async(id:string,value:boolean)=>{
+   await api('/api/v1/attendance/'+id+'/',{method:value?'PUT':'DELETE'});
    await refresh();
   },
   toggleSource:async(id:string)=>{const source=state.catalog.sources.find(s=>s.id===id);if(!source)return;await api('/api/v1/admin/sources/'+id+'/',{method:'PATCH',body:JSON.stringify({enabled:!source.enabled})});await refresh();},

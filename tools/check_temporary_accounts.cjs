@@ -1,3 +1,4 @@
+const {openAccountSettings}=require('./account_controls.cjs');
 // Local profile only: registers its own QA account and restarts this project's backend/worker.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -55,7 +56,7 @@ async function waitForBackend(page) {
     const created = await session(page);
     assert.equal(created.user.email, email);
     assert.equal((await page.request.put(base + '/api/v1/favorites/' + eventId + '/', {headers: {'X-CSRFToken': created.csrfToken}})).status(), 204);
-    await page.getByRole('button', {name: 'Cerrar sesión', exact: true}).click();
+    await openAccountSettings(page);await page.getByRole('button', {name: 'Cerrar sesión', exact: true}).click();
     const relogged = await login(page, email, password);
     assert.equal(relogged.user.id, created.user.id, 'Logging out does not delete the account');
     assert(relogged.favorites.includes(eventId));

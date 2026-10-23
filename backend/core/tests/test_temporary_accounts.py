@@ -6,7 +6,7 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 from django.utils import timezone
 from allauth.account.models import EmailAddress
-from core.models import Event, Favorite, Source, User
+from core.models import Attendance, Event, Favorite, Source, User
 
 @override_settings(LOCAL_TEST_ACCOUNTS=True)
 class TemporaryAccountTests(TestCase):
@@ -21,6 +21,8 @@ class TemporaryAccountTests(TestCase):
         source = Source.objects.create(id='preserved', name='Preserved source', url='https://example.org', city='A Coruña', platform='Web')
         Favorite.objects.create(user=temporary, event=event)
         Favorite.objects.create(user=permanent, event=event)
+        Attendance.objects.create(user=temporary, event=event)
+        Attendance.objects.create(user=permanent, event=event)
         for user, key in [(temporary, 'temporary-session'), (permanent, 'permanent-session')]:
             Session.objects.create(session_key=key, session_data=SessionStore().encode({'_auth_user_id': str(user.pk)}), expire_date=timezone.now()+timedelta(days=1))
         self.prepare()
@@ -30,6 +32,7 @@ class TemporaryAccountTests(TestCase):
         self.assertTrue(Session.objects.filter(session_key='permanent-session').exists())
         self.assertTrue(User.objects.filter(pk=permanent.pk).exists())
         self.assertEqual(Favorite.objects.count(), 1)
+        self.assertEqual(list(Attendance.objects.values_list('user_id', flat=True)), [permanent.pk])
         self.assertTrue(Event.objects.filter(pk=event.pk).exists())
         self.assertTrue(Source.objects.filter(pk=source.pk).exists())
 

@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, BasePermission, IsAuthenticated
 from rest_framework.response import Response
 from allauth.mfa.models import Authenticator
 from redis import Redis, RedisError
-from .models import AuditLog, CollectionRun, Event, Favorite, ProcessingConfig, ReviewCase, Source
+from .models import Attendance, AuditLog, CollectionRun, Event, Favorite, ProcessingConfig, ReviewCase, Source
 from .services import decide_case, processing_config, public_url
 
 class SessionAuth(SessionAuthentication):
@@ -56,6 +56,7 @@ def session(request):
     authenticated = request.user.is_authenticated
     return JsonResponse({'csrfToken': token, 'user': user_data(request.user) if authenticated else None,
                          'favorites': list(Favorite.objects.filter(user=request.user).values_list('event_id', flat=True)) if authenticated else [],
+                         'attended': list(Attendance.objects.filter(user=request.user).values_list('event_id', flat=True)) if authenticated else [],
                          'providers': list(settings.SOCIALACCOUNT_PROVIDERS), 'requireAdminMfa': settings.REQUIRE_ADMIN_MFA,
                          'registrationEnabled': settings.ALLOW_REGISTRATION,
                          'usernameLoginEnabled': settings.LOCAL_TEST_ACCOUNTS})
@@ -86,6 +87,23 @@ def favorite(request, event_id):
         Favorite.objects.get_or_create(user=request.user, event=event)
     else:
         Favorite.objects.filter(user=request.user, event=event).delete()
+    return Response(status=204)
+
+@api_view(['PUT', 'DELETE'])
+@authentication_classes([SessionAuth])
+@permission_classes([IsAuthenticated])
+def attendance(request, event_id):
+    # Removing a mark stays possible even if an event was withdrawn or rescheduled.
+    if request.method == 'DELETE':
+        Attendance.objects.filter(user=request.user, event_id=event_id).delete()
+        return Response(status=204)
+    try:
+        event = Event.objects.get(pk=event_id, published=True)
+    except Event.DoesNotExist:
+        raise NotFound()
+    if event.start > timezone.now():
+        return Response({'detail': 'Solo puedes marcar asistencia cuando el evento haya comenzado.'}, status=400)
+    Attendance.objects.get_or_create(user=request.user, event=event)
     return Response(status=204)
 
 class FavoriteImportSerializer(serializers.Serializer):

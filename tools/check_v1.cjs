@@ -1,3 +1,4 @@
+const {openAccountSettings}=require('./account_controls.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
@@ -51,7 +52,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-light.png')});
   await page.getByRole('button',{name:'Activar modo oscuro'}).click();await page.locator('.language-button').click();assert.equal(await page.locator('html').getAttribute('lang'),'gl');
   await page.setViewportSize({width:390,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-mobile-dark.png')});
-  await page.locator('.language-button').click();await page.goto(base+'/cuenta');await page.getByRole('button',{name:'Cerrar sesión'}).click();await page.getByRole('link',{name:'Iniciar sesión',exact:true}).waitFor();
+  await page.locator('.language-button').click();await page.goto(base+'/cuenta');await openAccountSettings(page);await page.getByRole('button',{name:'Cerrar sesión'}).click();await page.getByRole('link',{name:'Iniciar sesión',exact:true}).waitFor();
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
   await page.goto(base+'/login');await page.getByLabel(/correo electrónico/i).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.getByRole('heading',{name:'Verificación en dos pasos'}).waitFor();assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
   await page.getByLabel('Código de verificación').fill(totp(secret));await page.getByRole('button',{name:'Verificar',exact:true}).click();await page.waitForURL('**/cuenta');

@@ -1,88 +1,53 @@
-// Real local registration and isolated QA favorites; never modifies existing account data.
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const crypto = require('node:crypto');
-const {execFileSync} = require('node:child_process');
-const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const root = path.resolve(__dirname, '..'), out = path.join(root, 'output/account-redesign');
-const base = process.env.APP_URL || 'http://127.0.0.1:8088', docker = process.env.DOCKER_BIN || 'docker';
-const email = `qa-account-${crypto.randomUUID()}@example.org`, password = crypto.randomBytes(24).toString('base64url');
-fs.mkdirSync(out, {recursive: true});
-const localDay = value => new Intl.DateTimeFormat('en-CA', {year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Europe/Madrid'}).format(new Date(value));
-const ends = event => localDay(event.end && new Date(event.end) > new Date(event.start) ? new Date(event.end).getTime() - 1 : event.start);
-const session = async page => (await page.request.get(base + '/api/v1/session/')).json();
-async function noOverflow(page, widths) {
-  for (const width of widths) {
-    await page.setViewportSize({width, height: 1000});
-    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `No overflow at ${width}px`);
-  }
-}
-async function shot(page, file) { await page.screenshot({path: path.join(out, file), fullPage: true}); }
-(async () => {
- const browser = await chromium.launch({channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome', headless: true});
- const errors = [];
- try {
-  const context = await browser.newContext({locale: 'es-ES', viewport: {width: 1440, height: 1050}, reducedMotion: 'reduce'});
-  const page = await context.newPage();page.on('pageerror', error => errors.push(error.message));
-  await page.goto(base);await page.locator('.account-button').click();await page.waitForURL('**/cuenta');
-  await page.locator('.personal-welcome').waitFor();assert.equal(await page.title(), 'Galicia Tech · Mi cuenta');
-  assert.equal(await page.getByRole('link', {name: 'Crear cuenta', exact: true}).getAttribute('href'), '/registro');
-  assert.equal(await page.getByText(/verificación en dos pasos/i).count(), 0);
-  assert.equal(await page.locator('.admin-entry').count(), 0);
-  await shot(page, 'guest-desktop-light.png');await noOverflow(page, [1280, 900, 768, 700, 390, 320]);
-  await page.getByRole('radio', {name: 'Oscuro', exact: true}).check();
-  assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
-  await page.getByRole('radio', {name: /Galego/}).check();
-  assert.equal(await page.locator('html').getAttribute('lang'), 'gl');assert.equal(await page.title(), 'Galicia Tech · A miña conta');
-  await page.reload();await page.locator('.personal-welcome').waitFor();
-  assert(await page.getByRole('radio', {name: 'Escuro', exact: true}).isChecked());assert(await page.getByRole('radio', {name: /Galego/}).isChecked());
-  await page.setViewportSize({width: 390, height: 1000});await shot(page, 'guest-mobile-dark-gl.png');
-  await page.getByRole('radio', {name: /Castellano/}).check();await page.getByRole('radio', {name: 'Claro', exact: true}).check();
-  await page.setViewportSize({width: 1440, height: 1050});
-  const catalog = await (await page.request.get(base + '/api/v1/catalog/')).json(), today = localDay(Date.now());
-  const future = catalog.events.filter(event => ends(event) >= today).sort((a,b) => new Date(a.start) - new Date(b.start));
-  const past = catalog.events.filter(event => ends(event) < today).sort((a,b) => new Date(b.start) - new Date(a.start));
-  assert(future.length >= 2 && past.length, 'QA requires upcoming and past sample events');
-  const ids = [future[0].id, future[1].id, past[0].id];
-  await page.evaluate(ids => localStorage.setItem('galicia-tech-guest-favorites-v1', JSON.stringify(ids)), ids);
-  await page.reload();await page.locator('.personal-event').first().waitFor();
-  await page.getByRole('link', {name: 'Crear cuenta', exact: true}).click();await page.waitForURL('**/registro');
-  await page.getByLabel('Correo electrónico', {exact: true}).fill(email);await page.getByLabel('Contraseña', {exact: true}).fill(password);await page.getByLabel('Repite la contraseña', {exact: true}).fill(password);await page.getByRole('button', {name: 'Crear cuenta', exact: true}).click();await page.waitForURL('**/cuenta');
-  await page.locator('.personal-identity').waitFor();assert.equal((await session(page)).user.role, 'user');
-  assert.equal(await page.locator('.personal-event').count(), 0, 'No automatic import');
-  assert.equal(await page.locator('.admin-entry').count(), 0);assert.equal(await page.getByText(/verificación en dos pasos/i).count(), 0);
-  await shot(page, 'account-empty-light.png');
-  await page.getByRole('button', {name: 'Añadir guardados del navegador', exact: true}).click();
-  await page.locator('.personal-import').waitFor({state: 'detached'});assert.deepEqual((await session(page)).favorites.sort(), [...ids].sort());
-  assert.equal(await page.locator('.personal-stats dd').nth(0).innerText(), '03');assert.equal(await page.locator('.personal-stats dd').nth(1).innerText(), '02');
-  assert.deepEqual(await page.locator('.personal-event').evaluateAll(elements => elements.map(element => element.dataset.accountEvent)), future.slice(0, 2).map(event => event.id));
-  await shot(page, 'account-desktop-light.png');
-  await page.locator('.personal-event-featured').click();await page.waitForURL('**/evento/' + future[0].id);await page.goto(base + '/cuenta');
-  await page.getByRole('link', {name: 'Ver todos', exact: true}).click();await page.waitForURL('**/guardados');await page.goto(base + '/cuenta');
-  await page.getByRole('radio', {name: 'Oscuro', exact: true}).check();await shot(page, 'account-desktop-dark.png');
-  await page.getByRole('radio', {name: /Galego/}).check();await noOverflow(page, [1280, 900, 768, 700, 390, 320]);
-  await page.setViewportSize({width: 390, height: 1000});await shot(page, 'account-mobile-dark-gl.png');
-  await page.getByRole('radio', {name: /Castellano/}).check();
-  await page.route('**/api/v1/catalog/', route => route.fulfill({json: {...catalog, events: [past[0]]}}));
-  await page.reload();await page.getByRole('heading', {name: 'De tu archivo', exact: true}).waitFor();assert.equal(await page.locator('.personal-stats dd').nth(1).innerText(), '00');await page.locator('.personal-event-past').waitFor();
-  await page.unroute('**/api/v1/catalog/');await page.goto(base + '/admin/acceso');await page.getByRole('heading', {name: 'Área de administración', exact: true}).waitFor();assert.equal(await page.locator('.mfa-enrollment').count(), 0);
-  await page.goto(base + '/cuenta');await page.getByRole('button', {name: 'Cerrar sesión', exact: true}).click();await page.locator('.personal-welcome').waitFor();assert.equal((await session(page)).user, null);
-  assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('galicia-tech-guest-favorites-v1'))), ids);
-  const anonymous = await session(page);await page.route('**/api/v1/session/', route => route.fulfill({json: {...anonymous, registrationEnabled: false}}));await page.reload();await page.locator('.personal-welcome').waitFor();assert.equal(await page.locator('a[href="/registro"]').count(), 0);await page.unroute('**/api/v1/session/');await context.close();
-
-  const adminContext = await browser.newContext({locale: 'es-ES', viewport: {width: 1440, height: 1050}, reducedMotion: 'reduce'}), admin = await adminContext.newPage();admin.on('pageerror', error => errors.push(error.message));
-  await admin.goto(base + '/login');await admin.getByLabel('Usuario o correo electrónico', {exact: true}).fill('admin');await admin.getByLabel('Contraseña', {exact: true}).fill('admin');await admin.getByRole('button', {name: 'Entrar', exact: true}).click();await admin.waitForURL('**/cuenta');
-  await admin.locator('.admin-entry').waitFor();assert.equal(await admin.getByText(/verificación en dos pasos/i).count(), 0);await shot(admin, 'account-admin-light.png');await admin.locator('.admin-entry').click();await admin.waitForURL('**/admin');assert.equal((await admin.request.get(base + '/api/v1/admin/sources/')).status(), 200);
-  const adminSession = await session(admin);await admin.route('**/api/v1/session/', route => route.fulfill({json: {...adminSession, requireAdminMfa: true}}));await admin.reload();await admin.getByRole('link', {name: 'Configurar acceso', exact: true}).click();await admin.waitForURL('**/admin/acceso');await admin.getByRole('button', {name: 'Configurar verificación en dos pasos', exact: true}).waitFor();await adminContext.close();
-  assert.deepEqual(errors, []);
-  fs.writeFileSync(path.join(out, 'checks.json'), JSON.stringify({status: 'passed', checks: ['guest account entry and signup', 'real registration', 'no personal MFA panel', 'local collection preserved', 'explicit favorites import', 'upcoming/archive separation', 'event and collection links', 'working theme/language preferences and reload', '320–1440px', 'GL/ES light/dark', 'logout', 'closed registration', 'admin permissions and conditional access setup'], errors}, null, 2));
-  console.log('PASS account: real signup, favorites, preferences, role-specific access, responsive layout and GL/ES themes.');
- } catch (error) {
-  for (const context of browser.contexts()) for (const page of context.pages()) if (!page.isClosed()) await page.screenshot({path: path.join(out, 'failure.png'), fullPage: true}).catch(() => {});
-  throw error;
- } finally {
-  await browser.close();
-  execFileSync(docker, ['compose', 'exec', '-T', 'backend', 'python', 'manage.py', 'shell', '-c', "import json,sys; from core.models import User; User.objects.filter(email=json.loads(sys.stdin.read())['email'],is_staff=False,is_superuser=False).delete()"], {cwd: root, input: JSON.stringify({email}), encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']});
- }
-})().catch(error => {console.error(error);process.exitCode = 1;});
+// Real local account, favorites and attendance. Removes only its own QA user.
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {execFileSync}=require('node:child_process');const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const root=path.resolve(__dirname,'..'),out=path.join(root,'output/account-portal'),base=process.env.APP_URL||'http://127.0.0.1:8088',docker=process.env.DOCKER_BIN||'docker';
+const email=`qa-portal-${crypto.randomUUID()}@example.org`,password=crypto.randomBytes(24).toString('base64url');fs.mkdirSync(out,{recursive:true});
+const localDay=value=>new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Madrid'}).format(new Date(value));
+const end=event=>localDay(event.end&&new Date(event.end)>new Date(event.start)?new Date(event.end).getTime()-1:event.start);
+const session=async page=>(await page.request.get(base+'/api/v1/session/')).json();
+const manage=(code,input)=>execFileSync(docker,['compose','exec','-T','backend','python','manage.py','shell','-c',code],{cwd:root,input:JSON.stringify(input),encoding:'utf8',stdio:['pipe','pipe','pipe']});
+async function responsive(page){for(const width of [1440,1024,900,768,700,390,320]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`No overflow at ${width}px`);}}
+async function shot(page,name){await page.screenshot({path:path.join(out,name),fullPage:true});}
+const stat=(page,name)=>page.locator(`[data-stat="${name}"]`);
+const row=(page,id)=>page.locator(`.portal-event[data-portal-event="${id}"]`);
+async function tab(page,section){await page.locator('#portal-tab-'+section).click();await page.waitForFunction(section=>document.querySelector('#portal-tab-'+section)?.getAttribute('aria-selected')==='true',section);}
+(async()=>{
+ const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',headless:true});const errors=[];let page;
+ try{
+  const context=await browser.newContext({locale:'es-ES',viewport:{width:1440,height:1050},reducedMotion:'reduce'});page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(base);await page.locator('.account-button').click();await page.waitForURL('**/cuenta');await page.locator('.event-portal').waitFor();
+  assert.equal(await page.title(),'Galicia Tech · Mis encuentros');assert.equal(await page.locator('.portal-account-settings').getAttribute('open'),null);assert.equal(await stat(page,'attended').innerText(),'—');assert.equal(await page.locator('.admin-entry').count(),0);
+  await shot(page,'guest-desktop-light.png');await responsive(page);await page.setViewportSize({width:1440,height:1050});
+  const catalog=await(await page.request.get(base+'/api/v1/catalog/')).json(),today=localDay(Date.now());
+  const future=catalog.events.filter(event=>end(event)>=today&&new Date(event.start)>new Date()).sort((a,b)=>new Date(a.start)-new Date(b.start));
+  const past=catalog.events.filter(event=>end(event)<today).sort((a,b)=>new Date(b.start)-new Date(a.start));assert(future.length>=2&&past.length>=2,'Mixed local sample required');
+  const ids=[...future.slice(0,2),...past].map(event=>event.id);await page.evaluate(ids=>localStorage.setItem('galicia-tech-guest-favorites-v1',JSON.stringify(ids)),ids);await page.reload();await page.locator('.portal-next').waitFor();
+  await page.locator('.portal-signup').getByRole('link',{name:'Crear cuenta',exact:true}).click();await page.waitForURL('**/registro');await page.getByLabel('Correo electrónico',{exact:true}).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByLabel('Repite la contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Crear cuenta',exact:true}).click();await page.waitForURL('**/cuenta');
+  manage("import json,sys; from core.models import User; u=User.objects.get(email=json.loads(sys.stdin.read())['email'],is_ephemeral=True); u.first_name='Alex'; u.save(update_fields=['first_name'])",{email});await page.reload();await page.locator('.event-portal[data-authenticated=true]').waitFor();
+  assert.equal(await stat(page,'attended').innerText(),'00');assert.equal(await stat(page,'upcoming').innerText(),'00');assert.equal(await page.locator('.portal-next').count(),0);assert.equal(await page.getByText(/verificación en dos pasos/i).count(),0);
+  await shot(page,'member-empty-light.png');await page.getByRole('button',{name:'Añadir guardados del navegador',exact:true}).click();await page.locator('.portal-import').waitFor({state:'detached'});await page.locator('.portal-next').waitFor();assert.equal(await stat(page,'upcoming').innerText(),'02');assert.equal(await stat(page,'attended').innerText(),'00');
+  assert.deepEqual(await page.locator('[data-portal-event]').evaluateAll(elements=>elements.map(element=>element.dataset.portalEvent)),future.slice(0,2).map(event=>event.id));
+  const current=await session(page);assert.equal((await page.request.put(base+'/api/v1/attendance/'+future[0].id+'/',{headers:{'X-CSRFToken':current.csrfToken}})).status(),400);
+  await tab(page,'pasados');assert.equal(await page.locator('.portal-next').count(),0);assert.equal(await page.locator('.portal-event').count(),past.length);
+  await row(page,past[0].id).getByRole('button',{name:/^Marcar como asistido:/}).click();await row(page,past[0].id).getByRole('button',{name:/^Desmarcar asistencia:/}).waitFor();assert.equal(await stat(page,'attended').innerText(),'01');assert.deepEqual((await session(page)).favorites.sort(),[...ids].sort());
+  await page.goto(base+'/guardados');await page.locator('.saved-entry[data-period=pasados]').first().waitFor();await responsive(page);await page.setViewportSize({width:390,height:1000});await shot(page,'saved-past-mobile.png');await page.setViewportSize({width:1440,height:1050});await page.locator('.saved-entry[data-period=pasados]').filter({has:page.locator(`[data-motion-item="${past[1].id}"]`)}).getByRole('button',{name:/^Marcar como asistido:/}).click();await page.locator('.saved-entry[data-period=pasados]').filter({has:page.locator(`[data-motion-item="${past[1].id}"]`)}).locator('.attendance-button[aria-pressed=true]').waitFor();
+  await page.goto(base+'/cuenta?seccion=asistidos');await row(page,past[1].id).waitFor();assert.equal(await stat(page,'attended').innerText(),'02');
+  const cities=new Set(past.slice(0,2).map(event=>event.city)).size,communities=new Set(past.slice(0,2).map(event=>event.community)).size;assert.equal(await stat(page,'cities').innerText(),String(cities).padStart(2,'0'));assert.equal(await stat(page,'communities').innerText(),String(communities).padStart(2,'0'));
+  await row(page,past[0].id).getByRole('button',{name:/^Desmarcar asistencia:/}).click();await row(page,past[0].id).waitFor({state:'detached'});assert.equal(await stat(page,'attended').innerText(),'01');assert((await session(page)).favorites.includes(past[0].id));
+  await page.goto(base+'/evento/'+past[0].id);await page.locator('.detail-attendance').getByRole('button',{name:/^Marcar como asistido:/}).click();await page.locator('.detail-attendance .attendance-button[aria-pressed=true]').waitFor();
+  const csrf=(await session(page)).csrfToken;assert.equal((await page.request.delete(base+'/api/v1/favorites/'+past[0].id+'/',{headers:{'X-CSRFToken':csrf}})).status(),204);
+  await page.goto(base+'/cuenta?seccion=asistidos');await row(page,past[0].id).waitFor();assert.equal(await stat(page,'attended').innerText(),'02');assert.equal(await page.locator('.portal-event').count(),2);await page.reload();await row(page,past[0].id).waitFor();assert.equal(await stat(page,'attended').innerText(),'02');
+  const monthly=Array.from({length:6},(_,index)=>{const d=new Date(today.slice(0,7)+'-01T12:00:00Z');d.setUTCMonth(d.getUTCMonth()+index-5);const month=d.toISOString().slice(0,7);return past.slice(0,2).filter(event=>localDay(event.start).startsWith(month)).length;});assert.deepEqual(await page.locator('.portal-chart-track>b').allTextContents(),monthly.map(count=>count?String(count):''));
+  await shot(page,'attended-desktop-light.png');await tab(page,'proximos');await page.locator('.portal-next').waitFor();await shot(page,'upcoming-desktop-light.png');
+  await page.getByRole('button',{name:'Abrir ajustes de cuenta',exact:true}).click();assert.equal(await page.locator('.portal-account-settings').getAttribute('open'),'');await page.getByRole('radio',{name:'Oscuro',exact:true}).check();await page.getByRole('radio',{name:/Galego/}).check();await page.reload();await page.locator('.event-portal').waitFor();assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');assert.equal(await page.locator('html').getAttribute('lang'),'gl');assert.equal(await page.title(),'Galicia Tech · Os meus encontros');assert.equal(await page.locator('.portal-account-settings').getAttribute('open'),null);
+  await shot(page,'upcoming-desktop-dark-gl.png');await responsive(page);await page.setViewportSize({width:390,height:1000});await shot(page,'upcoming-mobile-dark-gl.png');await tab(page,'asistidos');await row(page,past[0].id).waitFor();await shot(page,'attended-mobile-dark-gl.png');
+  await page.setViewportSize({width:1440,height:1050});await page.locator('#portal-tab-asistidos').press('Home');await page.waitForFunction(()=>document.querySelector('#portal-tab-proximos').getAttribute('aria-selected')==='true');await page.locator('#portal-tab-proximos').press('End');await page.waitForFunction(()=>document.querySelector('#portal-tab-asistidos').getAttribute('aria-selected')==='true');await page.goBack();await page.waitForFunction(()=>document.querySelector('#portal-tab-proximos').getAttribute('aria-selected')==='true');
+  await page.getByRole('button',{name:'Abrir axustes da conta',exact:true}).click();await page.getByRole('radio',{name:/Castellano/}).check();await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();await page.locator('.portal-signup').waitFor();assert.deepEqual((await session(page)).attended,[]);assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('galicia-tech-guest-favorites-v1'))),ids);
+  assert.equal((await page.request.put(base+'/api/v1/attendance/'+past[0].id+'/')).status(),401);await page.goto(base+'/admin/acceso');await page.getByRole('heading',{name:'Área de administración',exact:true}).waitFor();await page.goto(base+'/cuenta');
+  const guest=await session(page);await page.route('**/api/v1/session/',route=>route.fulfill({json:{...guest,registrationEnabled:false}}));await page.reload();await page.locator('.portal-signup').waitFor();assert.equal(await page.locator('a[href="/registro"]').count(),0);await context.close();
+  const owner=await browser.newContext({locale:'es-ES',viewport:{width:1440,height:1050},reducedMotion:'reduce'}),admin=await owner.newPage();admin.on('pageerror',error=>errors.push(error.message));await admin.goto(base+'/login');await admin.getByLabel('Usuario o correo electrónico',{exact:true}).fill('admin');await admin.getByLabel('Contraseña',{exact:true}).fill('admin');await admin.getByRole('button',{name:'Entrar',exact:true}).click();await admin.waitForURL('**/cuenta');await admin.locator('.admin-entry').click();await admin.waitForURL('**/admin');assert.equal((await admin.request.get(base+'/api/v1/admin/sources/')).status(),200);await owner.close();
+  assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'checks.json'),JSON.stringify({status:'passed',checks:['real registration','local favorites preserved and explicitly imported','upcoming and past views','attendance from portal, saved and detail','reversible attendance','attendance independent of favorites','persistent private history','future attendance rejected','real cities/communities/monthly stats','keyboard and URL history','collapsed settings','preferences survive reload','320–1440px','GL/ES and both themes','closed registration and admin access'],errors},null,2));console.log('PASS user portal: real plans, attendance, history, stats, preferences and responsive GL/ES.');
+ }catch(error){if(page&&!page.isClosed())await shot(page,'failure.png').catch(()=>{});throw error;}
+ finally{await browser.close();manage("import json,sys; from core.models import User; User.objects.filter(email=json.loads(sys.stdin.read())['email'],is_staff=False,is_superuser=False).delete()",{email});}
+})().catch(error=>{console.error(error);process.exitCode=1;});

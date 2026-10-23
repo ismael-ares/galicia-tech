@@ -1,3 +1,4 @@
+const {openAccountSettings}=require('./account_controls.cjs');
 // Run against the local sample deployment. Creates and removes its own normal user.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -72,7 +73,7 @@ async function guest(page){assert.equal((await (await page.request.get(base+'/ap
   assert.deepEqual(mutations,['POST /api/v1/favorites/import/']);
   assert.deepEqual(await stored(page),['ourense'],'Private account favorites must never be written to local storage');
   await page.reload();await count(page,2);
-  await page.goto(base+'/cuenta');await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();
+  await page.goto(base+'/cuenta');await openAccountSettings(page);await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();
   await page.getByRole('link',{name:'Iniciar sesión',exact:true}).waitFor();
   await page.goto(base+'/guardados');await count(page,1);await card(page,'ourense').waitFor();await guest(page);
   await page.screenshot({path:path.join(out,'saved-guest-light.png'),fullPage:true});

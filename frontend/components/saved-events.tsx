@@ -10,6 +10,7 @@ import {SavedEventsNotice} from './saved-events-notice';
 import {EventFilters,filterEvents} from './event-filters';
 import {useBrowseFilters} from './use-browse-filters';
 import {useAnimatedList} from './motion';
+import {AttendanceButton} from './attendance';
 
 export function SavedEvents({today}:{today:string}){
  const {catalog,favorites}=useApp();
@@ -47,7 +48,7 @@ export function SavedEvents({today}:{today:string}){
     <div className="saved-group-list">{group.events.map(event=>{const range=eventDays(event),next=group.id==='proximos'&&event.id===upcoming[0]?.id;
      const status=group.id==='pasados'?'':range.start<today?'En curso':range.start===today?'Hoy':next?'El próximo':'';
      return <div className="saved-entry" key={event.id} data-next={next} data-period={group.id} data-motion-item={'saved-'+event.id}>
-     <div className="saved-entry-header"><time dateTime={event.start}><strong>{formatDate(event.start,{day:'2-digit'})}</strong><span><b>{formatDate(event.start,{month:'short',year:'numeric'}).replace('.','')}</b><small>{formatDate(event.start,{weekday:'long'})}</small></span></time>{status&&<span className="saved-entry-status"><i/>{t(status)}</span>}</div>
+     <div className="saved-entry-header"><time dateTime={event.start}><strong>{formatDate(event.start,{day:'2-digit'})}</strong><span><b>{formatDate(event.start,{month:'short',year:'numeric'}).replace('.','')}</b><small>{formatDate(event.start,{weekday:'long'})}</small></span></time>{status&&<span className="saved-entry-status"><i/>{t(status)}</span>}{group.id==='pasados'&&<AttendanceButton event={event}/>}</div>
      <EncounterRow event={event}/>
     </div>;})}</div>
    </section>)}

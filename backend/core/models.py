@@ -46,6 +46,13 @@ class Favorite(models.Model):
     class Meta:
         constraints = [models.UniqueConstraint(fields=['user', 'event'], name='unique_favorite')]
 
+class Attendance(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'event'], name='unique_attendance')]
+
 class ReviewCase(models.Model):
     id = models.SlugField(primary_key=True, max_length=100)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='reviews')
