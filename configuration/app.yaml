@@ -23,7 +23,7 @@ collection:
 processing:
   frequency: twice-weekly
   budget_eur: 5.00
-  paid_calls_enabled: false # LLM execution is not implemented in 0.1.
+  paid_calls_enabled: false # LLM execution is not implemented in 0.2.
 fetch:
   allowed_hosts: [gdg.community.dev, www.meetup.com, meetup.com, gpul.org, corunajug.org]
   max_bytes: 2000000

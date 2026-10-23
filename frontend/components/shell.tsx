@@ -12,6 +12,7 @@ import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/gu
 import { reducedMotion } from './motion';
 import {BrowseNavigation} from './browse-navigation';
 import {SettingsMenu} from './settings-menu';
+import {version as appVersion} from '../package.json';
 type State={user:User|null;favorites:string[];attended:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean;collectionEnabled:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
 const initial:State={user:null,favorites:[],attended:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false,collectionEnabled:false};
@@ -82,7 +83,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
  };
  return <Context.Provider value={value}>
   <a href="#main" className="skip-link">{t("Saltar al contenido")}</a>
-  {state.catalog.sample&&<div className="preview-bar"><span>{t('Datos de muestra · octubre 2026')}</span><span>{t('Versión 0.1 · homelab')}</span></div>}
+  {state.catalog.sample&&<div className="preview-bar"><span>{t('Datos de muestra · octubre 2026')}</span><span>{t('Versión')} {appVersion.split('.').slice(0,2).join('.')} · homelab</span></div>}
   <header className="site-header"><div className="header-inner">
    <div className="brand"><button className={'brand-symbol '+(motion?'shell-play':'')} onClick={()=>{setMotion(false);if(!reducedMotion())requestAnimationFrame(()=>setMotion(true));}} onAnimationEnd={e=>{if(e.target===e.currentTarget)setMotion(false);}} aria-label={t("Animar la vieira")} dangerouslySetInnerHTML={{__html:shellSvg}}/><Link href="/" className="brand-word">galicia<span>tech<span className="brand-period">.</span></span></Link></div>
    <BrowseNavigation/>

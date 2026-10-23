@@ -1,6 +1,6 @@
-# Primera versión funcional · 0.1.0
+# Aplicación funcional · v0.2 (0.2.0)
 
-Implementación inicial para probar en el homelab. El mock aprobado se conserva en `mock-next/` (puerto 8874). La aplicación con servidor y datos propios está en `frontend/`, `backend/` y el Compose de la raíz (puerto 8088 por defecto).
+Versión para probar en el homelab; esta guía conserva su ruta original para mantener los enlaces existentes. Los cambios de la entrega están en [CHANGELOG.md](../CHANGELOG.md). El mock aprobado se conserva en `mock-next/` (puerto 8874). La aplicación con servidor y datos propios está en `frontend/`, `backend/` y el Compose de la raíz (puerto 8088 por defecto).
 
 ## Qué funciona
 
@@ -112,7 +112,7 @@ Las cuentas temporales locales se limpian al reiniciar el backend, como se descr
 
 El conector es deliberadamente conservador y limitado: hasta seis fichas enlazadas por consulta, HTML/JSON-LD y estado estructurado GDG. Una fuente que necesite JavaScript, otro formato o tenga más páginas puede quedar parcial. Los errores figuran en la fuente y en la API de ejecuciones. No se ha demostrado en esta entrega una lectura completa y actual de los trece sitios reales.
 
-**No hay adaptador LLM ni llamadas de pago en 0.1.** Frecuencia y presupuesto quedan guardados para la siguiente fase. No se promete que guardar un presupuesto implemente una reserva transaccional. La priorización actual es por proximidad de fecha. Traducción automática de contenido nuevo, deduplicación semántica, extracción más amplia y selección/descarga de imágenes nuevas siguen pendientes. Las portadas automáticas cubren los eventos que no tienen imagen local verificada.
+**No hay adaptador LLM ni llamadas de pago en v0.2.** Frecuencia y presupuesto quedan guardados para la siguiente fase. No se promete que guardar un presupuesto implemente una reserva transaccional. La priorización actual es por proximidad de fecha. Traducción automática de contenido nuevo, deduplicación semántica, extracción más amplia y selección/descarga de imágenes nuevas siguen pendientes. Las portadas automáticas cubren los eventos que no tienen imagen local verificada.
 
 ## Acceso social y recuperación
 

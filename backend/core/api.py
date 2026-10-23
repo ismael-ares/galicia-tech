@@ -46,7 +46,7 @@ def health(request):
         with connection.cursor() as cursor:
             cursor.execute('SELECT 1')
         Redis.from_url(settings.REDIS_URL, socket_connect_timeout=2, socket_timeout=2).ping()
-        return JsonResponse({'status': 'ok', 'version': '0.1.0'})
+        return JsonResponse({'status': 'ok', 'version': '0.2.0'})
     except Exception:
         return JsonResponse({'status': 'unavailable'}, status=503)
 

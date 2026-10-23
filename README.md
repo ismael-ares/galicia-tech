@@ -1,12 +1,14 @@
 # Galicia Tech
 
-## Aplicación funcional 0.1
+## Aplicación funcional v0.2
 
 Ya existe la primera base funcional con Next.js, Django, PostgreSQL, Redis, Q2 y Nginx. Se despliega con el [Compose de la raíz](compose.yaml) y arranca en `http://127.0.0.1:8088/`. La agenda es la entrada principal. Consulta la [guía de instalación, alcance y verificación](docs/primera-version-0.1.md) antes de desplegar en el LXC.
 
+La etiqueta `v0.2` identifica esta entrega (versión interna `0.2.0`). El [historial de cambios](CHANGELOG.md) resume las mejoras respecto a la primera versión.
+
 Puedes guardar eventos sin iniciar sesión: se conservan en este navegador. Con una cuenta se guardan en el servidor y puedes incorporar expresamente tu selección local desde Guardados.
 
-La navegación ofrece **Agenda**, **Calendario** y una colección independiente de **Guardados**. Mi cuenta reúne próximos encuentros, pasados guardados, asistencias y estadísticas personales.
+La navegación ofrece **Agenda**, **Calendario** y una colección independiente de **Guardados**. Mi cuenta reúne próximos encuentros, pasados guardados, asistencias y estadísticas personales. El menú **Ajustes** abre cuenta, preferencias, administración según permisos y un único acceso para iniciar sesión o registrarse.
 
 ```sh
 python3 tools/init_env.py
@@ -21,7 +23,7 @@ El mock del puerto 8874 sigue separado de la aplicación. Los apartados siguient
 ## Prototipos y evidencia previa
 
 
-La referencia técnica vigente es el [plan consolidado para el homelab](docs/plan-arquitectura-homelab-2026-10-21.md), con [decisiones y evidencias verificables](docs/evidencias/arquitectura-2026-10-21/README.md). Confirma PostgreSQL y Redis, descarta RabbitMQ y aplaza GitHub Actions/cloud. Ese documento conserva el plan de partida; el estado actual se detalla en la guía de la versión 0.1 enlazada arriba.
+La referencia técnica vigente es el [plan consolidado para el homelab](docs/plan-arquitectura-homelab-2026-10-21.md), con [decisiones y evidencias verificables](docs/evidencias/arquitectura-2026-10-21/README.md). Confirma PostgreSQL y Redis, descarta RabbitMQ y aplaza GitHub Actions/cloud. Ese documento conserva el plan de partida; el estado actual se detalla en la guía de la versión v0.2 enlazada arriba.
 
 CLI manual en Python, sin interfaz web, scheduler ni credenciales. Lee directamente las páginas públicas GDG acordadas y el grupo WordPress Coruña; en GDG utiliza el estado estructurado público de la página y ficha JSON-LD, y en Meetup enlaces visibles y JSON-LD de fichas. La conversión de fechas se presenta en Europe/Madrid. La referencia predeterminada es `2026-10-19` y puede cambiarse con `--as-of YYYY-MM-DD`.
 
