@@ -23,8 +23,11 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await page.goto(base);await page.locator('.agenda-page').waitFor();await active(page,'/');
   assert.equal(await page.locator('.desktop-nav a').count(),3);
   assert.equal(await page.locator('.saved-filter-button,.event-view-switch,.header-actions a[href="/guardados"]').count(),0);
-  const catalog=await (await page.request.get(base+'/api/v1/catalog/')).json();await count(page,catalog.events.length);
-  for(const id of ['flutter','santiago','ourense']){await page.locator(`.meet-card[data-motion-item="${id}"] .save-button`).click();await page.locator(`.meet-card[data-motion-item="${id}"] .save-button[aria-pressed=true]`).waitFor();}
+  const catalog=await (await page.request.get(base+'/api/v1/catalog/')).json();
+  const localDay=value=>new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Madrid'}).format(new Date(value));
+  const today=localDay(new Date()),upcomingCount=catalog.events.filter(event=>localDay(event.end&&new Date(event.end)>new Date(event.start)?new Date(event.end).getTime()-1:event.start)>=today).length;await count(page,upcomingCount);
+  for(const id of ['santiago','ourense']){await page.locator(`.meet-card[data-motion-item="${id}"] .save-button`).click();await page.locator(`.meet-card[data-motion-item="${id}"] .save-button[aria-pressed=true]`).waitFor();}
+  await page.getByRole('group',{name:'Estado de los encuentros'}).getByRole('button',{name:/^Archivo/}).click();await page.locator('.meet-card[data-motion-item="flutter"] .save-button').click();await page.locator('.meet-card[data-motion-item="flutter"] .save-button[aria-pressed=true]').waitFor();
   await savedLink(page).click();await page.waitForURL('**/guardados');await count(page,3);await active(page,'/guardados');
   await page.locator('.saved-page').waitFor();assert.equal(await page.title(),'Galicia Tech · Guardados');
   assert.equal(await page.locator('.agenda-page,.calendar-view,.featured-section,.scope-exit').count(),0);
@@ -36,7 +39,7 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await savedLink(page).click();await count(page,3);assert.equal(new URL(page.url()).pathname,'/guardados');
   await page.getByLabel('Buscar en guardados').fill('DevFest');await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');await count(page,1);
   await page.reload();await count(page,1);assert.equal(await page.getByLabel('Buscar en guardados').inputValue(),'DevFest');
-  await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,catalog.events.length);
+  await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,upcomingCount);
   assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'');assert.equal(await page.getByLabel('Localidad').inputValue(),'');
   await page.goBack();await page.waitForURL(url=>url.pathname==='/guardados');await count(page,1);
   await nav(page,'Calendario').click();await page.waitForURL(url=>url.pathname==='/calendario');await page.locator('.calendar-view').waitFor();await active(page,'/calendario');
@@ -86,7 +89,7 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   for(const width of [390,320]){await page.setViewportSize({width,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`GL header overflow at ${width}px`);}
   await page.setViewportSize({width:390,height:900});await page.screenshot({path:path.join(out,'saved-collection-mobile-dark-gl.png'),fullPage:true});
   await page.evaluate(()=>window.scrollTo(0,600));assert((await savedLink(page,true).boundingBox()).y>=0,'The collection stays accessible while scrolling');
-  await nav(page,'Axenda',true).click();await page.waitForURL(url=>url.pathname==='/');await count(page,catalog.events.length);await active(page,'/',true);
+  await nav(page,'Axenda',true).click();await page.waitForURL(url=>url.pathname==='/');await count(page,upcomingCount);await active(page,'/',true);
 
   // Classification includes an event in progress, and is independent of the sample dates.
   const temporal=await browser.newContext({locale:'es-ES',viewport:{width:1440,height:1000},reducedMotion:'reduce'});
@@ -110,7 +113,7 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   const clean=await browser.newContext({locale:'es-ES',viewport:{width:390,height:900},reducedMotion:'reduce'});const fresh=await clean.newPage();fresh.on('pageerror',error=>errors.push(error.message));
   await fresh.goto(base+'/guardados');await fresh.locator('.saved-empty').waitFor();assert.equal(await fresh.locator('.event-filters').count(),0);await active(fresh,'/guardados',true);
   await fresh.getByRole('heading',{name:'Todavía no has guardado eventos'}).waitFor();
-  await fresh.locator('.saved-empty').getByRole('link',{name:'Explorar eventos'}).click();await fresh.waitForURL(url=>url.pathname==='/');await count(fresh,catalog.events.length);
+  await fresh.locator('.saved-empty').getByRole('link',{name:'Explorar eventos'}).click();await fresh.waitForURL(url=>url.pathname==='/');await count(fresh,upcomingCount);
   await clean.close();assert.deepEqual(errors,[]);
   fs.writeFileSync(path.join(out,'checks.json'),JSON.stringify({status:'passed',checks:['independent saved route','three destinations','no saved toggle','isolated collection filters','shared discovery filters','past/upcoming/in-progress','period and month history','legacy redirects','remove and counters','empty collection and search','calendar keyboard','responsive 320-1440px','GL/ES','light/dark'],errors},null,2));
   console.log('PASS navigation: independent saved collection, isolated filters, periods, history, legacy links and responsive GL/ES UI.');

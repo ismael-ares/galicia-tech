@@ -23,7 +23,11 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
   // Test sample import is explicit and leaves a visible sample banner.
   execFileSync(docker,['compose','exec','-T','backend','python','manage.py','import_sample'],{cwd:root,stdio:'pipe'});
-  await page.reload();await page.locator('.meet-card').first().waitFor();assert.equal(await page.locator('.meet-card').count(),8);
+  await page.reload();await page.locator('.agenda-page').waitFor();
+  const sample=await (await page.request.get(base+'/api/v1/catalog/')).json();assert.equal(sample.events.length,8);
+  const localDay=value=>new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Madrid'}).format(new Date(value));
+  const today=localDay(new Date()),upcomingCount=sample.events.filter(event=>localDay(event.end&&new Date(event.end)>new Date(event.start)?new Date(event.end).getTime()-1:event.start)>=today).length;
+  await page.waitForFunction(n=>document.querySelectorAll('.meet-card').length===n,upcomingCount);
   await page.locator('.preview-bar').getByText('Datos de muestra',{exact:false}).waitFor();
   await page.evaluate(()=>localStorage.setItem('galicia-tech-next-demo-v1',JSON.stringify({role:'admin'})));
   await page.goto(base+'/admin/fuentes');await page.getByRole('heading',{name:'Área de administración'}).waitFor();assert.equal(await page.locator('.source-table-row').count(),0);
@@ -41,7 +45,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.goto(base+'/admin/revision');const review=page.locator('#end-time');await review.locator('select').selectOption('19:00');await review.getByRole('button',{name:'Confirmar dato'}).click();await review.waitFor({state:'detached'});
   await page.goto(base+'/evento/hackathon');await page.getByRole('heading',{name:/Hackathon ETSE/}).waitFor();
   const catalogue=await (await page.request.get(base+'/api/v1/catalog/')).json();assert(catalogue.events.find(e=>e.id==='hackathon').end.includes('19:00:00'));
-  await page.goto(base);await page.locator('.meet-card').first().getByRole('button',{name:/^Guardar:/}).click();await page.getByRole('status').getByText('Encuentro guardado.',{exact:true}).waitFor();
+  await page.goto(base+(upcomingCount?'':'/?periodo=pasados'));await page.locator('.meet-card').first().getByRole('button',{name:/^Guardar:/}).click();await page.getByRole('status').getByText('Encuentro guardado.',{exact:true}).waitFor();
   await page.goto(base+'/guardados');await page.locator('.meet-card').first().waitFor();assert.equal(await page.locator('.meet-card').count(),1);await page.reload();await page.locator('.meet-card').first().waitFor();
   await page.goto(base+'/calendario?mes=2026-11');await page.locator('.calendar-view').waitFor();await page.locator('[data-day="2026-11-04"] .calendar-day-button').click();await page.locator('[data-calendar-event="santiago"]').waitFor();
   await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-light.png')});
