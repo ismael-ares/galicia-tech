@@ -1,6 +1,6 @@
 'use client';
 import {useState} from 'react';
-import {Bookmark,CloudUpload} from 'lucide-react';
+import {ChevronDown,Cloud,CloudUpload,Monitor} from 'lucide-react';
 import {useApp} from './shell';
 import {useI18n} from './i18n';
 
@@ -15,10 +15,9 @@ export function SavedEventsNotice(){
   finally{setBusy(false);}
  }
  return <aside className="saved-events-notice" aria-label={t('Dónde se guardan tus eventos')}>
-  <Bookmark size={19} aria-hidden="true"/>
-  <div><strong>{t(user?'Guardados en tu cuenta':'Guardados en este navegador')}</strong>
+  <details className="saved-storage"><summary>{user?<Cloud size={14}/>:<Monitor size={14}/>}<span>{t(user?'Guardados en tu cuenta':'Guardados en este navegador')}</span><ChevronDown size={12}/></summary>
    <p>{t(user?'Disponibles al iniciar sesión desde otros dispositivos.':'No necesitas iniciar sesión. Se eliminan si borras los datos de este sitio.')}</p>
-  </div>
+  </details>
   {user&&pendingGuestFavorites.length>0&&<button className="button secondary" type="button" disabled={busy} onClick={importSaved}><CloudUpload size={16}/>{t(busy?'Añadiendo…':'Añadir guardados del navegador')}<span>({pendingGuestFavorites.length})</span></button>}
  </aside>;
 }

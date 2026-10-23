@@ -10,7 +10,7 @@ import { type Catalog, type Decision, type ReviewCase, type User } from '@/lib/d
 import { api, ApiError } from '@/lib/api';
 import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/guest-favorites';
 import { reducedMotion } from './motion';
-import {BrowseNavigation,SavedNavigationLink} from './browse-navigation';
+import {BrowseNavigation} from './browse-navigation';
 type State={user:User|null;favorites:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
 const initial:State={user:null,favorites:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true};
@@ -81,7 +81,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
   <header className="site-header"><div className="header-inner">
    <div className="brand"><button className={'brand-symbol '+(motion?'shell-play':'')} onClick={()=>{setMotion(false);if(!reducedMotion())requestAnimationFrame(()=>setMotion(true));}} onAnimationEnd={e=>{if(e.target===e.currentTarget)setMotion(false);}} aria-label={t("Animar la vieira")} dangerouslySetInnerHTML={{__html:shellSvg}}/><Link href="/" className="brand-word">galicia<span>tech<span className="brand-period">.</span></span></Link></div>
    <BrowseNavigation/>
-   <div className="header-actions"><SavedNavigationLink count={favorites.filter(id=>publishedIds.has(id)).length}/><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
+   <div className="header-actions"><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
   </div></header>
   <main id="main" className="page-container">{error?<div className="empty-state" role="alert"><h1>{t('No se ha podido cargar la agenda')}</h1><p>{error}</p><button className="button primary" onClick={()=>refresh().catch(e=>setError(e.message))}>{t('Reintentar')}</button></div>:!ready?<div className="empty-state" role="status">{t('Cargando agenda…')}</div>:children}</main>
   <footer className="site-footer"><span>galicia tech<span className="brand-period">.</span><small>{t("Comunidades y encuentros")}</small></span><div><span>{t("Horarios de Galicia")}</span></div></footer>

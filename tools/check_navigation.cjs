@@ -7,7 +7,7 @@ const out=path.resolve(__dirname,'../output/navigation');fs.mkdirSync(out,{recur
 const key='galicia-tech-guest-favorites-v1';
 const count=(page,n)=>page.waitForFunction(n=>document.querySelectorAll('.meet-card').length===n,n);
 const nav=(page,label,mobile=false)=>page.locator(mobile?'.mobile-nav':'.desktop-nav').getByRole('link',{name:label,exact:true});
-const savedLink=(page,mobile=false)=>page.locator(mobile?'.mobile-nav a[href="/guardados"]':'.header-actions .saved-nav-link');
+const savedLink=(page,mobile=false)=>page.locator(mobile?'.mobile-nav a[href="/guardados"]':'.desktop-nav a[href="/guardados"]');
 async function active(page,pathname,mobile=false){
  const current=page.locator((mobile?'.mobile-nav':'.site-header')+' a[aria-current="page"]');
  await current.waitFor();assert.equal(await current.count(),1);assert.equal(new URL(await current.getAttribute('href'),base).pathname,pathname);
@@ -21,17 +21,20 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
  try{
   page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
   await page.goto(base);await page.locator('.agenda-page').waitFor();await active(page,'/');
-  assert.equal(await page.locator('.desktop-nav a').count(),2);
-  assert.equal(await page.locator('.saved-filter-button,.event-view-switch').count(),0);
+  assert.equal(await page.locator('.desktop-nav a').count(),3);
+  assert.equal(await page.locator('.saved-filter-button,.event-view-switch,.header-actions a[href="/guardados"]').count(),0);
   const catalog=await (await page.request.get(base+'/api/v1/catalog/')).json();await count(page,catalog.events.length);
   for(const id of ['flutter','santiago','ourense']){await page.locator(`.meet-card[data-motion-item="${id}"] .save-button`).click();await page.locator(`.meet-card[data-motion-item="${id}"] .save-button[aria-pressed=true]`).waitFor();}
   await savedLink(page).click();await page.waitForURL('**/guardados');await count(page,3);await active(page,'/guardados');
   await page.locator('.saved-page').waitFor();assert.equal(await page.title(),'Galicia Tech · Guardados');
   assert.equal(await page.locator('.agenda-page,.calendar-view,.featured-section,.scope-exit').count(),0);
   await page.getByText('Guardados en este navegador',{exact:true}).waitFor();
+  const storage=page.locator('.saved-storage');assert.equal(await storage.getAttribute('open'),null);
+  await storage.locator('summary').click();await storage.getByText('No necesitas iniciar sesión. Se eliminan si borras los datos de este sitio.',{exact:true}).waitFor();
+  await storage.locator('summary').click();
   // Saved is a destination, not a toggle back to all events.
   await savedLink(page).click();await count(page,3);assert.equal(new URL(page.url()).pathname,'/guardados');
-  await page.getByLabel('Buscar en guardados').fill('DevFest');await page.getByLabel('Localidad').selectOption('Santiago de Compostela');await count(page,1);
+  await page.getByLabel('Buscar en guardados').fill('DevFest');await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');await count(page,1);
   await page.reload();await count(page,1);assert.equal(await page.getByLabel('Buscar en guardados').inputValue(),'DevFest');
   await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,catalog.events.length);
   assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'');assert.equal(await page.getByLabel('Localidad').inputValue(),'');
@@ -61,11 +64,21 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await page.goBack();await month(page,'2026-11');await page.goForward();await month(page,'2026-12');
   await page.goto(base+'/calendario?mes=invalid');await page.locator('.calendar-view').waitFor();assert.match(await page.locator('input[type=month]').inputValue(),/^\d{4}-\d{2}$/);
   await page.goto(base+'/guardados');await count(page,2);await dismissToast(page);
+  for(const card of await page.locator('.saved-entry').all()){
+   assert.equal(await card.locator('.meet-description').count(),1);assert.equal(await card.locator('.meet-fact').count(),3);assert(await card.locator('.meet-tags').count());
+   const header=await card.locator('.saved-entry-header').boundingBox(),save=await card.locator('.save-button').boundingBox();
+   assert(save.y>=header.y&&save.y+save.height<=header.y+header.height,'Save control belongs to the date header');
+  }
   await page.screenshot({path:path.join(out,'saved-collection-light.png'),fullPage:true});
   for(const width of [1440,1120,1024,901,900,768,640,390,320]){
    await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Collection overflow at ${width}px`);
-   const mobile=width<=900;await active(page,'/guardados',mobile);assert.equal(await page.locator(mobile?'.mobile-nav a':'.desktop-nav a').count(),mobile?4:2);
+   const mobile=width<=900;await active(page,'/guardados',mobile);assert.equal(await page.locator(mobile?'.mobile-nav a':'.desktop-nav a').count(),mobile?4:3);
    assert.equal(await savedLink(page,!mobile).isVisible(),false);
+   if(!mobile)for(const link of await page.locator('.desktop-nav a').all()){
+    const box=await link.boundingBox();for(const child of await link.locator(':scope > svg,:scope > span,:scope > small').all()){
+     const item=await child.boundingBox();assert(item.x>=box.x&&item.x+item.width<=box.x+box.width+1,`Nav content fits at ${width}px`);
+    }
+   }
   }
   await page.setViewportSize({width:1440,height:1000});await page.getByRole('button',{name:'Activar modo oscuro'}).click();
   await page.screenshot({path:path.join(out,'saved-collection-dark.png'),fullPage:true});
