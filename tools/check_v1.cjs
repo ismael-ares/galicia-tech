@@ -32,7 +32,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.evaluate(()=>localStorage.setItem('galicia-tech-next-demo-v1',JSON.stringify({role:'admin'})));
   await page.goto(base+'/admin/fuentes');await page.getByRole('heading',{name:'Área de administración'}).waitFor();assert.equal(await page.locator('.source-table-row').count(),0);
   manage("import json,sys; from core.models import User; from allauth.account.models import EmailAddress; d=json.loads(sys.stdin.read()); u=User.objects.create_user(d['email'],email=d['email'],password=d['password'],is_staff=True); EmailAddress.objects.create(user=u,email=u.email,verified=True,primary=True)",{email,password});userCreated=true;
-  await page.goto(base+'/login');await page.getByLabel('Correo electrónico').fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.waitForURL('**/cuenta');
+  await page.goto(base+'/login');await page.getByLabel(/correo electrónico/i).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.waitForURL('**/cuenta');
   await page.getByRole('button',{name:'Configurar verificación en dos pasos'}).click();await page.getByLabel('Confirma tu contraseña').fill(password);await page.getByRole('button',{name:'Continuar',exact:true}).click();await page.locator('.mfa-enrollment code').waitFor();
   const secret=await page.locator('.mfa-enrollment code').innerText();
   await page.locator('.mfa-enrollment img').waitFor();
@@ -53,7 +53,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.setViewportSize({width:390,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('.calendar-view').screenshot({path:path.join(out,'calendar-mobile-dark.png')});
   await page.locator('.language-button').click();await page.goto(base+'/cuenta');await page.getByRole('button',{name:'Cerrar sesión'}).click();await page.getByRole('link',{name:'Iniciar sesión',exact:true}).waitFor();
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
-  await page.goto(base+'/login');await page.getByLabel('Correo electrónico').fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.getByRole('heading',{name:'Verificación en dos pasos'}).waitFor();assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
+  await page.goto(base+'/login');await page.getByLabel(/correo electrónico/i).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.getByRole('heading',{name:'Verificación en dos pasos'}).waitFor();assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),401);
   await page.getByLabel('Código de verificación').fill(totp(secret));await page.getByRole('button',{name:'Verificar',exact:true}).click();await page.waitForURL('**/cuenta');
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),200);
   assert.deepEqual(errors,[]);

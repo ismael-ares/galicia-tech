@@ -63,7 +63,7 @@ async function guest(page){assert.equal((await (await page.request.get(base+'/ap
 
   // Login never imports visitor selections automatically; explicit import is additive.
   manage("import json,sys; from core.models import User,Favorite; from allauth.account.models import EmailAddress; d=json.loads(sys.stdin.read()); u=User.objects.create_user(d['email'],email=d['email'],password=d['password']); EmailAddress.objects.create(user=u,email=u.email,verified=True,primary=True); Favorite.objects.create(user=u,event_id='santiago')",{email,password});created=true;
-  await page.goto(base+'/login');await page.getByLabel('Correo electrónico').fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.waitForURL('**/cuenta');
+  await page.goto(base+'/login');await page.getByLabel(/correo electrónico/i).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.waitForURL('**/cuenta');
   await page.goto(base+'/guardados');await count(page,1);await card(page,'santiago').waitFor();
   await page.getByText('Guardados en tu cuenta',{exact:true}).waitFor();
   assert.deepEqual(mutations,[],'Login must not upload local favorites');

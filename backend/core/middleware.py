@@ -28,8 +28,10 @@ class AccessMiddleware:
                 keys = [ip]
                 try:
                     data = json.loads(request.body or b'{}')
-                    if isinstance(data, dict) and isinstance(data.get('email'), str):
-                        keys.append(data['email'].strip().casefold())
+                    if isinstance(data, dict):
+                        for field in ('email', 'username'):
+                            if isinstance(data.get(field), str):
+                                keys.append(data[field].strip().casefold())
                 except (ValueError, UnicodeDecodeError):
                     pass
                 try:

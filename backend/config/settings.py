@@ -68,7 +68,8 @@ X_FRAME_OPTIONS = 'DENY'
 # The gateway overwrites these headers; backend has no published port.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLAUTH_TRUSTED_PROXY_COUNT = 1
-ACCOUNT_LOGIN_METHODS = {'email'}
+LOCAL_TEST_ACCOUNTS = flag('LOCAL_TEST_ACCOUNTS', False)
+ACCOUNT_LOGIN_METHODS = {'email', 'username'} if LOCAL_TEST_ACCOUNTS else {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # local signup has no email delivery; registration stays closed by default
 ACCOUNT_UNIQUE_EMAIL = True
