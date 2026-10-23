@@ -1,15 +1,17 @@
 /* Agenda and calendar are views; saved events are one shared collection filter. */
 .site-header{position:sticky;top:0;z-index:50}
 @media(min-width:641px){.encounters-view .date-heading{top:115px}}
-/* Navigation uses text tabs; actions use the same soft, rounded controls. */
-.desktop-nav{--view-index:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));position:relative;width:264px;flex-shrink:0;margin-left:0;gap:0;padding:0 0 5px;border:0;border-radius:0;background:transparent}
+/* A shared moving surface makes the two views read as one control. */
+.desktop-nav{--view-index:0;--view-thumb:var(--surface);--view-active-ink:var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));position:relative;isolation:isolate;width:272px;height:48px;flex-shrink:0;margin-left:0;gap:0;padding:4px;border:1px solid transparent;border-radius:999px;background:var(--surface-2)}
+[data-theme=dark] .desktop-nav{--view-thumb:var(--accent-soft);--view-active-ink:var(--accent-ink)}
 .desktop-nav[data-view=calendar]{--view-index:1}
-.desktop-nav::after{content:'';position:absolute;left:calc(25% + var(--view-index)*50% - 18px);bottom:0;width:36px;height:2px;background:var(--primary);border-radius:999px;pointer-events:none;transition:left var(--motion-base) var(--ease-settle),opacity var(--motion-fast) ease}
+.desktop-nav::after{content:'';position:absolute;left:calc(4px + var(--view-index)*(50% - 4px));top:4px;bottom:4px;width:calc(50% - 4px);border-radius:999px;background:var(--view-thumb);box-shadow:0 1px 4px #0000000d;pointer-events:none;z-index:-1;transition:left var(--motion-base) var(--ease-settle),background-color var(--motion-fast) ease,opacity var(--motion-fast) ease}
 .desktop-nav[data-view=other]::after{opacity:0}
-.desktop-nav a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:10px 15px;border-radius:12px;white-space:nowrap;font-size:12px;font-weight:550;color:var(--muted)}
-.desktop-nav a.active{background:transparent;color:var(--ink);font-weight:550;box-shadow:none}
+.desktop-nav a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:8px 13px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:550;color:var(--muted);transition:color var(--motion-fast) ease}
+.desktop-nav a.active{background:transparent;color:var(--view-active-ink);font-weight:550;box-shadow:none}
 .desktop-nav a.active>svg{color:var(--primary)}
-.desktop-nav a:hover,.desktop-nav a:not(.active):hover{background:var(--surface-2);color:var(--ink)}
+.desktop-nav a:hover,.desktop-nav a:not(.active):hover{background:transparent;color:var(--ink)}
+.desktop-nav a:focus-visible{outline-offset:2px}
 .header-actions{gap:9px}
 .header-actions>.icon-button{width:38px;height:38px;border-radius:50%;color:var(--muted)}
 .header-actions>.icon-button:hover{background:var(--surface-2);color:var(--ink)}
@@ -44,14 +46,13 @@
 @media(min-width:901px) and (max-width:1120px){.header-inner{gap:15px}.desktop-nav{width:230px}.desktop-nav a{padding:9px 12px}.header-actions{gap:7px}.header-actions .account-button{max-width:100px;padding:9px 12px}.saved-filter-button{gap:6px;padding:8px 10px}}
 @media(max-width:900px){
  .desktop-nav{display:none}
- .mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;border-top:1px solid var(--line);background:var(--surface);padding:11px max(8px,env(safe-area-inset-right)) max(13px,env(safe-area-inset-bottom));box-shadow:0 -4px 20px #00000008}
- .mobile-nav a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:10px;min-width:0;min-height:43px;color:var(--muted)}
- .mobile-nav a[aria-current=page]{color:var(--primary);font-weight:650}
+ .mobile-nav{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:12px;right:12px;z-index:40;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;align-items:center;border:1px solid var(--line);border-radius:25px;background:var(--surface);padding:6px;box-shadow:0 8px 28px #00000014}
+ .mobile-nav a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px 6px;border-radius:18px;font-size:10px;min-width:0;min-height:54px;color:var(--muted);transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease}
+ .mobile-nav a[aria-current=page]{background:var(--accent-soft);color:var(--accent-ink);font-weight:650}
  .mobile-nav a[aria-current=page]>svg{background:transparent;box-shadow:none;border-radius:0}
- .mobile-nav a::before{content:'';position:absolute;top:-11px;left:calc(50% - 12px);width:24px;height:3px;border-radius:0 0 4px 4px;background:var(--primary);opacity:0;transform:scaleX(.5);transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease-settle)}
- .mobile-nav a[aria-current=page]::before{opacity:1;transform:scaleX(1)}
+ .mobile-nav a::before{content:none}
  .mobile-nav a>span{display:inline-flex;align-items:center;gap:3px}
- .site-footer{padding-bottom:105px}.toast{bottom:92px}
+ .site-footer{padding-bottom:calc(108px + env(safe-area-inset-bottom))}.toast{bottom:calc(100px + env(safe-area-inset-bottom))}
  .saved-filter-button{min-height:38px}
 }
 @media(max-width:760px){
@@ -73,5 +74,5 @@
  .calendar-saved-month-empty{flex-wrap:wrap;padding:15px;gap:10px}.calendar-saved-month-empty>p{flex-basis:calc(100% - 30px)}.calendar-saved-month-empty>button{margin-left:28px}
 }
 @media(max-width:360px){.calendar-heading-mark{display:none}.mobile-nav a{font-size:9px}.header-actions{gap:5px}.header-actions>.icon-button,.header-actions .account-button,.saved-filter-button{width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px}.saved-filter-button small{right:-3px;min-width:16px;height:16px}}
-@media(prefers-reduced-motion:reduce){.saved-filter-button,.desktop-nav::after,.mobile-nav a::before{transition:none}}
-@media(forced-colors:active){.saved-filter-button.is-active{outline:2px solid Highlight;outline-offset:2px}.desktop-nav::after,.mobile-nav a::before{background:Highlight}}
+@media(prefers-reduced-motion:reduce){.saved-filter-button,.desktop-nav::after,.mobile-nav a{transition:none}}
+@media(forced-colors:active){.saved-filter-button.is-active{outline:2px solid Highlight;outline-offset:2px}.desktop-nav::after{background:Highlight}.desktop-nav a.active{color:HighlightText}.mobile-nav a[aria-current=page]{outline:2px solid Highlight;outline-offset:-2px}}
