@@ -91,7 +91,7 @@ Validar esquema, versión, claves desconocidas/duplicadas y tipos antes de aplic
 
 El cambio de autoridad debe ser una operación administrativa explícita, con validación y revisión de diferencias. No se propone guardar roles de usuarios o contraseñas en YAML. El alta inicial del propietario se hace mediante el procedimiento administrativo del servidor y no como un «primer usuario que se registra».
 
-Se adjunta `config.example.yaml` como ejemplo de contrato futuro. No lo lee el mock ni está conectado a un backend. Las referencias a secretos son nombres de variables, no los secretos.
+El contrato de esta propuesta ha sido sustituido por [configuration/app.yaml](../configuration/app.yaml), ya conectado a la aplicación funcional. La [guía YAML](configuracion-yaml.md) documenta su esquema y aplicación. El mock histórico sigue sin leerlo.
 
 ## Protección prevista para el backend
 

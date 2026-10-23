@@ -9,10 +9,10 @@ export function pressFeedback(element:HTMLElement){
 }
 
 // Reordena los elementos reales sin retrasar filtros, mantener duplicados ni bloquear clics.
-export function useAnimatedList(ref:RefObject<HTMLElement|null>,signature:string){
+export function useAnimatedList(ref:RefObject<HTMLElement|null>,signature:string,selector='[data-motion-item]'){
  const previous=useRef(new Map<string,{top:number;left:number}>());
  useLayoutEffect(()=>{
-  const elements=[...(ref.current?.querySelectorAll<HTMLElement>('[data-motion-item]')||[])];
+  const elements=[...(ref.current?.querySelectorAll<HTMLElement>(selector)||[])];
   const next=new Map<string,{top:number;left:number}>();
   const measurements=elements.map(element=>{const rect=element.getBoundingClientRect();const position={top:rect.top+window.scrollY,left:rect.left+window.scrollX};next.set(element.dataset.motionItem!,position);return {element,position,old:previous.current.get(element.dataset.motionItem!)};});
   const animations:Animation[]=[];
@@ -25,7 +25,7 @@ export function useAnimatedList(ref:RefObject<HTMLElement|null>,signature:string
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
   const cancel=()=>{if(preference.matches)animations.forEach(a=>a.cancel());};preference.addEventListener('change',cancel);
   return()=>{preference.removeEventListener('change',cancel);animations.forEach(a=>a.cancel());};
- },[ref,signature]);
+ },[ref,signature,selector]);
 }
 
 export function Disclosure({open,children,id}:{open:boolean;children:React.ReactNode;id?:string}){

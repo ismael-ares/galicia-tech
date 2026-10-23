@@ -1,6 +1,6 @@
 name: galicia-tech-v1
 x-python: &python
-  image: galicia-tech-backend:0.1.0
+  image: galicia-tech-backend:0.2.0
   build: ./backend
   restart: unless-stopped
   security_opt: [no-new-privileges:true]
@@ -61,7 +61,7 @@ services:
     depends_on:
       backend: {condition: service_healthy}
   frontend:
-    image: galicia-tech-frontend:0.1.0
+    image: galicia-tech-frontend:0.2.0
     build: ./frontend
     restart: unless-stopped
     security_opt: [no-new-privileges:true]

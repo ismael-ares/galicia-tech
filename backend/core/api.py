@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, BasePermission, IsAuthenticated
 from rest_framework.response import Response
 from allauth.mfa.models import Authenticator
 from redis import Redis, RedisError
-from .models import AuditLog, CollectionRun, Event, Favorite, ProcessingConfig, ReviewCase, Source
+from .models import Attendance, AuditLog, CollectionRun, Event, Favorite, ReviewCase, Source
 from .services import decide_case, processing_config, public_url
 
 class SessionAuth(SessionAuthentication):
@@ -32,7 +32,7 @@ def user_data(user):
             'role': 'admin' if user.is_staff else 'user', 'mfaEnabled': Authenticator.objects.filter(user=user, type='totp').exists()}
 
 def source_data(source, private=False):
-    result = {'id': source.id, 'name': source.name, 'url': source.url, 'city': source.city, 'platform': source.platform, 'enabled': source.enabled}
+    result = {'id': source.id, 'name': source.name, 'url': source.url, 'city': source.city, 'platform': source.platform, 'enabled': source.enabled and source.id in settings.MANAGED_SOURCE_IDS, 'managed': source.id in settings.MANAGED_SOURCE_IDS}
     if private:
         result.update(checkedAt=source.checked_at.isoformat() if source.checked_at else None, lastError=source.last_error)
     return result
@@ -46,7 +46,7 @@ def health(request):
         with connection.cursor() as cursor:
             cursor.execute('SELECT 1')
         Redis.from_url(settings.REDIS_URL, socket_connect_timeout=2, socket_timeout=2).ping()
-        return JsonResponse({'status': 'ok', 'version': '0.1.0'})
+        return JsonResponse({'status': 'ok', 'version': '0.2.0'})
     except Exception:
         return JsonResponse({'status': 'unavailable'}, status=503)
 
@@ -56,7 +56,10 @@ def session(request):
     authenticated = request.user.is_authenticated
     return JsonResponse({'csrfToken': token, 'user': user_data(request.user) if authenticated else None,
                          'favorites': list(Favorite.objects.filter(user=request.user).values_list('event_id', flat=True)) if authenticated else [],
-                         'providers': list(settings.SOCIALACCOUNT_PROVIDERS), 'requireAdminMfa': settings.REQUIRE_ADMIN_MFA})
+                         'attended': list(Attendance.objects.filter(user=request.user).values_list('event_id', flat=True)) if authenticated else [],
+                         'providers': list(settings.SOCIALACCOUNT_PROVIDERS), 'requireAdminMfa': settings.REQUIRE_ADMIN_MFA,
+                         'registrationEnabled': settings.ALLOW_REGISTRATION,
+                         'usernameLoginEnabled': settings.LOCAL_TEST_ACCOUNTS, 'collectionEnabled': settings.COLLECTION_ENABLED, 'configurationAuthority': 'yaml'})
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -86,41 +89,53 @@ def favorite(request, event_id):
         Favorite.objects.filter(user=request.user, event=event).delete()
     return Response(status=204)
 
-class SourceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Source
-        fields = ['id', 'name', 'url', 'city', 'platform', 'enabled']
-    def validate_url(self, value):
-        return public_url(value)
+@api_view(['PUT', 'DELETE'])
+@authentication_classes([SessionAuth])
+@permission_classes([IsAuthenticated])
+def attendance(request, event_id):
+    # Removing a mark stays possible even if an event was withdrawn or rescheduled.
+    if request.method == 'DELETE':
+        Attendance.objects.filter(user=request.user, event_id=event_id).delete()
+        return Response(status=204)
+    try:
+        event = Event.objects.get(pk=event_id, published=True)
+    except Event.DoesNotExist:
+        raise NotFound()
+    if event.start > timezone.now():
+        return Response({'detail': 'Solo puedes marcar asistencia cuando el evento haya comenzado.'}, status=400)
+    Attendance.objects.get_or_create(user=request.user, event=event)
+    return Response(status=204)
+
+class FavoriteImportSerializer(serializers.Serializer):
+    ids = serializers.ListField(child=serializers.RegexField(r'^[A-Za-z0-9_-]{1,100}$'),
+                                allow_empty=False, max_length=1000)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuth])
+@permission_classes([IsAuthenticated])
+@transaction.atomic
+def import_favorites(request):
+    serializer = FavoriteImportSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    # A single authenticated request copies only public events into this account.
+    # Unknown or withdrawn IDs never expose unpublished event data.
+    events = Event.objects.filter(pk__in=set(serializer.validated_data['ids']), published=True)
+    Favorite.objects.bulk_create([Favorite(user=request.user, event=event) for event in events], ignore_conflicts=True)
+    return Response({'favorites': list(Favorite.objects.filter(user=request.user).values_list('event_id', flat=True))})
 
 @api_view(['GET', 'POST'])
 @authentication_classes([SessionAuth])
 @permission_classes([IsManager])
 def sources(request):
     if request.method == 'POST':
-        serializer = SourceSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        source = serializer.save()
-        AuditLog.objects.create(actor=request.user, action='source.create', target=source.id)
-        return Response(source_data(source, True), status=201)
+        raise PermissionDenied('Las fuentes se gestionan en configuration/app.yaml.')
     return Response([source_data(s, True) for s in Source.objects.order_by('name')])
 
 @api_view(['PATCH'])
 @authentication_classes([SessionAuth])
 @permission_classes([IsManager])
 def source(request, source_id):
-    try:
-        instance = Source.objects.get(pk=source_id)
-    except Source.DoesNotExist:
-        raise NotFound()
-    if 'id' in request.data:
-        raise serializers.ValidationError({'id': 'El identificador no se modifica.'})
-    serializer = SourceSerializer(instance, data=request.data, partial=True)
-    serializer.is_valid(raise_exception=True)
-    with transaction.atomic():
-        instance = serializer.save()
-        AuditLog.objects.create(actor=request.user, action='source.update', target=instance.id, details={'fields': list(serializer.validated_data)})
-    return Response(source_data(instance, True))
+    raise PermissionDenied('Las fuentes se gestionan en configuration/app.yaml.')
 
 @api_view(['GET'])
 @authentication_classes([SessionAuth])
@@ -144,31 +159,13 @@ def review(request, case_id):
     values.is_valid(raise_exception=True)
     return Response(review_data(decide_case(case_id, request.user, values.validated_data)))
 
-class ConfigSerializer(serializers.Serializer):
-    retrieval = serializers.ChoiceField(choices=['daily', 'twice-weekly'])
-    frequency = serializers.ChoiceField(choices=['twice-weekly', 'every-three-days'])
-    budget = serializers.DecimalField(max_digits=5, decimal_places=2, min_value=0, max_value=5)
-    version = serializers.IntegerField(min_value=1)
-
 @api_view(['GET', 'PUT'])
 @authentication_classes([SessionAuth])
 @permission_classes([IsManager])
 def configuration(request):
     if request.method == 'PUT':
-        if settings.CONFIG_AUTHORITY != 'web':
-            raise PermissionDenied('La configuración procede del archivo del servidor.')
-        values = ConfigSerializer(data=request.data)
-        values.is_valid(raise_exception=True)
-        with transaction.atomic():
-            config, _ = ProcessingConfig.objects.select_for_update().get_or_create(pk=1)
-            if config.version != values.validated_data['version']:
-                return Response({'detail': 'La configuración ha cambiado. Recarga la página.'}, status=409)
-            for key in ('retrieval', 'frequency', 'budget'):
-                setattr(config, key, values.validated_data[key])
-            config.version += 1
-            config.save()
-            AuditLog.objects.create(actor=request.user, action='configuration.update', target='processing', details={'version': config.version})
-    return Response(processing_config())
+        raise PermissionDenied('La configuración se gestiona en configuration/app.yaml.')
+    return Response(processing_config(diagnostics=True))
 
 @api_view(['GET', 'POST'])
 @authentication_classes([SessionAuth])
@@ -177,9 +174,9 @@ def collections(request):
     from .tasks import enqueue_source
     if request.method == 'POST':
         if not settings.COLLECTION_ENABLED:
-            return Response({'detail': 'Activa COLLECTION_ENABLED en el servidor para consultar fuentes.'}, status=409)
+            return Response({'detail': 'Activa collection.enabled en configuration/app.yaml para consultar fuentes.'}, status=409)
         source_id = request.data.get('sourceId')
-        if not isinstance(source_id, str) or not Source.objects.filter(pk=source_id, enabled=True).exists():
+        if not isinstance(source_id, str) or not Source.objects.filter(pk=source_id, enabled=True, id__in=settings.MANAGED_SOURCE_IDS).exists():
             raise serializers.ValidationError({'sourceId': 'Selecciona una fuente activa.'})
         run = enqueue_source(source_id)
         AuditLog.objects.create(actor=request.user, action='collection.enqueue', target=str(run.id))

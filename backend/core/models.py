@@ -7,6 +7,7 @@ from django.db.models.functions import Lower
 class User(AbstractUser):
     public_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     email = models.EmailField(unique=True)
+    is_ephemeral = models.BooleanField(default=False, db_index=True)
     class Meta:
         constraints = [models.UniqueConstraint(Lower('email'), name='unique_user_email_casefold')]
 
@@ -44,6 +45,13 @@ class Favorite(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         constraints = [models.UniqueConstraint(fields=['user', 'event'], name='unique_favorite')]
+
+class Attendance(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'event'], name='unique_attendance')]
 
 class ReviewCase(models.Model):
     id = models.SlugField(primary_key=True, max_length=100)

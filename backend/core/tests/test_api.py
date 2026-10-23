@@ -72,6 +72,41 @@ class ApiTests(TestCase):
         self.assertEqual(self.client.patch(url, {'status':'approved','value':'19:30','version':case.version}, format='json').status_code, 409)
         self.assertEqual(self.client.patch(url, {'status':'approved','value':'invented','version':case.version+1}, format='json').status_code, 400)
         self.assertEqual(AuditLog.objects.filter(action='review.approved').count(), 1)
+    def test_guest_favorites_import_requires_account(self):
+        result = self.client.post('/api/v1/favorites/import/', {'ids':['santiago']}, format='json')
+        self.assertEqual(result.status_code, 401)
+        self.assertFalse(Favorite.objects.exists())
+    def test_guest_favorites_import_is_idempotent_and_only_imports_published(self):
+        self.client.force_login(self.other)
+        Event.objects.filter(pk='santiago').update(published=False)
+        published = Event.objects.filter(published=True).first().pk
+        values = {'ids':[published, published, 'santiago', 'missing-event']}
+        for _ in range(2):
+            result = self.client.post('/api/v1/favorites/import/', values, format='json')
+            self.assertEqual(result.status_code, 200)
+            self.assertEqual(result.json()['favorites'], [published])
+        self.assertEqual(Favorite.objects.count(), 1)
+        self.admin()
+        self.assertEqual(self.client.get('/api/v1/session/').json()['favorites'], [])
+    def test_guest_favorites_import_adds_without_replacing_account_favorites(self):
+        self.client.force_login(self.other)
+        Favorite.objects.create(user=self.other, event_id='santiago')
+        another = Event.objects.filter(published=True).exclude(pk='santiago').first().pk
+        result = self.client.post('/api/v1/favorites/import/', {'ids':[another]}, format='json')
+        self.assertEqual(result.status_code, 200)
+        self.assertCountEqual(result.json()['favorites'], ['santiago', another])
+    def test_guest_favorites_import_validates_whole_batch(self):
+        self.client.force_login(self.other)
+        for values in ({}, {'ids':[]}, {'ids':'santiago'}, {'ids':['santiago','../private']},
+                       {'ids':['santiago', None]}, {'ids':['santiago']*1001}):
+            with self.subTest(values=str(values)[:80]):
+                self.assertEqual(self.client.post('/api/v1/favorites/import/', values, format='json').status_code, 400)
+                self.assertFalse(Favorite.objects.exists())
+    def test_guest_favorites_import_requires_csrf_with_session(self):
+        client = APIClient(enforce_csrf_checks=True)
+        client.force_login(self.other)
+        self.assertEqual(client.post('/api/v1/favorites/import/', {'ids':['santiago']}, format='json').status_code, 403)
+        self.assertFalse(Favorite.objects.exists())
     def test_unpublished_review_and_unsafe_registration(self):
         self.admin()
         case = ReviewCase.objects.get(pk='registration')
@@ -80,10 +115,11 @@ class ApiTests(TestCase):
         self.assertFalse(Event.objects.get(pk='hacktoberfest').published)
         for value in ('javascript:alert(1)', 'https://user:secret@example.org/'):
             self.assertEqual(self.client.patch('/api/v1/admin/reviews/registration/', {'status':'approved','version':case.version+1,'value':value}, format='json').status_code, 400)
-    def test_pausing_a_source_preserves_published_events(self):
+    def test_web_source_changes_are_rejected_and_events_preserved(self):
         self.admin()
-        response = self.client.patch('/api/v1/admin/sources/ourense/', {'enabled': False}, format='json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.client.patch('/api/v1/admin/sources/ourense/', {'enabled': False}, format='json').status_code, 403)
+        self.assertEqual(self.client.post('/api/v1/admin/sources/', {'id': 'forged'}, format='json').status_code, 403)
+        self.assertTrue(Source.objects.get(pk='ourense').enabled)
         self.assertEqual(len(self.client.get('/api/v1/catalog/').json()['events']), 8)
     def test_sample_import_does_not_reset_reviews_or_sources(self):
         self.admin()
@@ -94,26 +130,26 @@ class ApiTests(TestCase):
         self.assertEqual(Event.objects.count(), 9)
         self.assertFalse(Source.objects.get(pk='ourense').enabled)
         self.assertEqual(Event.objects.get(pk='hackathon').data['end'], '2026-10-22T19:00:00+02:00')
-    def test_configuration_budget_and_optimistic_concurrency(self):
+    def test_configuration_is_read_only_and_does_not_write_on_get(self):
         self.admin()
-        values = self.client.get('/api/v1/admin/configuration/').json()
-        values.update(budget='1.50')
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 200)
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 409)
-        values.update(version=values['version']+1, budget='50')
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 400)
-        self.assertFalse(self.client.get('/api/v1/admin/configuration/').json()['paidCallsEnabled'])
-    def test_yaml_lock_and_invalid_reload_keep_last_valid_config(self):
+        response = self.client.get('/api/v1/admin/configuration/').json()
+        self.assertEqual(response['authority'], 'yaml')
+        self.assertEqual(response['budget'], '5.00')
+        self.assertFalse(response['paidCallsEnabled'])
+        self.assertEqual(self.client.put('/api/v1/admin/configuration/', {'budget': '1.50'}, format='json').status_code, 403)
+        self.assertFalse(ProcessingConfig.objects.exists())
+
+    def test_invalid_disk_file_keeps_active_execution_configuration(self):
         self.admin()
         with TemporaryDirectory() as directory:
-            path = Path(directory)/'processing.yaml'
-            path.write_text('processing:\n  retrieval: daily\n  frequency: twice-weekly\n  budget_eur: 1.25\n')
-            with override_settings(CONFIG_AUTHORITY='yaml', CONFIG_YAML_PATH=str(path)):
-                self.assertEqual(processing_config()['budget'], '1.25')
-                self.assertEqual(self.client.put('/api/v1/admin/configuration/', {}, format='json').status_code, 403)
-                path.write_text('processing: invalid')
-                self.assertIn('warning', processing_config())
-                self.assertEqual(ProcessingConfig.objects.get(pk=1).budget, Decimal('1.25'))
+            path = Path(directory)/'app.yaml'
+            path.write_text('processing: invalid')
+            with override_settings(APP_CONFIG_PATH=str(path)):
+                response = self.client.get('/api/v1/admin/configuration/').json()
+                self.assertEqual(response['fileStatus'], 'invalid')
+                self.assertIn('warning', response)
+                self.assertEqual(response['budget'], '5.00')
+                self.assertFalse(ProcessingConfig.objects.exists())
     def test_collection_disabled_does_not_enqueue(self):
         self.admin()
         with override_settings(COLLECTION_ENABLED=False):
@@ -146,6 +182,7 @@ class AuthSecurityTests(TestCase):
         with patch('core.middleware.redis.eval', side_effect=RedisError('unavailable')):
             response = self.client.post('/_allauth/browser/v1/auth/login', data=json.dumps({'email':'x@example.org','password':'secret'}), content_type='application/json')
         self.assertEqual(response.status_code, 503)
+    @override_settings(ALLOW_REGISTRATION=False)
     def test_public_signup_disabled(self):
         with patch('core.middleware.redis.eval', return_value=1):
             response = self.client.post('/_allauth/browser/v1/auth/signup', data=json.dumps({'email':'new@example.org','password':'long-enough-password'}), content_type='application/json')
@@ -156,6 +193,7 @@ class AuthSecurityTests(TestCase):
         self.assertEqual(response['Cache-Control'], 'no-store')
         self.assertNotIn('session', response.json())
 
+@override_settings(REQUIRE_ADMIN_MFA=True)
 class MFAFlowTests(TestCase):
     def test_password_login_enrollment_reauth_and_totp_challenge(self):
         from allauth.account.models import EmailAddress

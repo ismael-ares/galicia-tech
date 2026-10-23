@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Languages } from 'lucide-react';
+import {usePathname} from 'next/navigation';
 import { type Locale, localeCookie } from '@/lib/locale';
 import galician from '@/lib/messages/gl.json';
 import { localDate, localDateRange } from '@/lib/date-format';
@@ -11,10 +12,12 @@ const Context=createContext({locale:'gl' as Locale,setLocale:(_:Locale)=>{}});
 
 export function LocaleProvider({initialLocale,children}:{initialLocale:Locale;children:React.ReactNode}){
  const [locale,setLocale]=useState(initialLocale);
+ const pathname=usePathname();
  useEffect(()=>{
   document.documentElement.lang=locale;
-  document.title=locale==='gl'?'Galicia Tech · Axenda':'Galicia Tech · Agenda';
- },[locale]);
+  const section=pathname==='/cuenta'?(locale==='gl'?'Os meus encontros':'Mis encuentros'):pathname==='/preferencias'?'Preferencias':pathname==='/registro'?(locale==='gl'?'Crear conta':'Crear cuenta'):pathname==='/login'?'Iniciar sesión':pathname==='/calendario'?'Calendario':pathname==='/guardados'?(locale==='gl'?'Gardados':'Guardados'):(locale==='gl'?'Axenda':'Agenda');
+  document.title='Galicia Tech · '+section;
+ },[locale,pathname]);
  function select(value:Locale){
   setLocale(value);
   document.documentElement.lang=value;

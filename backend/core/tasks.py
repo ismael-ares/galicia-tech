@@ -14,7 +14,7 @@ from .services import processing_config
 
 def enqueue_source(source_id):
     with transaction.atomic():
-        source = Source.objects.select_for_update().get(pk=source_id, enabled=True)
+        source = Source.objects.select_for_update().get(pk=source_id, enabled=True, id__in=settings.MANAGED_SOURCE_IDS)
         run = CollectionRun.objects.filter(source=source, status__in=['queued', 'running']).first()
         if not run:
             run = CollectionRun.objects.create(source=source)
@@ -32,9 +32,9 @@ def collect_source(run_id):
         if run.status in ('completed', 'partial', 'disabled') or run.attempts >= 2:
             return
         run.status = 'running'; run.attempts += 1; run.save()
-    if not run.source.enabled:
+    if not run.source.enabled or run.source_id not in settings.MANAGED_SOURCE_IDS:
         CollectionRun.objects.filter(pk=run_id).update(status='disabled', finished_at=timezone.now()); return
-    deadline = time.monotonic() + 65
+    deadline = time.monotonic() + settings.COLLECTION_DEADLINE
     found = []; errors = []
     try:
         document, url = fetch_html(run.source.url)
@@ -49,7 +49,7 @@ def collect_source(run_id):
                 nodes.extend({**node, 'url': node.get('url') or final} for data in detail.jsonld for node in event_nodes(data))
             except Exception:
                 errors.append('No se ha podido interpretar una ficha enlazada.')
-        for node in nodes[:20]:
+        for node in nodes[:settings.COLLECTION_MAX_EVENTS]:
             try:
                 data = normalize(node, run.source, url)
                 fingerprint = hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
@@ -85,11 +85,11 @@ def collect_source(run_id):
 def schedule_sources():
     if not settings.COLLECTION_ENABLED: return
     config = processing_config()
-    interval = timezone.timedelta(days=1)
+    interval = timezone.timedelta(hours=settings.COLLECTION_INTERVAL_HOURS)
     now = timezone.now()
-    CollectionRun.objects.filter(status__in=['queued', 'running'], created_at__lt=now-timezone.timedelta(minutes=10)).update(status='failed', error='Trabajo interrumpido; disponible para una nueva consulta.', finished_at=now)
-    if config['retrieval'] == 'twice-weekly' and timezone.localtime(now).weekday() not in (0, 3): return
-    for source in Source.objects.filter(enabled=True):
+    CollectionRun.objects.filter(status__in=['queued', 'running'], created_at__lt=now-timezone.timedelta(minutes=settings.COLLECTION_STALE_MINUTES)).update(status='failed', error='Trabajo interrumpido; disponible para una nueva consulta.', finished_at=now)
+    if config['retrieval'] == 'twice-weekly' and timezone.localtime(now).weekday() not in settings.COLLECTION_WEEKDAYS: return
+    for source in Source.objects.filter(enabled=True, id__in=settings.MANAGED_SOURCE_IDS):
         latest = CollectionRun.objects.filter(source=source).order_by('-created_at').first()
         if latest and latest.created_at > now - interval: continue
         try:

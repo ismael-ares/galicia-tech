@@ -1,8 +1,14 @@
 # Galicia Tech
 
-## Aplicación funcional 0.1
+## Aplicación funcional v0.2
 
 Ya existe la primera base funcional con Next.js, Django, PostgreSQL, Redis, Q2 y Nginx. Se despliega con el [Compose de la raíz](compose.yaml) y arranca en `http://127.0.0.1:8088/`. La agenda es la entrada principal. Consulta la [guía de instalación, alcance y verificación](docs/primera-version-0.1.md) antes de desplegar en el LXC.
+
+La etiqueta `v0.2` identifica esta entrega (versión interna `0.2.0`). El [historial de cambios](CHANGELOG.md) resume las mejoras respecto a la primera versión.
+
+Puedes guardar eventos sin iniciar sesión: se conservan en este navegador. Con una cuenta se guardan en el servidor y puedes incorporar expresamente tu selección local desde Guardados.
+
+La navegación ofrece **Agenda**, **Calendario** y una colección independiente de **Guardados**. Mi cuenta reúne próximos encuentros, pasados guardados, asistencias y estadísticas personales. El menú **Ajustes** abre cuenta, preferencias, administración según permisos y un único acceso para iniciar sesión o registrarse.
 
 ```sh
 python3 tools/init_env.py
@@ -10,12 +16,14 @@ sh infra/start.sh
 docker compose exec backend python manage.py create_owner --email tu@correo.example
 ```
 
+Las fuentes y la política de la aplicación se versionan en [configuration/app.yaml](configuration/app.yaml). La web muestra esas secciones en solo lectura. Consulta [cómo validar y aplicar el YAML](docs/configuracion-yaml.md); claves y contraseñas permanecen en `.env` o archivos de secretos. `APP_PROFILE=local` activa el perfil de pruebas y `production` conserva los valores de acceso predeterminados.
+
 El mock del puerto 8874 sigue separado de la aplicación. Los apartados siguientes documentan los prototipos y las pruebas de recopilación previas. El LLM de pago, los callbacks OAuth reales y el despliegue Proxmox todavía requieren su fase de integración.
 
 ## Prototipos y evidencia previa
 
 
-La referencia técnica vigente es el [plan consolidado para el homelab](docs/plan-arquitectura-homelab-2026-10-21.md), con [decisiones y evidencias verificables](docs/evidencias/arquitectura-2026-10-21/README.md). Confirma PostgreSQL y Redis, descarta RabbitMQ y aplaza GitHub Actions/cloud. Ese documento conserva el plan de partida; el estado actual se detalla en la guía de la versión 0.1 enlazada arriba.
+La referencia técnica vigente es el [plan consolidado para el homelab](docs/plan-arquitectura-homelab-2026-10-21.md), con [decisiones y evidencias verificables](docs/evidencias/arquitectura-2026-10-21/README.md). Confirma PostgreSQL y Redis, descarta RabbitMQ y aplaza GitHub Actions/cloud. Ese documento conserva el plan de partida; el estado actual se detalla en la guía de la versión v0.2 enlazada arriba.
 
 CLI manual en Python, sin interfaz web, scheduler ni credenciales. Lee directamente las páginas públicas GDG acordadas y el grupo WordPress Coruña; en GDG utiliza el estado estructurado público de la página y ficha JSON-LD, y en Meetup enlaces visibles y JSON-LD de fichas. La conversión de fechas se presenta en Europe/Madrid. La referencia predeterminada es `2026-10-19` y puede cambiarse con `--as-of YYYY-MM-DD`.
 
@@ -50,7 +58,7 @@ El [plan técnico consolidado del 21 de octubre](docs/plan-arquitectura-homelab-
 
 La arquitectura elegida es **Django + Next.js**, documentada en [Cuenta, acceso y configuración](docs/cuenta-acceso-configuracion-2026-10-20.md). Next.js gestionará la interfaz pública, el área de usuario y la gestión; Django será responsable de la API, cuentas, sesiones y permisos, con django-allauth para el acceso directo con GitHub/Google y las credenciales locales. PostgreSQL conservará datos y sesiones. Se propone servir ambos bajo un mismo origen, sin un segundo sistema de autenticación en Next.js. El usuario confirma Redis local para compartir los límites de intentos entre procesos, resolviendo un punto abierto de la propuesta anterior. Los detalles de proveedores, límites y costes deben verificarse al activar producción. Esta elección está planificada: el prototipo sigue siendo HTML/CSS/JavaScript y el backend no está implementado.
 
-En Ajustes se puede comparar una sección gestionada desde la web con la misma sección en modo YAML y solo lectura. El contrato de ejemplo está en [config.example.yaml](docs/config.example.yaml). El mock no lee ese archivo, no activa OAuth y no valida, transmite ni guarda credenciales. Los campos del login no tienen `name` y permanecen desactivados sin JavaScript. El cambio de perfil por URL y los estados de acceso restringido son demostraciones visuales; los recursos privados siguen sirviéndose estáticamente.
+En Ajustes se puede comparar una sección gestionada desde la web con la misma sección en modo YAML y solo lectura. Este era un diseño previo; la aplicación funcional usa ahora [configuration/app.yaml](configuration/app.yaml) como autoridad única. El mock no lee ese archivo, no activa OAuth y no valida, transmite ni guarda credenciales. Los campos del login no tienen `name` y permanecen desactivados sin JavaScript. El cambio de perfil por URL y los estados de acceso restringido son demostraciones visuales; los recursos privados siguen sirviéndose estáticamente.
 
 ## Destino inicial de despliegue
 

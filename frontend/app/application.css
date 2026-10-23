@@ -7,3 +7,15 @@
 @media(max-width:640px){.source-create form{grid-template-columns:1fr}}
 
 .source-logo,.calendar-event-logo,.calendar-event-community>span,.mini-avatars>span{color:#34597c}
+.login-card>.auth-switch{margin:20px 0;font-size:12px;line-height:1.7;color:var(--muted)}
+.auth-switch>a{color:var(--primary);font-weight:600;text-underline-offset:3px}.auth-switch>a:hover{text-decoration:underline}
+.auth-hint{display:block;text-align:left;font-size:10px;color:var(--muted);line-height:1.6;margin-top:7px}
+.register-card{width:430px;max-width:100%}
+
+.saved-events-notice{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:var(--surface);border-radius:15px;padding:17px 20px;margin-bottom:26px;color:var(--muted)}
+.saved-events-notice>svg{flex-shrink:0;color:var(--primary)}
+.saved-events-notice>div{flex:1;min-width:0}
+.saved-events-notice strong{display:block;color:var(--ink);font-size:13px;font-weight:600}
+.saved-events-notice p{font-size:11px;line-height:1.6;margin-top:4px}
+.saved-events-notice>.text-action,.saved-events-notice>.button{font-size:11px;flex-shrink:0}
+@media(max-width:760px){.saved-events-notice{flex-wrap:wrap;align-items:flex-start;padding:16px;gap:10px}.saved-events-notice>div{flex-basis:calc(100% - 35px)}.saved-events-notice>.button,.saved-events-notice>.text-action{margin-left:29px;white-space:normal;text-align:left}.saved-events-notice>.button{flex-wrap:wrap;justify-content:flex-start}}

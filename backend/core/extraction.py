@@ -4,6 +4,7 @@ import re
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlsplit, urlunsplit
 from django.utils.dateparse import parse_datetime
+from django.conf import settings
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -53,7 +54,7 @@ def detail_links(parser, url):
     if isinstance(gdg, dict):
         links.extend(item.get('url') for item in gdg.get('results', []) if isinstance(item, dict) and item.get('url'))
     links.extend(urljoin(url, link) for link in parser.links if re.search(r'/events/\d+|/events/details/|/eventos/[^#?]+/|/evento/[^#?]+/', link))
-    return list(dict.fromkeys(links))[:6]
+    return list(dict.fromkeys(links))[:settings.COLLECTION_MAX_DETAILS]
 
 def normalize(node, source, page_url):
     start = parse_datetime(str(node.get('startDate', '')))

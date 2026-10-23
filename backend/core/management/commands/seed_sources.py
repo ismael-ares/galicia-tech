@@ -1,12 +1,7 @@
-import json
-from pathlib import Path
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
-from core.models import Source
 
 class Command(BaseCommand):
-    help = 'Load only the thirteen selected sources. Does not import events or overwrite edits.'
+    help = 'Compatibility alias: synchronize the versioned YAML, never seed sources from samples.'
     def handle(self, *args, **options):
-        data = json.loads((Path(__file__).resolve().parents[3]/'sample'/'sample.json').read_text())
-        for item in data['sources']:
-            Source.objects.get_or_create(pk=item['id'], defaults={k:item[k] for k in ('name','url','city','platform','enabled')})
-        self.stdout.write('Selected sources loaded. No event data imported and no external requests made.')
+        call_command('sync_configuration', stdout=self.stdout)
