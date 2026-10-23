@@ -11,11 +11,11 @@ import { api, ApiError } from '@/lib/api';
 import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/guest-favorites';
 import { reducedMotion } from './motion';
 import {BrowseNavigation} from './browse-navigation';
-type State={user:User|null;favorites:string[];attended:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean};
+type State={user:User|null;favorites:string[];attended:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean;collectionEnabled:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
-const initial:State={user:null,favorites:[],attended:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false};
+const initial:State={user:null,favorites:[],attended:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false,collectionEnabled:false};
 const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admin',disabled:[] as string[],ready:false,error:'',appearance:'light' as 'light'|'dark',setAppearance:(_: 'light'|'dark')=>{},
- guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},setAttendance:async(_:string,__:boolean)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
+ guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},setAttendance:async(_:string,__:boolean)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
 export const useApp=()=>useContext(Context);
 export const useMock=useApp;
 export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI18n();
@@ -77,7 +77,6 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
    await api('/api/v1/attendance/'+id+'/',{method:value?'PUT':'DELETE'});
    await refresh();
   },
-  toggleSource:async(id:string)=>{const source=state.catalog.sources.find(s=>s.id===id);if(!source)return;await api('/api/v1/admin/sources/'+id+'/',{method:'PATCH',body:JSON.stringify({enabled:!source.enabled})});await refresh();},
   decide:async(id:string,decision:Decision)=>{const item=state.cases.find(c=>c.id===id);if(!item)return;await api('/api/v1/admin/reviews/'+id+'/',{method:'PATCH',body:JSON.stringify({...decision,version:item.version})});await refresh();},
  };
  return <Context.Provider value={value}>

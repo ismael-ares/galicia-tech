@@ -115,10 +115,11 @@ class ApiTests(TestCase):
         self.assertFalse(Event.objects.get(pk='hacktoberfest').published)
         for value in ('javascript:alert(1)', 'https://user:secret@example.org/'):
             self.assertEqual(self.client.patch('/api/v1/admin/reviews/registration/', {'status':'approved','version':case.version+1,'value':value}, format='json').status_code, 400)
-    def test_pausing_a_source_preserves_published_events(self):
+    def test_web_source_changes_are_rejected_and_events_preserved(self):
         self.admin()
-        response = self.client.patch('/api/v1/admin/sources/ourense/', {'enabled': False}, format='json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.client.patch('/api/v1/admin/sources/ourense/', {'enabled': False}, format='json').status_code, 403)
+        self.assertEqual(self.client.post('/api/v1/admin/sources/', {'id': 'forged'}, format='json').status_code, 403)
+        self.assertTrue(Source.objects.get(pk='ourense').enabled)
         self.assertEqual(len(self.client.get('/api/v1/catalog/').json()['events']), 8)
     def test_sample_import_does_not_reset_reviews_or_sources(self):
         self.admin()
@@ -129,26 +130,26 @@ class ApiTests(TestCase):
         self.assertEqual(Event.objects.count(), 9)
         self.assertFalse(Source.objects.get(pk='ourense').enabled)
         self.assertEqual(Event.objects.get(pk='hackathon').data['end'], '2026-10-22T19:00:00+02:00')
-    def test_configuration_budget_and_optimistic_concurrency(self):
+    def test_configuration_is_read_only_and_does_not_write_on_get(self):
         self.admin()
-        values = self.client.get('/api/v1/admin/configuration/').json()
-        values.update(budget='1.50')
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 200)
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 409)
-        values.update(version=values['version']+1, budget='50')
-        self.assertEqual(self.client.put('/api/v1/admin/configuration/', values, format='json').status_code, 400)
-        self.assertFalse(self.client.get('/api/v1/admin/configuration/').json()['paidCallsEnabled'])
-    def test_yaml_lock_and_invalid_reload_keep_last_valid_config(self):
+        response = self.client.get('/api/v1/admin/configuration/').json()
+        self.assertEqual(response['authority'], 'yaml')
+        self.assertEqual(response['budget'], '5.00')
+        self.assertFalse(response['paidCallsEnabled'])
+        self.assertEqual(self.client.put('/api/v1/admin/configuration/', {'budget': '1.50'}, format='json').status_code, 403)
+        self.assertFalse(ProcessingConfig.objects.exists())
+
+    def test_invalid_disk_file_keeps_active_execution_configuration(self):
         self.admin()
         with TemporaryDirectory() as directory:
-            path = Path(directory)/'processing.yaml'
-            path.write_text('processing:\n  retrieval: daily\n  frequency: twice-weekly\n  budget_eur: 1.25\n')
-            with override_settings(CONFIG_AUTHORITY='yaml', CONFIG_YAML_PATH=str(path)):
-                self.assertEqual(processing_config()['budget'], '1.25')
-                self.assertEqual(self.client.put('/api/v1/admin/configuration/', {}, format='json').status_code, 403)
-                path.write_text('processing: invalid')
-                self.assertIn('warning', processing_config())
-                self.assertEqual(ProcessingConfig.objects.get(pk=1).budget, Decimal('1.25'))
+            path = Path(directory)/'app.yaml'
+            path.write_text('processing: invalid')
+            with override_settings(APP_CONFIG_PATH=str(path)):
+                response = self.client.get('/api/v1/admin/configuration/').json()
+                self.assertEqual(response['fileStatus'], 'invalid')
+                self.assertIn('warning', response)
+                self.assertEqual(response['budget'], '5.00')
+                self.assertFalse(ProcessingConfig.objects.exists())
     def test_collection_disabled_does_not_enqueue(self):
         self.admin()
         with override_settings(COLLECTION_ENABLED=False):

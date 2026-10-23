@@ -1,6 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 from urllib.parse import urlsplit
 import yaml
 from django.conf import settings
@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils.dateparse import parse_datetime
 from rest_framework.exceptions import ValidationError as APIValidationError
-from .models import AuditLog, Event, ProcessingConfig, ReviewCase
+from .models import AuditLog, Event, ReviewCase
 
 
 def public_url(value):
@@ -84,24 +84,26 @@ def decide_case(case_id, actor, values):
     return case
 
 
-def processing_config():
-    config, _ = ProcessingConfig.objects.get_or_create(pk=1)
-    values = {'authority': settings.CONFIG_AUTHORITY, 'retrieval': config.retrieval, 'frequency': config.frequency,
-              'budget': str(config.budget), 'version': config.version, 'paidCallsEnabled': False}
-    if settings.CONFIG_AUTHORITY == 'yaml':
-        # Validate first; an invalid reload leaves the last accepted database copy intact.
+def processing_config(diagnostics=False):
+    from config.app_configuration import ConfigurationError, load_configuration
+    document = settings.APP_CONFIG
+    values = {'authority': 'yaml', 'retrieval': document['collection']['retrieval'],
+              'frequency': document['processing']['frequency'],
+              'budget': format(Decimal(str(document['processing']['budget_eur'])), '.2f'),
+              'version': document['version'], 'paidCallsEnabled': False,
+              'file': 'configuration/app.yaml', 'profile': settings.APP_PROFILE,
+              'revision': settings.CONFIG_REVISION, 'fileStatus': 'active',
+              'sourceCount': len(document['sources']), 'access': document['access'],
+              'collection': document['collection'], 'fetch': document['fetch']}
+    if diagnostics:
+        values['yaml'] = yaml.safe_dump(document, allow_unicode=True, sort_keys=False)
         try:
-            with open(settings.CONFIG_YAML_PATH) as handle:
-                document = yaml.safe_load(handle)
-            section = document['processing']
-            retrieval, frequency = section['retrieval'], section['frequency']
-            budget = Decimal(str(section['budget_eur']))
-            if retrieval not in ('daily', 'twice-weekly') or frequency not in ('twice-weekly', 'every-three-days') or not 0 <= budget <= 5:
-                raise ValueError('Invalid processing values')
-            if section.get('paid_calls_enabled', False):
-                raise ValueError('Paid calls are unavailable in this release')
-            values.update(retrieval=retrieval, frequency=frequency, budget=str(budget))
-            ProcessingConfig.objects.filter(pk=1).update(retrieval=retrieval, frequency=frequency, budget=budget)
-        except (OSError, ValueError, TypeError, KeyError, InvalidOperation, yaml.YAMLError):
-            values['warning'] = 'El YAML no es válido; se conserva la última configuración aceptada.'
+            candidate = load_configuration(settings.APP_CONFIG_PATH, settings.APP_PROFILE)
+            if candidate.revision != settings.CONFIG_REVISION:
+                values['fileStatus'] = 'pending'
+                values['warning'] = 'Hay cambios válidos en YAML pendientes de reiniciar backend y worker.'
+        except ConfigurationError as error:
+            values['fileStatus'] = 'invalid'
+            values['warning'] = 'El YAML del disco no es válido. Esta ejecución conserva su configuración activa.'
+            values['validationError'] = str(error)
     return values

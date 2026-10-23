@@ -1,0 +1,117 @@
+# Application policy. Secrets and deployment addresses belong in .env.
+# Validate and restart backend + worker after changing this file.
+version: 1
+access:
+  registration: false
+  local_test_accounts: false
+  require_admin_mfa: true
+  social_providers: [google, github]
+  session_idle_minutes: 30
+  session_max_hours: 8
+  auth_attempts: 30
+  auth_window_seconds: 300
+collection:
+  enabled: false
+  retrieval: daily
+  weekdays: [0, 3] # Monday and Thursday for twice-weekly retrieval.
+  min_interval_hours: 24
+  scheduler_minutes: 60
+  source_deadline_seconds: 65
+  stale_run_minutes: 10
+  max_details: 6
+  max_events: 20
+processing:
+  frequency: twice-weekly
+  budget_eur: 5.00
+  paid_calls_enabled: false # LLM execution is not implemented in 0.1.
+fetch:
+  allowed_hosts: [gdg.community.dev, www.meetup.com, meetup.com, gpul.org, corunajug.org]
+  max_bytes: 2000000
+  max_redirects: 3
+  connect_timeout_seconds: 5
+  read_timeout_seconds: 8
+profiles:
+  local:
+    access:
+      registration: true
+      local_test_accounts: true
+      require_admin_mfa: false
+sources:
+  - id: coruna
+    name: "GDG A Coruña"
+    url: "https://gdg.community.dev/gdg-a-coruna/"
+    city: "A Coruña"
+    platform: "GDG"
+    enabled: true
+  - id: ourense
+    name: "GDG Ourense"
+    url: "https://gdg.community.dev/gdg-ourense/"
+    city: "Ourense"
+    platform: "GDG"
+    enabled: true
+  - id: santiago
+    name: "GDG Santiago de Compostela"
+    url: "https://gdg.community.dev/gdg-santiago-de-compostela/"
+    city: "Santiago de Compostela"
+    platform: "GDG"
+    enabled: true
+  - id: wordpress
+    name: "WordPress Coruña · Meetup"
+    url: "https://www.meetup.com/wordpresscoruna/"
+    city: "A Coruña"
+    platform: "Meetup"
+    enabled: true
+  - id: gpul
+    name: "GPUL"
+    url: "https://gpul.org/"
+    city: "A Coruña"
+    platform: "Web"
+    enabled: true
+  - id: wordpress-vigo
+    name: "WordPress Vigo"
+    url: "https://www.meetup.com/vigo-wordpress-meetup/"
+    city: "Vigo"
+    platform: "Meetup"
+    enabled: true
+  - id: wordpress-lugo
+    name: "WordPress Lugo"
+    url: "https://www.meetup.com/wordpresslugo/"
+    city: "Lugo"
+    platform: "Meetup"
+    enabled: true
+  - id: wordpress-santiago
+    name: "WordPress Santiago"
+    url: "https://www.meetup.com/santiago-de-compostela-wordpress-meetup-group/"
+    city: "Santiago de Compostela"
+    platform: "Meetup"
+    enabled: true
+  - id: wordpress-pontevedra
+    name: "WordPress Pontevedra"
+    url: "https://www.meetup.com/pontevedra-wordpress-meetup/"
+    city: "Pontevedra"
+    platform: "Meetup"
+    enabled: true
+  - id: wordpress-ferrolterra
+    name: "Ferrolterra WordPress"
+    url: "https://www.meetup.com/ferrolterrawordpress/"
+    city: "Ferrol"
+    platform: "Meetup"
+    enabled: true
+  - id: wordpress-ourense
+    name: "WordPress Ourense"
+    url: "https://www.meetup.com/wordpressourense/"
+    city: "Ourense"
+    platform: "Meetup"
+    enabled: true
+  - id: corunajug
+    name: "CoruñaJUG"
+    url: "https://corunajug.org/"
+    city: "A Coruña"
+    platform: "Web"
+    enabled: true
+  - id: python-coruna
+    name: "Python A Coruña"
+    url: "https://www.meetup.com/python-a-coruna/"
+    city: "A Coruña"
+    platform: "Meetup"
+    enabled: true

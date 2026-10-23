@@ -1,10 +1,11 @@
 import socket
-from unittest.mock import patch
+from datetime import datetime, timezone as dt_timezone, timedelta
+from unittest.mock import Mock, patch
 from django.test import SimpleTestCase, TestCase, override_settings
-from core.extraction import PageParser, event_nodes
+from core.extraction import PageParser, detail_links, event_nodes
 from core.fetching import fetch_html
 from core.models import CollectionRun, Event, Observation, ReviewCase, Source
-from core.tasks import collect_source
+from core.tasks import collect_source, schedule_sources
 
 class FetchTests(SimpleTestCase):
     @override_settings(FETCH_ALLOWED_HOSTS=['trusted.example'])
@@ -17,7 +18,23 @@ class FetchTests(SimpleTestCase):
         parser = PageParser();parser.feed('<script type="application/ld+json">{"@graph":[{"@type":["Event","Thing"],"name":"A"}]}</script>')
         self.assertEqual(len(list(event_nodes(parser.jsonld))), 1)
 
-@override_settings(COLLECTION_ENABLED=True)
+    @override_settings(FETCH_ALLOWED_HOSTS=['trusted.example'], FETCH_MAX_BYTES=10, FETCH_CONNECT_TIMEOUT=2, FETCH_READ_TIMEOUT=3)
+    def test_download_uses_configured_size_and_time_limits(self):
+        response = Mock(status=200, headers={'Content-Type': 'text/html'})
+        response.read.return_value = b'x'*11
+        with patch('socket.getaddrinfo', return_value=[(socket.AF_INET,socket.SOCK_STREAM,6,'',('8.8.8.8',443))]), patch('core.fetching.urllib3.HTTPSConnectionPool') as pool:
+            pool.return_value.request.return_value = response
+            with self.assertRaises(ValueError): fetch_html('https://trusted.example/')
+            response.read.assert_called_once_with(11, decode_content=False)
+            self.assertEqual(pool.call_args.kwargs['timeout'].connect_timeout, 2)
+            self.assertEqual(pool.call_args.kwargs['timeout'].read_timeout, 3)
+
+    @override_settings(COLLECTION_MAX_DETAILS=1)
+    def test_detail_link_limit_is_configurable(self):
+        parser = PageParser(); parser.links = ['/eventos/first/', '/eventos/second/']
+        self.assertEqual(detail_links(parser, 'https://gpul.org/'), ['https://gpul.org/eventos/first/'])
+
+@override_settings(COLLECTION_ENABLED=True, MANAGED_SOURCE_IDS={'test'})
 class CollectionTests(TestCase):
     def setUp(self):
         self.source=Source.objects.create(id='test',name='Trusted',city='A Coruña',platform='Web',url='https://gpul.org/')
@@ -46,3 +63,20 @@ class CollectionTests(TestCase):
         self.run_once()
         self.assertEqual(ReviewCase.objects.count(), 2)
         self.assertTrue(all(not case.data['published'] for case in ReviewCase.objects.all()))
+
+    @override_settings(COLLECTION_WEEKDAYS=[1,4], COLLECTION_INTERVAL_HOURS=48)
+    def test_scheduler_uses_configured_weekdays_and_minimum_interval(self):
+        tuesday = datetime(2026,10,20,10,tzinfo=dt_timezone.utc)
+        with patch('core.tasks.processing_config', return_value={'retrieval':'twice-weekly'}), patch('core.tasks.enqueue_source') as enqueue:
+            with patch('core.tasks.timezone.now', return_value=tuesday-timedelta(days=1)):
+                schedule_sources()
+            enqueue.assert_not_called()
+            run = CollectionRun.objects.create(source=self.source, status='completed')
+            CollectionRun.objects.filter(pk=run.pk).update(created_at=tuesday-timedelta(hours=47))
+            with patch('core.tasks.timezone.now', return_value=tuesday):
+                schedule_sources()
+            enqueue.assert_not_called()
+            CollectionRun.objects.filter(pk=run.pk).update(created_at=tuesday-timedelta(hours=49))
+            with patch('core.tasks.timezone.now', return_value=tuesday):
+                schedule_sources()
+            enqueue.assert_called_once_with(self.source.id)

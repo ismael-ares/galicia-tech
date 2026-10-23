@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from redis import Redis, RedisError
 
 redis = Redis.from_url(settings.REDIS_URL, socket_connect_timeout=2, socket_timeout=2)
-LIMIT = "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],300) end; return n"
+LIMIT = "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]) end; return n"
 
 class AccessMiddleware:
     def __init__(self, get_response):
@@ -18,7 +18,7 @@ class AccessMiddleware:
             if request.user.is_authenticated:
                 started = request.session.setdefault('auth_started', time.time())
                 last = request.session.get('last_activity', time.time())
-                if time.time() - last > 1800 or time.time() - started > 8 * 3600:
+                if time.time() - last > settings.SESSION_IDLE_SECONDS or time.time() - started > settings.SESSION_COOKIE_AGE:
                     logout(request)
                 else:
                     request.session['last_activity'] = time.time()
@@ -37,8 +37,8 @@ class AccessMiddleware:
                 try:
                     for value in keys:
                         digest = hmac.new(settings.SECRET_KEY.encode(), value.encode(), hashlib.sha256).hexdigest()
-                        if redis.eval(LIMIT, 1, 'auth:' + digest) > 30:
-                            return JsonResponse({'detail': 'Demasiados intentos. Espera unos minutos.'}, status=429, headers={'Retry-After': '300', 'Cache-Control': 'no-store'})
+                        if redis.eval(LIMIT, 1, 'auth:' + digest, settings.AUTH_WINDOW_SECONDS) > settings.AUTH_ATTEMPTS:
+                            return JsonResponse({'detail': 'Demasiados intentos. Espera unos minutos.'}, status=429, headers={'Retry-After': str(settings.AUTH_WINDOW_SECONDS), 'Cache-Control': 'no-store'})
                 except RedisError:
                     return JsonResponse({'detail': 'El acceso no está disponible temporalmente.'}, status=503, headers={'Cache-Control': 'no-store'})
         response = self.get_response(request)

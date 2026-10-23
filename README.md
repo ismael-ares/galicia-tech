@@ -6,13 +6,15 @@ Ya existe la primera base funcional con Next.js, Django, PostgreSQL, Redis, Q2 y
 
 Puedes guardar eventos sin iniciar sesión: se conservan en este navegador. Con una cuenta se guardan en el servidor y puedes incorporar expresamente tu selección local desde Guardados.
 
-La navegación tiene dos vistas: **Agenda** (`/`) y **Calendario** (`/calendario`). El botón independiente **Guardados** filtra la vista actual y mantiene la selección al cambiar entre ambas. La cabecera permanece accesible al desplazarte; el aviso de guardados permite volver a todos los eventos sin cambiar de vista.
+La navegación ofrece **Agenda**, **Calendario** y una colección independiente de **Guardados**. Mi cuenta reúne próximos encuentros, pasados guardados, asistencias y estadísticas personales.
 
 ```sh
 python3 tools/init_env.py
 sh infra/start.sh
 docker compose exec backend python manage.py create_owner --email tu@correo.example
 ```
+
+Las fuentes y la política de la aplicación se versionan en [configuration/app.yaml](configuration/app.yaml). La web muestra esas secciones en solo lectura. Consulta [cómo validar y aplicar el YAML](docs/configuracion-yaml.md); claves y contraseñas permanecen en `.env` o archivos de secretos. `APP_PROFILE=local` activa el perfil de pruebas y `production` conserva los valores de acceso predeterminados.
 
 El mock del puerto 8874 sigue separado de la aplicación. Los apartados siguientes documentan los prototipos y las pruebas de recopilación previas. El LLM de pago, los callbacks OAuth reales y el despliegue Proxmox todavía requieren su fase de integración.
 
@@ -54,7 +56,7 @@ El [plan técnico consolidado del 21 de octubre](docs/plan-arquitectura-homelab-
 
 La arquitectura elegida es **Django + Next.js**, documentada en [Cuenta, acceso y configuración](docs/cuenta-acceso-configuracion-2026-10-20.md). Next.js gestionará la interfaz pública, el área de usuario y la gestión; Django será responsable de la API, cuentas, sesiones y permisos, con django-allauth para el acceso directo con GitHub/Google y las credenciales locales. PostgreSQL conservará datos y sesiones. Se propone servir ambos bajo un mismo origen, sin un segundo sistema de autenticación en Next.js. El usuario confirma Redis local para compartir los límites de intentos entre procesos, resolviendo un punto abierto de la propuesta anterior. Los detalles de proveedores, límites y costes deben verificarse al activar producción. Esta elección está planificada: el prototipo sigue siendo HTML/CSS/JavaScript y el backend no está implementado.
 
-En Ajustes se puede comparar una sección gestionada desde la web con la misma sección en modo YAML y solo lectura. El contrato de ejemplo está en [config.example.yaml](docs/config.example.yaml). El mock no lee ese archivo, no activa OAuth y no valida, transmite ni guarda credenciales. Los campos del login no tienen `name` y permanecen desactivados sin JavaScript. El cambio de perfil por URL y los estados de acceso restringido son demostraciones visuales; los recursos privados siguen sirviéndose estáticamente.
+En Ajustes se puede comparar una sección gestionada desde la web con la misma sección en modo YAML y solo lectura. Este era un diseño previo; la aplicación funcional usa ahora [configuration/app.yaml](configuration/app.yaml) como autoridad única. El mock no lee ese archivo, no activa OAuth y no valida, transmite ni guarda credenciales. Los campos del login no tienen `name` y permanecen desactivados sin JavaScript. El cambio de perfil por URL y los estados de acceso restringido son demostraciones visuales; los recursos privados siguen sirviéndose estáticamente.
 
 ## Destino inicial de despliegue
 

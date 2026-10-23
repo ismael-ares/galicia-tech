@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 from django.db import transaction
 from django.utils.dateparse import parse_datetime
 from core.models import Event, ReviewCase, Source
@@ -24,7 +25,7 @@ class Command(BaseCommand):
         data = json.loads(Path(options['path']).read_text())
         translations = json.loads(Path(options['translations']).read_text())
         for item in data['sources']:
-            Source.objects.get_or_create(pk=item['id'], defaults={k: item[k] for k in ('name', 'url', 'city', 'platform', 'enabled')})
+            Source.objects.get_or_create(pk=item['id'], defaults={**{k: item[k] for k in ('name', 'url', 'city', 'platform')}, 'enabled': item['enabled'] and item['id'] in settings.MANAGED_SOURCE_IDS})
         raw = {item['id']: item for item in data['events']}
         for case in data['cases']:
             if case.get('candidate') and case['eventId'] not in raw:

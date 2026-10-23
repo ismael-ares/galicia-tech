@@ -1,7 +1,18 @@
 import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+from .app_configuration import ConfigurationError, load_configuration
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+APP_CONFIG_PATH = os.environ.get('APP_CONFIG_PATH', str(BASE_DIR / 'configuration' / 'app.yaml'))
+APP_PROFILE = os.environ.get('APP_PROFILE', 'production')
+try:
+    LOADED_CONFIG = load_configuration(APP_CONFIG_PATH, APP_PROFILE)
+except ConfigurationError as error:
+    raise ImproperlyConfigured(f'Configuración YAML inválida: {error}') from None
+APP_CONFIG = LOADED_CONFIG.document
+CONFIG_REVISION = LOADED_CONFIG.revision
+MANAGED_SOURCE_IDS = frozenset(source['id'] for source in APP_CONFIG['sources'])
 
 def secret(name, default=None):
     filename = os.environ.get(name + '_FILE')
@@ -59,7 +70,10 @@ SESSION_COOKIE_NAME = 'galicia_session'
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = flag('COOKIE_SECURE')
 SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_AGE = 8 * 3600
+SESSION_COOKIE_AGE = APP_CONFIG['access']['session_max_hours'] * 3600
+SESSION_IDLE_SECONDS = APP_CONFIG['access']['session_idle_minutes'] * 60
+AUTH_ATTEMPTS = APP_CONFIG['access']['auth_attempts']
+AUTH_WINDOW_SECONDS = APP_CONFIG['access']['auth_window_seconds']
 CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
 CSRF_COOKIE_SAMESITE = 'Lax'
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -68,13 +82,13 @@ X_FRAME_OPTIONS = 'DENY'
 # The gateway overwrites these headers; backend has no published port.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLAUTH_TRUSTED_PROXY_COUNT = 1
-LOCAL_TEST_ACCOUNTS = flag('LOCAL_TEST_ACCOUNTS', False)
+LOCAL_TEST_ACCOUNTS = APP_CONFIG['access']['local_test_accounts']
 ACCOUNT_LOGIN_METHODS = {'email', 'username'} if LOCAL_TEST_ACCOUNTS else {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # local signup has no email delivery; registration stays closed by default
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_ADAPTER = 'core.adapters.AccountAdapter'
-ALLOW_REGISTRATION = flag('ALLOW_REGISTRATION', False)
+ALLOW_REGISTRATION = APP_CONFIG['access']['registration']
 ACCOUNT_RATE_LIMITS = {'login': '20/m/ip', 'login_failed': '5/5m/key,20/5m/ip'}
 HEADLESS_ONLY = True
 HEADLESS_CLIENTS = ('browser',)
@@ -86,7 +100,7 @@ SOCIALACCOUNT_EMAIL_AUTHENTICATION = False
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = False
 SOCIALACCOUNT_LOGIN_ON_GET = False
 SOCIALACCOUNT_PROVIDERS = {}
-for provider in ('google', 'github'):
+for provider in APP_CONFIG['access']['social_providers']:
     client_id = os.environ.get(provider.upper() + '_CLIENT_ID')
     client_secret = secret(provider.upper() + '_CLIENT_SECRET', '')
     if client_id and client_secret:
@@ -94,7 +108,7 @@ for provider in ('google', 'github'):
 MFA_SUPPORTED_TYPES = ['totp', 'recovery_codes']
 MFA_ADAPTER = 'core.adapters.MFAAdapter'
 MFA_ENCRYPTION_KEY = secret('MFA_ENCRYPTION_KEY')
-REQUIRE_ADMIN_MFA = flag('REQUIRE_ADMIN_MFA', True)
+REQUIRE_ADMIN_MFA = APP_CONFIG['access']['require_admin_mfa']
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'  # no mail delivery is advertised
 LOGIN_REDIRECT_URL = '/cuenta'
 REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication'],
@@ -103,10 +117,20 @@ REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authenticat
 Q_CLUSTER = {'name': 'galicia-tech', 'workers': 1, 'orm': 'default', 'timeout': 90,
              'retry': 180, 'max_attempts': 2, 'queue_limit': 1, 'bulk': 1,
              'catch_up': False, 'save_limit': 500, 'recycle': 100}
-CONFIG_AUTHORITY = os.environ.get('CONFIG_AUTHORITY', 'web')
-CONFIG_YAML_PATH = os.environ.get('CONFIG_YAML_PATH', '/app/configuration/processing.yaml')
-COLLECTION_ENABLED = flag('COLLECTION_ENABLED', False)
-FETCH_ALLOWED_HOSTS = os.environ.get('FETCH_ALLOWED_HOSTS', 'gdg.community.dev,www.meetup.com,meetup.com,gpul.org,corunajug.org').split(',')
+CONFIG_AUTHORITY = 'yaml'
+COLLECTION_ENABLED = APP_CONFIG['collection']['enabled']
+FETCH_ALLOWED_HOSTS = APP_CONFIG['fetch']['allowed_hosts']
+FETCH_MAX_BYTES = APP_CONFIG['fetch']['max_bytes']
+FETCH_MAX_REDIRECTS = APP_CONFIG['fetch']['max_redirects']
+FETCH_CONNECT_TIMEOUT = APP_CONFIG['fetch']['connect_timeout_seconds']
+FETCH_READ_TIMEOUT = APP_CONFIG['fetch']['read_timeout_seconds']
+COLLECTION_DEADLINE = APP_CONFIG['collection']['source_deadline_seconds']
+COLLECTION_MAX_DETAILS = APP_CONFIG['collection']['max_details']
+COLLECTION_MAX_EVENTS = APP_CONFIG['collection']['max_events']
+COLLECTION_WEEKDAYS = APP_CONFIG['collection']['weekdays']
+COLLECTION_INTERVAL_HOURS = APP_CONFIG['collection']['min_interval_hours']
+COLLECTION_STALE_MINUTES = APP_CONFIG['collection']['stale_run_minutes']
+SCHEDULER_MINUTES = APP_CONFIG['collection']['scheduler_minutes']
 LOGGING = {'version': 1, 'disable_existing_loggers': False,
            'handlers': {'console': {'class': 'logging.StreamHandler'}},
            'root': {'handlers': ['console'], 'level': 'INFO'}}

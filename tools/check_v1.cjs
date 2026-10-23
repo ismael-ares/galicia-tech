@@ -41,7 +41,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.getByText('Verificación en dos pasos activada.',{exact:true}).waitFor();
   await page.locator('.recovery-codes pre').waitFor();assert((await page.locator('.recovery-codes pre').innerText()).length>20);
   await page.goto(base+'/admin/fuentes');await page.locator('.source-table-row').first().waitFor();assert.equal(await page.locator('.source-logo img').count(),13);
-  await page.getByRole('button',{name:'Pausar GDG Ourense',exact:true}).click();await page.getByRole('button',{name:'Activar GDG Ourense',exact:true}).waitFor();await page.reload();await page.getByRole('button',{name:'Activar GDG Ourense',exact:true}).waitFor();await page.getByRole('button',{name:'Activar GDG Ourense',exact:true}).click();
+  assert.equal(await page.locator('.source-state').count(),13);assert.equal(await page.locator('.source-toggle,.source-create').count(),0);const csrf=(await (await page.request.get(base+'/api/v1/session/')).json()).csrfToken;assert.equal((await page.request.patch(base+'/api/v1/admin/sources/ourense/',{headers:{'X-CSRFToken':csrf},data:{enabled:false}})).status(),403);
   manage("from core.models import ReviewCase,Event; from core.services import render_event; c=ReviewCase.objects.get(pk='end-time',event__is_sample=True); c.status='pending'; c.value=''; c.note=''; c.version+=1; c.save(); render_event(c.event)");
   await page.goto(base+'/admin/revision');const review=page.locator('#end-time');await review.locator('select').selectOption('19:00');await review.getByRole('button',{name:'Confirmar dato'}).click();await review.waitFor({state:'detached'});
   await page.goto(base+'/evento/hackathon');await page.getByRole('heading',{name:/Hackathon ETSE/}).waitFor();
@@ -58,7 +58,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.getByLabel('Código de verificación').fill(totp(secret));await page.getByRole('button',{name:'Verificar',exact:true}).click();await page.waitForURL('**/cuenta');
   assert.equal((await page.request.get(base+'/api/v1/admin/sources/')).status(),200);
   assert.deepEqual(errors,[]);
-  fs.writeFileSync(path.join(out,'browser-checks.json'),JSON.stringify({status:'passed',checks:['default agenda','server authorization','mock role ignored','password login','TOTP QR setup','recovery codes','TOTP login challenge','favorites persistence','source persistence','review persistence','calendar','GL/ES','light/dark','mobile','logout'],errors},null,2));
+  fs.writeFileSync(path.join(out,'browser-checks.json'),JSON.stringify({status:'passed',checks:['default agenda','server authorization','mock role ignored','password login','TOTP QR setup','recovery codes','TOTP login challenge','favorites persistence','YAML sources readonly','review persistence','calendar','GL/ES','light/dark','mobile','logout'],errors},null,2));
   console.log('PASS v0.1 browser: real sessions, TOTP, permissions, favorites, sources, review, calendar, languages and themes.');
  }finally{
   if(userCreated)manage("from core.models import User,AuditLog,ReviewCase; from core.services import render_event; import sys,json; u=User.objects.get(email=json.loads(sys.stdin.read())['email']); AuditLog.objects.filter(actor=u).delete(); u.delete(); c=ReviewCase.objects.get(pk='end-time',event__is_sample=True); c.status='pending'; c.value=''; c.note=''; c.version+=1; c.save(); render_event(c.event)",{email});

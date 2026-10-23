@@ -5,10 +5,8 @@ from urllib.parse import urljoin, urlsplit
 import urllib3
 from django.conf import settings
 
-MAX_BYTES = 2_000_000
-
 def fetch_html(url):
-    for _ in range(4):
+    for _ in range(settings.FETCH_MAX_REDIRECTS + 1):
         parsed = urlsplit(url)
         if parsed.scheme != 'https' or parsed.port not in (None, 443) or parsed.username or parsed.password or parsed.hostname not in settings.FETCH_ALLOWED_HOSTS:
             raise ValueError('URL fuera de las fuentes HTTPS permitidas.')
@@ -17,7 +15,7 @@ def fetch_html(url):
             raise ValueError('La fuente resuelve a una dirección no pública.')
         # Connect to a checked address; do not perform a second DNS lookup.
         pool = urllib3.HTTPSConnectionPool(next(iter(addresses)), port=443, server_hostname=parsed.hostname,
-                                           assert_hostname=parsed.hostname, timeout=urllib3.Timeout(connect=5, read=8), maxsize=1)
+                                           assert_hostname=parsed.hostname, timeout=urllib3.Timeout(connect=settings.FETCH_CONNECT_TIMEOUT, read=settings.FETCH_READ_TIMEOUT), maxsize=1)
         response = None
         try:
             response = pool.request('GET', (parsed.path or '/') + ('?' + parsed.query if parsed.query else ''),
@@ -31,9 +29,9 @@ def fetch_html(url):
                 raise ValueError(f'La fuente devuelve HTTP {response.status}.')
             if 'html' not in response.headers.get('Content-Type', ''):
                 raise ValueError('La fuente no devuelve HTML.')
-            raw = response.read(MAX_BYTES + 1, decode_content=False)
-            if len(raw) > MAX_BYTES:
-                raise ValueError('Página mayor de 2 MB.')
+            raw = response.read(settings.FETCH_MAX_BYTES + 1, decode_content=False)
+            if len(raw) > settings.FETCH_MAX_BYTES:
+                raise ValueError('La página supera el tamaño permitido en YAML.')
             return raw.decode('utf-8', errors='replace'), url
         finally:
             if response:
