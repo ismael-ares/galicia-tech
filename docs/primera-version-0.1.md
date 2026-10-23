@@ -45,19 +45,21 @@ Los visitantes guardan únicamente identificadores de eventos en `localStorage`,
 
 Los guardados pertenecen a ese navegador y origen (protocolo, dirección y puerto). Borrar los datos del sitio los elimina; en navegación privada su duración depende del navegador. No se almacena el catálogo completo para consultarlo sin conexión. Si el navegador deniega el almacenamiento, se avisa y el marcador no aparenta haberse guardado.
 
-Al iniciar sesión se muestran los guardados de la cuenta, mantenidos en PostgreSQL. No se sube automáticamente la selección local: en Guardados aparece «Añadir guardados del navegador» para copiar expresamente los eventos publicados que falten. La operación autenticada `POST /api/v1/favorites/import/` es aditiva, transaccional, protegida por CSRF e idempotente. La lista local se conserva al importar y al cerrar sesión; los favoritos privados de la cuenta nunca se copian al almacenamiento local.
+Al iniciar sesión se muestran los guardados de la cuenta, mantenidos en PostgreSQL. No se sube automáticamente la selección local: con el filtro Guardados activo aparece «Añadir guardados del navegador» para copiar expresamente los eventos publicados que falten. La operación autenticada `POST /api/v1/favorites/import/` es aditiva, transaccional, protegida por CSRF e idempotente. La lista local se conserva al importar y al cerrar sesión; los favoritos privados de la cuenta nunca se copian al almacenamiento local.
 
 Prueba de navegador específica (requiere Playwright y una muestra local cargada): `node tools/check_guest_favorites.cjs`. Admite `PLAYWRIGHT_MODULE`, `PLAYWRIGHT_CHANNEL`, `DOCKER_BIN` y `APP_URL`. Crea y elimina una cuenta normal temporal, sin modificar cuentas existentes. Las capturas y el resultado quedan en `output/guest-favorites/`.
 
-## Agenda, calendario y selección personal
+## Agenda, calendario y guardados
 
-La navegación principal ofrece tres destinos: Agenda (`/`, entrada predeterminada), Calendario (`/calendario`) y Guardados (`/guardados`). En escritorio se agrupan en la cabecera; en móvil y tablet se mantienen en la barra inferior junto a Mi cuenta. La administración sigue dentro de la cuenta con permisos.
+La navegación principal tiene dos vistas: Agenda (`/`, entrada predeterminada) y Calendario (`/calendario`). Guardados es un botón independiente de la cabecera que filtra la vista actual mediante `guardados=1`. Al cambiar de vista se conservan el alcance, búsqueda (`q`), ciudad (`ciudad`), comunidad (`comunidad`) y último mes elegido (`mes=AAAA-MM`). Mi cuenta sigue separada; la administración aparece dentro de ella con permisos.
 
-Agenda conserva el carrusel y las tarjetas aprobadas. Calendario tiene una pantalla propia, sin carrusel ni selector Agenda/Calendario. El mes (`mes=AAAA-MM`), la búsqueda (`q`), ciudad (`ciudad`), comunidad (`comunidad`) y alcance (`guardados=1` para la selección personal) se reflejan en la URL. Mes y alcance permiten Atrás/Adelante; la búsqueda y los filtros reemplazan la entrada actual del historial. Los marcadores también están disponibles en las fichas del día seleccionado.
+La cabecera es fija al desplazarse para mantener accesible el filtro también en móvil. La barra inferior ofrece Agenda, Calendario y Mi cuenta. Guardados no aparece como un tercer destino: al activarlo, ambas vistas muestran «Tus guardados», identifican la vista en el encabezado y ofrecen «Ver todos los eventos» para quitar el filtro manteniendo la vista y sus filtros de contenido.
 
-Guardados es una colección con filtros Todos, Por venir y Pasados, búsqueda y un acceso «Ver en calendario» con `guardados=1`. Los eventos de varios días que siguen en curso se incluyen en Por venir. El enlace abre el mes del siguiente guardado o, si todos han pasado, el del último. La selección local y la cuenta mantienen el comportamiento descrito arriba.
+Agenda conserva las tarjetas aprobadas y muestra el carrusel cuando se exploran todos los eventos. Los filtros de periodo pertenecen a esta vista; Calendario usa el mes seleccionado. Los marcadores también están disponibles en las fichas del día del calendario. Si el mes no tiene guardados pero existen en otro, aparece una acción para llegar a un mes con guardados sin salir del calendario.
 
-Los enlaces anteriores `/?vista=calendario&mes=...` y `/guardados?vista=calendario&mes=...` redirigen a la nueva ruta, conservando el mes válido y, para Guardados, el alcance personal. `node tools/check_navigation.cjs` comprueba navegación, filtros, historial, teclado, enlaces anteriores, marcadores, estados vacíos y GL/ES con ambos temas. Las evidencias quedan en `output/navigation/`.
+Mes y alcance permiten Atrás/Adelante; la búsqueda y los filtros reemplazan la entrada actual del historial. La selección local y la cuenta mantienen el comportamiento descrito arriba. No hay copia automática ni nuevo almacenamiento de preferencias de guardados.
+
+Los enlaces `/guardados` redirigen a `/?guardados=1`, conservando los filtros compartidos. Las variantes anteriores `/?vista=calendario&mes=...` y `/guardados?vista=calendario&mes=...` redirigen al calendario conservando mes válido y alcance. `node tools/check_navigation.cjs` comprueba las dos vistas, el filtro compartido, historial, teclado, enlaces anteriores, marcadores, estados vacíos y GL/ES con ambos temas. Las evidencias quedan en `output/navigation/`.
 
 ## Consulta de fuentes y gasto
 

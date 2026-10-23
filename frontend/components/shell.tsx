@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowUpRight, Bookmark, CalendarDays, Check, Compass, LogOut, Moon, Settings2, ShieldCheck, Sun, UserRound, X } from 'lucide-react';
+import { Check, LogOut, Moon, ShieldCheck, Sun, UserRound, X } from 'lucide-react';
 import { shellSvg } from '@/lib/shell';
 import { type Catalog, type Decision, type ReviewCase, type User } from '@/lib/data';
 import { api, ApiError } from '@/lib/api';
 import {guestFavoritesKey,readGuestFavorites,toggleGuestFavorite} from '@/lib/guest-favorites';
 import { reducedMotion } from './motion';
+import {BrowseNavigation,SavedFilterButton} from './browse-navigation';
 type State={user:User|null;favorites:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
 const initial:State={user:null,favorites:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true};
@@ -18,7 +19,7 @@ const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admi
 export const useApp=()=>useContext(Context);
 export const useMock=useApp;
 export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI18n();
- const pathname=usePathname(); const [state,setState]=useState(initial); const [ready,setReady]=useState(false); const [dark,setDark]=useState(false); const [toast,setToast]=useState(''); const [motion,setMotion]=useState(false);
+ const [state,setState]=useState(initial); const [ready,setReady]=useState(false); const [dark,setDark]=useState(false); const [toast,setToast]=useState(''); const [motion,setMotion]=useState(false);
  const transitionRef=useRef<{skipTransition:()=>void}|null>(null);const themeGeneration=useRef(0);const requestedTheme=useRef<boolean|null>(null);
  useEffect(()=>{const preference=window.matchMedia('(prefers-reduced-motion: reduce)');const stop=()=>{if(preference.matches){transitionRef.current?.skipTransition();setMotion(false);}};preference.addEventListener('change',stop);return()=>{preference.removeEventListener('change',stop);transitionRef.current?.skipTransition();};},[]);
  const [error,setError]=useState('');
@@ -79,21 +80,12 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
   {state.catalog.sample&&<div className="preview-bar"><span>{t('Datos de muestra · octubre 2026')}</span><span>{t('Versión 0.1 · homelab')}</span></div>}
   <header className="site-header"><div className="header-inner">
    <div className="brand"><button className={'brand-symbol '+(motion?'shell-play':'')} onClick={()=>{setMotion(false);if(!reducedMotion())requestAnimationFrame(()=>setMotion(true));}} onAnimationEnd={e=>{if(e.target===e.currentTarget)setMotion(false);}} aria-label={t("Animar la vieira")} dangerouslySetInnerHTML={{__html:shellSvg}}/><Link href="/" className="brand-word">galicia<span>tech<span className="brand-period">.</span></span></Link></div>
-   <nav className="desktop-nav" aria-label={t("Principal")}>
-    <Link href="/" aria-current={pathname==='/'?'page':undefined} className={pathname==='/'?'active':''}><Compass size={17}/>{t("Agenda")}</Link>
-    <Link href="/calendario" aria-current={pathname==='/calendario'?'page':undefined} className={pathname==='/calendario'?'active':''}><CalendarDays size={17}/>{t("Calendario")}</Link>
-    <Link href="/guardados" aria-current={pathname==='/guardados'?'page':undefined} className={pathname==='/guardados'?'active':''}><Bookmark size={16}/>{t("Guardados")}{favorites.length>0&&<span className="tiny-count">{favorites.length}</span>}</Link>
-   </nav>
-   <div className="header-actions"><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
+   <BrowseNavigation/>
+   <div className="header-actions"><SavedFilterButton count={favorites.filter(id=>publishedIds.has(id)).length}/><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
   </div></header>
   <main id="main" className="page-container">{error?<div className="empty-state" role="alert"><h1>{t('No se ha podido cargar la agenda')}</h1><p>{error}</p><button className="button primary" onClick={()=>refresh().catch(e=>setError(e.message))}>{t('Reintentar')}</button></div>:!ready?<div className="empty-state" role="status">{t('Cargando agenda…')}</div>:children}</main>
   <footer className="site-footer"><span>galicia tech<span className="brand-period">.</span><small>{t("Comunidades y encuentros")}</small></span><div><span>{t("Horarios de Galicia")}</span></div></footer>
-  <nav className="mobile-nav" aria-label={t("Navegación móvil")}>
-   <Link href="/" aria-current={pathname==='/'?'page':undefined}><Compass size={20}/><span>{t("Agenda")}</span></Link>
-   <Link href="/calendario" aria-current={pathname==='/calendario'?'page':undefined}><CalendarDays size={20}/><span>{t("Calendario")}</span></Link>
-   <Link href="/guardados" aria-current={pathname==='/guardados'?'page':undefined}><Bookmark size={20}/><span>{t("Guardados")}{favorites.length>0&&<small>{favorites.length}</small>}</span></Link>
-   <Link href="/cuenta" aria-current={pathname==='/cuenta'||pathname==='/login'||pathname.startsWith('/admin')?'page':undefined}><UserRound size={20}/><span>{t("Mi cuenta")}</span></Link>
-  </nav>
+  <BrowseNavigation mobile/>
   {toast&&<div className="toast" role="status"><Check size={17}/>{toast}<button onClick={()=>setToast('')} aria-label={t("Cerrar aviso")}><X size={16}/></button></div>}
  </Context.Provider>;
 }

@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Languages } from 'lucide-react';
-import {usePathname} from 'next/navigation';
+import {usePathname,useSearchParams} from 'next/navigation';
 import { type Locale, localeCookie } from '@/lib/locale';
 import galician from '@/lib/messages/gl.json';
 import { localDate, localDateRange } from '@/lib/date-format';
@@ -13,11 +13,13 @@ const Context=createContext({locale:'gl' as Locale,setLocale:(_:Locale)=>{}});
 export function LocaleProvider({initialLocale,children}:{initialLocale:Locale;children:React.ReactNode}){
  const [locale,setLocale]=useState(initialLocale);
  const pathname=usePathname();
+ const params=useSearchParams();
+ const savedOnly=(pathname==='/'||pathname==='/calendario')&&params.get('guardados')==='1';
  useEffect(()=>{
   document.documentElement.lang=locale;
   const section=pathname==='/calendario'?'Calendario':pathname==='/guardados'?(locale==='gl'?'Gardados':'Guardados'):(locale==='gl'?'Axenda':'Agenda');
-  document.title='Galicia Tech · '+section;
- },[locale,pathname]);
+  document.title='Galicia Tech · '+(savedOnly?(locale==='gl'?'Gardados':'Guardados')+' · ':'')+section;
+ },[locale,pathname,savedOnly]);
  function select(value:Locale){
   setLocale(value);
   document.documentElement.lang=value;

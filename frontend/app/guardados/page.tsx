@@ -1,9 +1,8 @@
-import { calendarDay } from '@/lib/calendar';
-import { Agenda } from '@/components/agenda';
 import {redirect} from 'next/navigation';
+import {browseHref} from '@/lib/browse-navigation';
 import {legacyCalendarHref,type PageSearchParams} from '@/lib/legacy-calendar';
 export default async function Page({searchParams}:{searchParams:Promise<PageSearchParams>}){
- const legacy=legacyCalendarHref(await searchParams,true);
- if(legacy)redirect(legacy);
- return <Agenda savedOnly today={calendarDay(new Date())}/>;
+ const params=await searchParams;
+ const legacy=legacyCalendarHref(params,true);
+ redirect(legacy||browseHref('/',{get:key=>typeof params[key]==='string'?params[key]:null},true));
 }
