@@ -27,15 +27,6 @@
 .filter-active-dot{width:5px;height:5px;background:var(--primary);border-radius:50%}
 .saved-events-notice{border-left:3px solid var(--primary);background:var(--surface)}
 .saved-empty{border:1px dashed var(--control-line);border-radius:22px;margin:10px 0;padding:65px 20px;background:var(--surface)}
-.calendar-page-heading{position:relative;padding-bottom:29px}
-.calendar-heading-mark{width:93px;height:93px;border:1px solid var(--line);border-radius:27px;display:grid;place-items:center;color:var(--primary);background:var(--accent-soft);position:relative;margin-right:15px}
-.calendar-heading-mark>span{position:absolute;right:-7px;bottom:12px;width:20px;height:20px;border:4px solid var(--bg);background:var(--primary);border-radius:7px;transform:rotate(-12deg)}
-.calendar-heading-mark>span:last-child{width:12px;height:12px;bottom:-5px;right:17px;border-width:2px;opacity:.65}
-.calendar-filter-summary{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:13px 0 25px;color:var(--muted);font-size:10px;min-height:18px}
-.calendar-filter-summary>button{display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;font-size:10px;padding:0;color:var(--primary)}
-.calendar-day-event-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}
-.calendar-day-event-top .calendar-event-community{margin-bottom:0;min-width:0}.calendar-event-community small{overflow-wrap:anywhere}
-.calendar-day-event-top .save-button{width:31px;height:31px;min-width:31px;flex-shrink:0}.calendar-day-event-top .save-button>svg{width:16px;height:16px}
 @media(min-width:901px) and (max-width:1120px){.header-inner{gap:15px}.desktop-nav{width:372px}.desktop-nav a{padding:9px 8px;gap:6px;font-size:11px}.header-actions{gap:7px}.header-actions .account-button{max-width:100px;padding:9px 12px}}
 @media(max-width:900px){
  .desktop-nav{display:none}
@@ -57,10 +48,7 @@
 @media(max-width:640px){
  .section-context{display:none}
  .saved-empty{padding:48px 20px}
- .calendar-heading-mark{width:65px;height:65px;border-radius:19px;margin-right:4px;flex-shrink:0}.calendar-heading-mark>svg{width:33px;height:33px}
- .calendar-page-heading{gap:8px}.calendar-page-heading h1{font-size:37px;letter-spacing:-1.7px}.calendar-page-heading p{font-size:12px}.calendar-page-heading .eyebrow{font-size:8px;letter-spacing:1px;line-height:1.7}
- .calendar-filter-summary{margin:12px 0 21px;gap:10px;font-size:10px}.calendar-filter-summary>button{white-space:nowrap}
 }
-@media(max-width:360px){.calendar-heading-mark{display:none}.mobile-nav a{font-size:9px}.header-actions{gap:4px}.header-actions>.icon-button,.header-actions .account-button{width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px}}
+@media(max-width:360px){.mobile-nav a{font-size:9px}.header-actions{gap:4px}.header-actions>.icon-button,.header-actions .account-button{width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px}}
 @media(prefers-reduced-motion:reduce){.desktop-nav::after,.mobile-nav a{transition:none}}
 @media(forced-colors:active){.desktop-nav::after{background:Highlight}.desktop-nav a.active{color:HighlightText}.mobile-nav a[aria-current=page]{outline:2px solid Highlight;outline-offset:-2px}}

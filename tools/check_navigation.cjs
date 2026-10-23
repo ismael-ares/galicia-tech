@@ -44,7 +44,7 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await page.getByLabel('Ir a un mes').fill('2026-11');await month(page,'2026-11');
   await page.locator('[data-day="2026-11-04"] .calendar-day-button').click();await page.locator('[data-calendar-event="santiago"]').waitFor();
   await page.locator('.calendar-event[href="/evento/ourense"]').first().waitFor();
-  await page.getByLabel('Buscar eventos').fill('DevFest');await page.getByLabel('Localidad').selectOption('Santiago de Compostela');
+  await page.getByLabel('Buscar eventos').fill('DevFest');await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');
   await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,1);
   assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'DevFest');assert.equal(await page.getByLabel('Localidad').inputValue(),'Santiago de Compostela');
   await nav(page,'Calendario').click();await page.waitForURL(url=>url.pathname==='/calendario');await month(page,'2026-11');
