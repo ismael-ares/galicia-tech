@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {usePathname,useRouter,useSearchParams} from 'next/navigation';
-import {Bookmark,CalendarDays,List,UserRound} from 'lucide-react';
+import {Bookmark,BookmarkCheck,CalendarDays,List,UserRound} from 'lucide-react';
 import {browseHref} from '@/lib/browse-navigation';
 import {useI18n} from './i18n';
 
@@ -28,6 +28,6 @@ export function SavedFilterButton({count}:{count:number}){
   window.scrollTo({top:0,behavior:'instant'});
  }
  return <button type="button" className={'saved-filter-button '+(active?'is-active':'')} aria-label={t(active?'Mostrar todos los eventos':'Mostrar solo guardados')} title={t(active?'Mostrar todos los eventos':'Mostrar solo guardados')} aria-pressed={active} onClick={toggle}>
-  <Bookmark size={17} strokeWidth={1.7} fill={active?'currentColor':'none'} aria-hidden="true"/><span>{t('Guardados')}</span><small>{count}</small>
+  {active?<BookmarkCheck size={18} strokeWidth={1.7} aria-hidden="true"/>:<Bookmark size={18} strokeWidth={1.7} aria-hidden="true"/>}<span>{t('Guardados')}</span><small>{count}</small>
  </button>;
 }
