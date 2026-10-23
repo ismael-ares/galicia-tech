@@ -11,7 +11,7 @@ export function BrowseNavigation({mobile=false}:{mobile?:boolean}){
  const pathname=usePathname(),params=useSearchParams();
  const {favorites,catalog}=useApp();
  const count=catalog.events.filter(event=>favorites.includes(event.id)).length;
- const browseParams=pathname==='/guardados'?{get:()=>null}:params;
+ const browseParams=pathname==='/'||pathname==='/calendario'?params:{get:()=>null};
  const view=pathname==='/'?'agenda':pathname==='/calendario'?'calendar':pathname==='/guardados'?'saved':'other';
  return <nav className={mobile?'mobile-nav':'desktop-nav'} data-view={view} aria-label={t(mobile?'Navegación móvil':'Principal')}>
   <Link href={browseHref('/',browseParams)} aria-current={pathname==='/'?'page':undefined} className={pathname==='/'?'active':''}><List size={mobile?20:18} strokeWidth={1.7} aria-hidden="true"/><span>{t('Agenda')}</span></Link>

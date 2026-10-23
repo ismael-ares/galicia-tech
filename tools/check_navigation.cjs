@@ -1,3 +1,4 @@
+const {searchFor,openFilters,setFilter,readFilter,goToMonth,currentQuery}=require('./browse_controls.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
@@ -12,7 +13,7 @@ async function active(page,pathname,mobile=false){
  const current=page.locator((mobile?'.mobile-nav':'.site-header')+' a[aria-current="page"]');
  await current.waitFor();assert.equal(await current.count(),1);assert.equal(new URL(await current.getAttribute('href'),base).pathname,pathname);
 }
-async function month(page,value){await page.waitForFunction(value=>document.querySelector('input[type=month]')?.value===value,value);}
+async function month(page,value){await page.waitForFunction(value=>document.querySelector('.calendar-month-title-button')?.dataset.month===value,value);}
 async function dismissToast(page){const button=page.getByRole('button',{name:'Cerrar aviso',exact:true});if(await button.count())await button.click();}
 (async()=>{
  const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',headless:true});
@@ -37,19 +38,19 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await storage.locator('summary').click();
   // Saved is a destination, not a toggle back to all events.
   await savedLink(page).click();await count(page,3);assert.equal(new URL(page.url()).pathname,'/guardados');
-  await page.getByLabel('Buscar en guardados').fill('DevFest');await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');await count(page,1);
-  await page.reload();await count(page,1);assert.equal(await page.getByLabel('Buscar en guardados').inputValue(),'DevFest');
+  await searchFor(page,'Buscar en guardados','DevFest');await setFilter(page,'Localidad','Santiago de Compostela');await count(page,1);
+  await page.reload();await count(page,1);assert.equal(currentQuery(page),'DevFest');
   await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,upcomingCount);
-  assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'');assert.equal(await page.getByLabel('Localidad').inputValue(),'');
+  assert.equal(currentQuery(page),'');assert.equal(await readFilter(page,'Localidad'),'');
   await page.goBack();await page.waitForURL(url=>url.pathname==='/guardados');await count(page,1);
   await nav(page,'Calendario').click();await page.waitForURL(url=>url.pathname==='/calendario');await page.locator('.calendar-view').waitFor();await active(page,'/calendario');
-  assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'');assert.equal(new URL(page.url()).searchParams.get('guardados'),null);
-  await page.getByLabel('Ir a un mes').fill('2026-11');await month(page,'2026-11');
+  assert.equal(currentQuery(page),'');assert.equal(new URL(page.url()).searchParams.get('guardados'),null);
+  await goToMonth(page,'2026-11');await month(page,'2026-11');
   await page.locator('[data-day="2026-11-04"] .calendar-day-button').click();await page.locator('[data-calendar-event="santiago"]').waitFor();
   await page.locator('.calendar-event[href="/evento/ourense"]').first().waitFor();
-  await page.getByLabel('Buscar eventos').fill('DevFest');await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');
+  await searchFor(page,'Buscar eventos','DevFest');await setFilter(page,'Localidad','Santiago de Compostela');
   await nav(page,'Agenda').click();await page.waitForURL(url=>url.pathname==='/');await count(page,1);
-  assert.equal(await page.getByLabel('Buscar eventos').inputValue(),'DevFest');assert.equal(await page.getByLabel('Localidad').inputValue(),'Santiago de Compostela');
+  assert.equal(currentQuery(page),'DevFest');assert.equal(await readFilter(page,'Localidad'),'Santiago de Compostela');
   await nav(page,'Calendario').click();await page.waitForURL(url=>url.pathname==='/calendario');await month(page,'2026-11');
   // The collection never inherits discovery filters or a calendar month.
   await savedLink(page).click();await page.waitForURL('**/guardados');await count(page,3);assert.equal(new URL(page.url()).search,'');
@@ -65,7 +66,7 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   await page.locator('[data-day="2026-11-30"] .calendar-day-button').focus();await page.keyboard.press('ArrowRight');await month(page,'2026-12');
   await page.waitForFunction(()=>document.querySelector('[data-day="2026-12-01"] .calendar-day-button')===document.activeElement);
   await page.goBack();await month(page,'2026-11');await page.goForward();await month(page,'2026-12');
-  await page.goto(base+'/calendario?mes=invalid');await page.locator('.calendar-view').waitFor();assert.match(await page.locator('input[type=month]').inputValue(),/^\d{4}-\d{2}$/);
+  await page.goto(base+'/calendario?mes=invalid');await page.locator('.calendar-view').waitFor();assert.match(await page.locator('.calendar-month-title-button').getAttribute('data-month'),/^\d{4}-\d{2}$/);
   await page.goto(base+'/guardados');await count(page,2);await dismissToast(page);
   for(const card of await page.locator('.saved-entry').all()){
    assert.equal(await card.locator('.meet-description').count(),1);assert.equal(await card.locator('.meet-fact').count(),3);assert(await card.locator('.meet-tags').count());
@@ -101,10 +102,10 @@ async function dismissToast(page){const button=page.getByRole('button',{name:'Ce
   const timed=await temporal.newPage();timed.on('pageerror',error=>errors.push(error.message));await timed.goto(base+'/guardados');await timed.locator('.saved-empty').waitFor();
   await timed.evaluate(key=>localStorage.setItem(key,JSON.stringify(['flutter','santiago','ourense'])),key);await timed.reload();await count(timed,3);
   assert.deepEqual(await timed.locator('.saved-group[aria-labelledby="saved-proximos"] .meet-card').evaluateAll(cards=>cards.map(card=>card.dataset.motionItem)),['ourense','santiago']);
-  await timed.getByRole('button',{name:/^Pasados/}).click();await count(timed,1);await timed.locator('.meet-card[data-motion-item="flutter"]').waitFor();
-  await timed.getByRole('button',{name:/^Próximos/}).click();await count(timed,2);await timed.reload();await count(timed,2);
+  await setFilter(timed,'Periodo de guardados','pasados');await count(timed,1);await timed.locator('.meet-card[data-motion-item="flutter"]').waitFor();
+  await setFilter(timed,'Periodo de guardados','proximos');await count(timed,2);await timed.reload();await count(timed,2);
   await timed.goBack();await count(timed,1);await timed.goForward();await count(timed,2);
-  await timed.getByLabel('Buscar en guardados').fill('no-existing-event');await timed.getByRole('heading',{name:'No hay coincidencias'}).waitFor();
+  await searchFor(timed,'Buscar en guardados','no-existing-event');await timed.getByRole('heading',{name:'No hay coincidencias'}).waitFor();
   await timed.locator('.saved-empty').getByRole('button',{name:'Limpiar filtros',exact:true}).click();await count(timed,3);
   for(const id of ['ourense','santiago','flutter'])await timed.locator(`.meet-card[data-motion-item="${id}"] .save-button`).click();
   await timed.locator('.saved-empty').waitFor();assert.equal(new URL(timed.url()).pathname,'/guardados');assert.equal(await savedLink(timed).locator('small').innerText(),'0');

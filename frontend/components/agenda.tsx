@@ -1,5 +1,5 @@
 'use client';
-import {ArrowDownWideNarrow,ArrowRight,CalendarDays,CalendarRange,Clock3,History,Info,Search,X} from 'lucide-react';
+import {ArrowDownWideNarrow,ArrowRight,CalendarDays,History,Info,Search} from 'lucide-react';
 import {calendarDay,eventDays,moveDay,validMonth} from '@/lib/calendar';
 import {useApp} from './shell';
 import {useI18n} from './i18n';
@@ -34,12 +34,13 @@ export function Agenda({today}:{today:string}){
    <div className="agenda-sources-context"><span className="mini-avatars">{['GDG','WordPress','Python'].map(identity=><span title={identity} key={identity}><CommunityLogo identity={identity} size={20}/></span>)}</span><span><strong>{catalog.sources.filter(source=>source.enabled).length} {t('fuentes')}</strong><small>{t('Comunidades de Galicia')}</small></span></div>
   </section>
   <section className="agenda-controls" aria-label={t('Explorar encuentros')}>
-   <div className="agenda-scope-row"><div className="agenda-scopes" role="group" aria-label={t('Estado de los encuentros')}>
-    {[{archive:false,label:'Próximos',count:upcoming.length,icon:CalendarDays},{archive:true,label:'Archivo',count:past.length,icon:History}].map(item=><button type="button" key={item.label} aria-pressed={archived===item.archive} aria-controls="agenda-results" onClick={()=>switchSection(item.archive)}><item.icon size={17} aria-hidden="true"/><span>{t(item.label)}</span><small>{item.count}</small></button>)}
-   </div><span className="agenda-timezone"><Clock3 size={13}/>{t('Horarios de Galicia')}</span></div>
-   <EventFilters events={catalog.events} value={filters} onChange={changeFilters} compact showReset={false}/>
-   <div className="agenda-refine"><label className="agenda-date-filter"><CalendarRange size={15} aria-hidden="true"/><span>{t(archived?'Mes':'Fechas')}</span>{archived?<select aria-label={t('Mes del archivo')} value={month} onChange={event=>navigate({archivo:event.target.value||null})}><option value="">{t('Cualquier mes')}</option>{archiveMonths.map(value=><option key={value} value={value}>{formatDate(value+'-01T12:00:00Z',{month:'long',year:'numeric'})}</option>)}</select>:<select aria-label={t('Rango de fechas')} value={period} onChange={event=>navigate({periodo:event.target.value||null,archivo:null})}><option value="">{t('Desde hoy')}</option><option value="7">{t('Próximos 7 días')}</option><option value="30">{t('Próximos 30 días')}</option></select>}</label>{active&&<button className="agenda-reset" type="button" onClick={reset}>{t('Limpiar filtros')}<X size={12}/></button>}</div>
-   {(filters.city||filters.community)&&<div className="agenda-applied"><div>{filters.city&&<button type="button" onClick={()=>changeFilters({...filters,city:''})} aria-label={t('Quitar filtro: ')+filters.city}>{filters.city}<X size={12}/></button>}{filters.community&&<button type="button" onClick={()=>changeFilters({...filters,community:''})} aria-label={t('Quitar filtro: ')+filters.community}>{filters.community}<X size={12}/></button>}</div></div>}
+   <EventFilters events={catalog.events} value={filters} onChange={changeFilters} contextKey={archived?'archive':'upcoming'} onClear={reset}
+    extraFields={[archived?{id:'archiveMonth',label:'Mes del archivo',value:month,options:[{value:'',label:'Cualquier mes'},...archiveMonths.map(value=>({value,label:formatDate(value+'-01T12:00:00Z',{month:'long',year:'numeric'})}))]}:{id:'range',label:'Rango de fechas',value:period,options:[{value:'',label:'Desde hoy'},{value:'7',label:'Próximos 7 días'},{value:'30',label:'Próximos 30 días'}]}]}
+    onApply={(value,extra)=>navigate({ciudad:value.city||null,comunidad:value.community||null,periodo:archived?'pasados':extra.range||null,archivo:archived?extra.archiveMonth||null:null})}>
+    <div className="agenda-scopes" role="group" aria-label={t('Estado de los encuentros')}>
+     {[{archive:false,label:'Próximos',count:upcoming.length,icon:CalendarDays},{archive:true,label:'Archivo',count:past.length,icon:History}].map(item=><button type="button" key={item.label} aria-pressed={archived===item.archive} aria-controls="agenda-results" onClick={()=>switchSection(item.archive)}><item.icon size={17} aria-hidden="true"/><span>{t(item.label)}</span><small>{item.count}</small></button>)}
+    </div>
+   </EventFilters>
   </section>
   {!archived&&!active&&<FeaturedEvents today={today}/>}
   <section className="agenda-list encounters-view" id="agenda-results" aria-labelledby="events-heading">

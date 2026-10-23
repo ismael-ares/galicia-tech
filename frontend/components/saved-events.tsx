@@ -7,7 +7,7 @@ import {useApp} from './shell';
 import {useI18n} from './i18n';
 import {EncounterRow,Poster} from './catalog';
 import {SavedEventsNotice} from './saved-events-notice';
-import {emptyEventFilters,EventFilters,filterEvents} from './event-filters';
+import {EventFilters,filterEvents} from './event-filters';
 import {useBrowseFilters} from './use-browse-filters';
 import {useAnimatedList} from './motion';
 
@@ -29,18 +29,17 @@ export function SavedEvents({today}:{today:string}){
  const activeFilters=!!(filters.query||filters.city||filters.community);
  const listRef=useRef<HTMLDivElement>(null);
  useAnimatedList(listRef,groups.flatMap(group=>group.events.map(event=>event.id)).join('|'),'.saved-entry[data-motion-item]');
- function reset(){changeFilters(emptyEventFilters);navigate({periodo:null},true);}
+ function reset(){navigate({q:null,ciudad:null,comunidad:null,periodo:null},true);}
  return <div className="saved-page">
   <section className="page-heading saved-page-heading">
    <div className="saved-heading-copy"><div className="eyebrow"><Bookmark size={13}/>{t('Tu colección')}</div><h1>{t('Guardados')}<span className="heading-dot">.</span></h1><p className="saved-description"><strong>{selection.length}</strong> {t(selection.length===1?'encuentro':'encuentros')}<span aria-hidden="true"/> <strong>{communities}</strong> {t(communities===1?'comunidad':'comunidades')}</p><SavedEventsNotice/></div>
    {selection.length>0&&<div className="saved-heading-visual"><div className="saved-cover-stack" aria-hidden="true">{preview.map(event=><div className="saved-stack-cover" key={event.id}><Poster event={event}/></div>)}</div><Link href="/" className="text-action saved-explore">{t('Explorar eventos')}<ArrowUpRight size={15}/></Link></div>}
   </section>
   {selection.length>0&&<section className="saved-tools" aria-label={t('Organizar guardados')}>
-   <div className="saved-periods" role="group" aria-label={t('Periodo de guardados')}>
-    {[{id:'todos',label:'Todos',count:selection.length},{id:'proximos',label:'Próximos',count:upcoming.length},{id:'pasados',label:'Pasados',count:past.length}].map(item=><button type="button" key={item.id} className={period===item.id?'is-active':''} aria-pressed={period===item.id} onClick={()=>navigate({periodo:item.id==='todos'?null:item.id})}>{t(item.label)}<span>{item.count}</span></button>)}
-   </div>
-   <EventFilters events={selection} value={filters} onChange={changeFilters} searchLabel="Buscar en guardados" compact/>
-   {activeFilters&&<div className="saved-results" role="status"><span>{count} {t('eventos encontrados')}</span><button type="button" onClick={()=>changeFilters(emptyEventFilters)}>{t('Limpiar filtros')}</button></div>}
+   <EventFilters events={selection} value={filters} onChange={changeFilters} searchLabel="Buscar en guardados" onClear={reset}
+    extraFields={[{id:'period',label:'Periodo de guardados',value:period,defaultValue:'todos',options:[{value:'todos',label:'Todos'},{value:'proximos',label:'Próximos'},{value:'pasados',label:'Pasados'}]}]}
+    onApply={(value,extra)=>navigate({ciudad:value.city||null,comunidad:value.community||null,periodo:extra.period==='todos'?null:extra.period})}/>
+   {activeFilters&&<span className="collection-result-status" role="status">{count} {t('eventos encontrados')}</span>}
   </section>}
   <div ref={listRef} className="saved-collection encounters-view">
    {groups.filter(group=>group.events.length>0).map(group=><section className="saved-group" key={group.id} aria-labelledby={'saved-'+group.id}>
@@ -56,7 +55,7 @@ export function SavedEvents({today}:{today:string}){
   {!count&&<div className="empty-state saved-empty">
    <div className="saved-empty-mark" aria-hidden="true"><span/><span/>{!selection.length?<Bookmark size={30}/>:<Search size={28}/>}</div>
    <h2>{t(!selection.length?'Todavía no has guardado eventos':activeFilters?'No hay coincidencias':period==='pasados'?'No tienes encuentros pasados':'No tienes encuentros por venir')}</h2>
-   <p>{t(!selection.length?'Usa el marcador de un evento para guardarlo.':activeFilters?'Prueba otra búsqueda o amplía los filtros.':'El resto de tu colección sigue en Todos.')}</p>
+   <p>{t(!selection.length?'Usa el marcador de un evento para guardarlo.':activeFilters?'Prueba otra búsqueda o amplía los filtros.':'Puedes consultar toda tu colección al quitar el filtro de periodo.')}</p>
    {!selection.length?<Link className="button primary" href="/">{t('Explorar eventos')}<ArrowUpRight size={16}/></Link>:<button type="button" className="button secondary" onClick={reset}>{t(activeFilters?'Limpiar filtros':'Ver todos mis guardados')}</button>}
   </div>}
  </div>;

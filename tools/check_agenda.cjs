@@ -1,3 +1,4 @@
+const {searchFor,openFilters,setFilter,readFilter,goToMonth,currentQuery}=require('./browse_controls.cjs');
 // Local sample app; synthetic scheduling and cover cases are isolated in browser responses.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -48,31 +49,31 @@ async function stage(page){
   await page.locator('.featured-save .save-button').click();await page.locator(`.meet-card[data-motion-item="${id}"] .save-button[aria-pressed=false]`).waitFor();
   const close=page.getByRole('button',{name:'Cerrar aviso',exact:true});if(await close.count())await close.click();
   await images(page);await page.screenshot({path:path.join(out,'agenda-desktop-light.png'),fullPage:true});
-  const search=page.getByLabel('Buscar eventos'),before=await search.boundingBox();await search.fill('DevFest');await count(page,2);
+  const search=page.getByRole('button',{name:'Abrir búsqueda',exact:true}),before=await search.boundingBox();await searchFor(page,'Buscar eventos','DevFest');await count(page,2);
   assert.equal(await page.locator('.featured-section').count(),0);assert.equal(await search.evaluate(node=>node===document.activeElement),true);assert(Math.abs((await search.boundingBox()).y-before.y)<1,'Search stays put when featured events collapse');
-  await page.getByRole('button',{name:'Filtros',exact:true}).click();await page.getByLabel('Localidad').selectOption('Santiago de Compostela');await count(page,1);
-  await page.reload();await count(page,1);assert.equal(await search.inputValue(),'DevFest');
-  await page.getByRole('button',{name:'Quitar filtro: Santiago de Compostela',exact:true}).click();await count(page,2);
-  await page.locator('.agenda-reset').click();await count(page,upcoming.length);await page.locator('.featured-section').waitFor();
+  await setFilter(page,'Localidad','Santiago de Compostela');await count(page,1);
+  await page.reload();await count(page,1);assert.equal(currentQuery(page),'DevFest');
+  await page.getByRole('button',{name:'Quitar filtro: Localidad: Santiago de Compostela',exact:true}).click();await count(page,2);
+  await page.locator('.collection-clear').click();await count(page,upcoming.length);await page.locator('.featured-section').waitFor();
   await scope(page,true).click();await count(page,past.length);assert.deepEqual(await ids(page),past.map(event=>event.id));
   assert.equal(await page.locator('.featured-section').count(),0);await page.getByRole('heading',{name:/^Archivo de encuentros/}).waitFor();
   assert.equal(await page.getByLabel('Rango de fechas').count(),0);await page.reload();await count(page,past.length);
   await images(page);await page.screenshot({path:path.join(out,'archive-desktop-light.png'),fullPage:true});
-  const archiveMonth=localDay(past[0].start).slice(0,7);await page.getByLabel('Mes del archivo').selectOption(archiveMonth);await count(page,past.filter(event=>localDay(event.start).startsWith(archiveMonth)).length);
-  assert.equal(new URL(page.url()).searchParams.get('archivo'),archiveMonth);await page.reload();assert.equal(await page.getByLabel('Mes del archivo').inputValue(),archiveMonth);
-  await search.fill('no-matching-events');await page.getByRole('heading',{name:'No hay coincidencias',exact:true}).waitFor();
+  const archiveMonth=localDay(past[0].start).slice(0,7);await setFilter(page,'Mes del archivo',archiveMonth);await count(page,past.filter(event=>localDay(event.start).startsWith(archiveMonth)).length);
+  assert.equal(new URL(page.url()).searchParams.get('archivo'),archiveMonth);await page.reload();assert.equal(await readFilter(page,'Mes del archivo'),archiveMonth);
+  await searchFor(page,'Buscar eventos','no-matching-events');await page.getByRole('heading',{name:'No hay coincidencias',exact:true}).waitFor();
   await page.locator('.agenda-empty').getByRole('button',{name:'Limpiar filtros',exact:true}).click();await count(page,past.length);
-  assert.equal(await scope(page,true).getAttribute('aria-pressed'),'true','Clearing archive filters must stay in the archive');assert.equal(await page.getByLabel('Mes del archivo').inputValue(),'');
-  await search.fill('DevFest');await count(page,0);await scope(page,false).click();await count(page,2);assert.equal(await search.inputValue(),'DevFest','Search is retained when switching sections');
-  await page.locator('.agenda-reset').click();await count(page,upcoming.length);
+  assert.equal(await scope(page,true).getAttribute('aria-pressed'),'true','Clearing archive filters must stay in the archive');assert.equal(await readFilter(page,'Mes del archivo'),'');
+  await searchFor(page,'Buscar eventos','DevFest');await count(page,0);await scope(page,false).click();await count(page,2);assert.equal(currentQuery(page),'DevFest','Search is retained when switching sections');
+  await page.locator('.collection-clear').click();await count(page,upcoming.length);
   await scope(page,true).click();await count(page,past.length);await page.goBack();await count(page,upcoming.length);await page.goForward();await count(page,past.length);
   await scope(page,false).click();await count(page,upcoming.length);
-  for(const days of [7,30]){await page.getByLabel('Rango de fechas').selectOption(String(days));await count(page,upcoming.filter(event=>localDay(event.start)<=move(today,days-1)).length);}
-  await page.reload();assert.equal(await page.getByLabel('Rango de fechas').inputValue(),'30');
-  await search.fill('no-matching-events');await page.getByRole('heading',{name:'No hay coincidencias',exact:true}).waitFor();
+  for(const days of [7,30]){await setFilter(page,'Rango de fechas',String(days));await count(page,upcoming.filter(event=>localDay(event.start)<=move(today,days-1)).length);}
+  await page.reload();assert.equal(await readFilter(page,'Rango de fechas'),'30');
+  await searchFor(page,'Buscar eventos','no-matching-events');await page.getByRole('heading',{name:'No hay coincidencias',exact:true}).waitFor();
   await page.locator('.agenda-empty').getByRole('button',{name:'Limpiar filtros',exact:true}).click();await count(page,upcoming.length);
   for(const value of ['todos','proximos','invalid']){await page.goto(base+'/?periodo='+value);await count(page,upcoming.length);assert.deepEqual(await ids(page),upcoming.map(event=>event.id));}
-  await page.goto(base+'/?periodo=pasados&archivo=invalid');await count(page,past.length);assert.equal(await page.getByLabel('Mes del archivo').inputValue(),'');
+  await page.goto(base+'/?periodo=pasados&archivo=invalid');await count(page,past.length);assert.equal(await readFilter(page,'Mes del archivo'),'');
   for(const width of [1440,768,390,320]){await page.setViewportSize({width,height:950});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Archive overflow at ${width}px`);}
   await page.getByRole('button',{name:'Activar modo oscuro'}).click();await page.setViewportSize({width:1440,height:1050});await images(page);await page.screenshot({path:path.join(out,'archive-desktop-dark.png'),fullPage:true});
   await page.locator('.language-button').click();await page.getByRole('heading',{name:/^Arquivo de encontros/}).waitFor();await page.setViewportSize({width:390,height:950});await page.screenshot({path:path.join(out,'archive-mobile-dark-gl.png'),fullPage:true});
@@ -106,9 +107,9 @@ async function stage(page){
   // Archive months and ordering cross both month and year boundaries.
   edgeCatalog.events=[...fixture,{...fixture[0],id:'archive-january',start:'2001-01-31T18:00:00+01:00',end:null},{...fixture[0],id:'archive-february',start:'2001-02-01T10:00:00+01:00',end:'2001-02-01T12:00:00+01:00'}];
   await sample.reload();await count(sample,3);await scope(sample,true).click();await count(sample,3);assert.deepEqual(await ids(sample),['archive-february','archive-january','agenda-expired']);
-  assert.deepEqual(await sample.getByLabel('Mes del archivo').locator('option').evaluateAll(nodes=>nodes.map(node=>node.value)),['','2001-02','2001-01','2000-01']);
-  await sample.getByLabel('Mes del archivo').selectOption('2001-01');await count(sample,1);await sample.reload();await count(sample,1);await scope(sample,true).click();assert.equal(await sample.getByLabel('Mes del archivo').inputValue(),'2001-01','Clicking the active section keeps its date filter');
-  await scope(sample,false).click();await count(sample,3);assert.equal(new URL(sample.url()).searchParams.has('archivo'),false);await sample.getByLabel('Rango de fechas').selectOption('7');await count(sample,1);await scope(sample,false).click();assert.equal(await sample.getByLabel('Rango de fechas').inputValue(),'7');
+  await openFilters(sample);assert.deepEqual(await sample.getByRole('dialog').getByLabel('Mes del archivo').locator('option').evaluateAll(nodes=>nodes.map(node=>node.value)),['','2001-02','2001-01','2000-01']);await sample.keyboard.press('Escape');
+  await setFilter(sample,'Mes del archivo','2001-01');await count(sample,1);await sample.reload();await count(sample,1);await scope(sample,true).click();assert.equal(await readFilter(sample,'Mes del archivo'),'2001-01','Clicking the active section keeps its date filter');
+  await scope(sample,false).click();await count(sample,3);assert.equal(new URL(sample.url()).searchParams.has('archivo'),false);await setFilter(sample,'Rango de fechas','7');await count(sample,1);await scope(sample,false).click();assert.equal(await readFilter(sample,'Rango de fechas'),'7');
   // Midnight is exclusive; today's event with no end date stays in upcoming.
   edgeCatalog.events=[{...fixture[0],id:'midnight-end',start:move(today,-1)+'T18:00:00+02:00',end:today+'T00:00:00+02:00'},{...fixture[0],id:'today-no-end',start:today+'T12:00:00+02:00',end:null}];
   await sample.goto(base);await count(sample,1);assert.deepEqual(await ids(sample),['today-no-end']);await scope(sample,true).click();await count(sample,1);assert.deepEqual(await ids(sample),['midnight-end']);

@@ -1,11 +1,11 @@
 'use client';
-import {CalendarDays,Clock3,Info,X} from 'lucide-react';
+import {CalendarDays,Clock3,Info} from 'lucide-react';
 import {validMonth} from '@/lib/calendar';
 import {useApp} from './shell';
 import {useI18n} from './i18n';
 import {Poster,Save} from './catalog';
 import {CalendarView} from './calendar-view';
-import {emptyEventFilters,EventFilters,filterEvents} from './event-filters';
+import {EventFilters,filterEvents} from './event-filters';
 import {useBrowseFilters} from './use-browse-filters';
 
 export function CalendarScreen({today}:{today:string}){
@@ -19,7 +19,7 @@ export function CalendarScreen({today}:{today:string}){
  return <div className="calendar-page">
   <section className="page-heading calendar-page-heading"><div><div className="eyebrow"><CalendarDays size={13}/>{t('Galicia · Encuentros por fecha')}</div><h1>{t('Calendario')}<span className="heading-dot">.</span></h1><p>{t('Todos los encuentros, mes a mes.')}</p></div><span className="calendar-page-context"><Clock3 size={14}/>{t('Horarios de Galicia')}</span></section>
   <section aria-label={t('Calendario de encuentros')}>
-   <div className="calendar-filters"><EventFilters events={catalog.events} value={filters} onChange={changeFilters} compact/>{activeFilters&&<div className="calendar-filter-summary" aria-live="polite"><span>{filtered.length} {t('eventos encontrados')}</span><button type="button" onClick={()=>changeFilters(emptyEventFilters)}>{t('Limpiar filtros')}<X size={12}/></button></div>}</div>
+   <div className="calendar-filters"><EventFilters events={catalog.events} value={filters} onChange={changeFilters}/>{activeFilters&&<span className="collection-result-status" role="status">{filtered.length} {t('eventos encontrados')}</span>}</div>
    <CalendarView events={filtered} month={month} today={today} onMonthChange={next=>navigate({mes:next})} renderPoster={event=><Poster event={event}/>} renderSave={event=><Save event={event}/>}/>
   </section>
   <div className="sample-footnote"><Info size={14}/><span>{t('Confirma horarios, plazas y entradas en la fuente original.')}</span></div>

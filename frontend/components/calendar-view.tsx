@@ -1,11 +1,12 @@
 'use client';
 import Link from 'next/link';
 import {useEffect,useMemo,useRef,useState,type CSSProperties,type KeyboardEvent,type ReactNode} from 'react';
-import {ArrowDown,ArrowRight,ArrowUp,ArrowUpRight,CalendarDays,ChevronLeft,ChevronRight,Clock3,ExternalLink,Info,MapPin,Ticket} from 'lucide-react';
+import {ArrowDown,ArrowRight,ArrowUp,ArrowUpRight,CalendarDays,ChevronDown,ChevronLeft,ChevronRight,Clock3,ExternalLink,Info,MapPin,Ticket} from 'lucide-react';
 import {calendarMonth,eventDays,moveDay,moveMonth,validMonth} from '@/lib/calendar';
 import {type Event,topic} from '@/lib/data';
 import {useI18n} from './i18n';
 import {CommunityLogo} from './community-logo';
+import {FloatingPanel} from './collection-tools';
 
 type Props={events:Event[];month:string;today:string;onMonthChange:(month:string)=>void;renderPoster:(event:Event)=>ReactNode;renderSave?:(event:Event)=>ReactNode};
 function tone(event:Event){
@@ -17,6 +18,8 @@ function tone(event:Event){
 export function CalendarView({events,month,today,onMonthChange,renderPoster,renderSave}:Props){
  const {t,eventText,formatDate}=useI18n();
  const [selection,setSelection]=useState<string|null>(null);
+ const [monthPanel,setMonthPanel]=useState(false),[draftMonth,setDraftMonth]=useState(month);const monthTrigger=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{setMonthPanel(false);},[month]);
  const buttons=useRef(new Map<string,HTMLButtonElement>());
  const focusDate=useRef<string|null>(null);
  const {days:dates,monthly,byDay}=useMemo(()=>calendarMonth(events,month),[events,month]);
@@ -55,13 +58,14 @@ export function CalendarView({events,month,today,onMonthChange,renderPoster,rend
  }
  return <div className="calendar-view" style={{'--calendar-weeks':weeks.length} as CSSProperties}>
   <div className="calendar-toolbar">
-   <div className="calendar-month-heading"><h2 id="calendar-month-title" aria-live="polite">{title}</h2><p><strong>{monthly.length}</strong> {t(monthly.length===1?'encuentro':'encuentros')}<span aria-hidden="true"/> <strong>{busyDays.length}</strong> {t(busyDays.length===1?'día con encuentros':'días con encuentros')}</p></div>
+   <div className="calendar-month-heading"><h2 id="calendar-month-title" aria-live="polite"><button ref={monthTrigger} type="button" className="calendar-month-title-button" data-month={month} aria-haspopup="dialog" aria-expanded={monthPanel} onClick={()=>{setDraftMonth(month);setMonthPanel(true);}}>{title}<ChevronDown size={16}/></button></h2><p><strong>{monthly.length}</strong> {t(monthly.length===1?'encuentro':'encuentros')}<span aria-hidden="true"/> <strong>{busyDays.length}</strong> {t(busyDays.length===1?'día con encuentros':'días con encuentros')}</p></div>
    <div className="calendar-month-controls">
     <button className="calendar-today" type="button" onClick={()=>{setSelection(today);onMonthChange(today.slice(0,7));}}>{t('Hoy')}</button>
-    <label className="calendar-month-picker"><CalendarDays size={16}/><input type="month" aria-label={t('Ir a un mes')} value={month} onChange={e=>{if(validMonth(e.target.value))onMonthChange(e.target.value);}}/></label>
+
     <div className="calendar-arrows"><button className="icon-button" type="button" aria-label={t('Mes anterior')} onClick={()=>onMonthChange(moveMonth(month,-1))}><ChevronLeft size={18}/></button><button className="icon-button" type="button" aria-label={t('Mes siguiente')} onClick={()=>onMonthChange(moveMonth(month,1))}><ChevronRight size={18}/></button></div>
    </div>
   </div>
+  {monthPanel&&<FloatingPanel title={t('Elegir mes')} anchor={monthTrigger.current!} onClose={()=>setMonthPanel(false)}><form onSubmit={event=>{event.preventDefault();if(validMonth(draftMonth)){onMonthChange(draftMonth);setMonthPanel(false);}}}><div className="collection-panel-fields"><label>{t('Ir a un mes')}<input className="collection-month-input" type="month" data-autofocus required aria-label={t('Ir a un mes')} value={draftMonth} onChange={event=>setDraftMonth(event.target.value)}/></label></div><footer><button type="button" className="text-action" onClick={()=>setMonthPanel(false)}>{t('Cancelar')}</button><button type="submit" className="button primary">{t('Ir al mes')}</button></footer></form></FloatingPanel>}
   <div className="calendar-layout">
    <div className="calendar-month" id="calendar-month-grid">
     <table aria-labelledby="calendar-month-title"><thead><tr>{weekdayDates.map((day,index)=><th key={day} scope="col" data-weekend={index>4}><abbr title={formatDate(day+'T12:00:00Z',{weekday:'long'})}>{formatDate(day+'T12:00:00Z',{weekday:'long'}).slice(0,3)}</abbr></th>)}</tr></thead>

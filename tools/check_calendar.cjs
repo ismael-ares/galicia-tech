@@ -1,3 +1,4 @@
+const {searchFor,openFilters,setFilter,readFilter,goToMonth,currentQuery}=require('./browse_controls.cjs');
 // Browser QA against the local sample app; extra density/boundary cases stay in an isolated browser response.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -6,7 +7,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const base=process.env.APP_URL||'http://127.0.0.1:8088';
 const out=path.resolve(__dirname,'../output/calendar-redesign');fs.mkdirSync(out,{recursive:true});
 const day=(page,date)=>page.locator(`[data-day="${date}"] .calendar-day-button`);
-async function month(page,value){await page.waitForFunction(value=>document.querySelector('input[type=month]')?.value===value,value);}
+async function month(page,value){await page.waitForFunction(value=>document.querySelector('.calendar-month-title-button')?.dataset.month===value,value);}
 async function images(page){await page.locator('img').evaluateAll(nodes=>Promise.all(nodes.map(img=>img.complete?Promise.resolve():new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});img.loading='eager';}))));}
 (async()=>{
  const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',headless:true});
@@ -31,11 +32,11 @@ async function images(page){await page.locator('img').evaluateAll(nodes=>Promise
   await page.waitForFunction(()=>document.querySelector('[data-day="2026-12-01"] .calendar-day-button')===document.activeElement);
   await page.goBack();await month(page,'2026-11');await page.goForward();await month(page,'2026-12');
   for(const [value,cells] of [['2027-02',28],['2026-10',35],['2026-11',42]]){
-   await page.getByLabel('Ir a un mes').fill(value);await month(page,value);assert.equal(await page.locator('.calendar-month td').count(),cells);
+   await goToMonth(page,value);await month(page,value);assert.equal(await page.locator('.calendar-month td').count(),cells);
   }
-  await page.getByLabel('Buscar eventos').fill('no-matching-events');await page.getByRole('heading',{name:'No hay encuentros este mes'}).waitFor();
-  await page.getByRole('button',{name:'Limpiar filtros',exact:true}).click();await page.locator('.calendar-day-event').first().waitFor();
-  await page.getByLabel('Ir a un mes').fill('2026-10');await month(page,'2026-10');await day(page,'2026-10-22').click();await images(page);
+  await searchFor(page,'Buscar eventos','no-matching-events');await page.getByRole('heading',{name:'No hay encuentros este mes'}).waitFor();
+  await page.locator('.collection-clear').click();await page.locator('.calendar-day-event').first().waitFor();
+  await goToMonth(page,'2026-10');await month(page,'2026-10');await day(page,'2026-10-22').click();await images(page);
   await page.screenshot({path:path.join(out,'calendar-desktop-light.png'),fullPage:true});
   for(const width of [1440,1120,1100,1024,901,900,768,640,390,320]){
    await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Calendar overflow at ${width}px`);
