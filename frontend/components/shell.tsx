@@ -14,7 +14,7 @@ import {BrowseNavigation} from './browse-navigation';
 type State={user:User|null;favorites:string[];catalog:Catalog;cases:ReviewCase[];csrfToken:string;providers:string[];requireAdminMfa:boolean;registrationEnabled:boolean;usernameLoginEnabled:boolean};
 const emptyCatalog:Catalog={events:[],sources:[],covers:[],ranking:[],translations:{},sample:false};
 const initial:State={user:null,favorites:[],catalog:emptyCatalog,cases:[],csrfToken:'',providers:[],requireAdminMfa:true,registrationEnabled:false,usernameLoginEnabled:false};
-const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admin',disabled:[] as string[],ready:false,error:'',
+const Context=createContext({...initial,role:'visitor' as 'visitor'|'user'|'admin',disabled:[] as string[],ready:false,error:'',appearance:'light' as 'light'|'dark',setAppearance:(_: 'light'|'dark')=>{},
  guestFavorites:[] as string[],pendingGuestFavorites:[] as string[],importGuestFavorites:async()=>{},refresh:async()=>{},logout:async()=>{},toggleFavorite:async(_:string)=>{},toggleSource:async(_:string)=>{},decide:async(_:string,__:Decision)=>{},notify:(_:string)=>{}});
 export const useApp=()=>useContext(Context);
 export const useMock=useApp;
@@ -41,8 +41,9 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
  }
  useEffect(()=>{let active=true;refresh().catch(e=>{if(active){setError(e.message);setReady(true);}});setDark(document.documentElement.dataset.theme==='dark');return()=>{active=false;};},[]);
  useEffect(()=>{if(!toast)return; const timer=setTimeout(()=>setToast(''),4500);return()=>clearTimeout(timer);},[toast]);
- function theme(){
-  const next=!(requestedTheme.current??document.documentElement.dataset.theme==='dark');requestedTheme.current=next;
+ function theme(value?:boolean){
+  const current=requestedTheme.current??document.documentElement.dataset.theme==='dark';
+  const next=value??!current;if(next===current)return;requestedTheme.current=next;
   const generation=++themeGeneration.current;transitionRef.current?.skipTransition();
   const apply=()=>{if(generation!==themeGeneration.current)return;document.documentElement.dataset.theme=next?'dark':'light';flushSync(()=>setDark(next));try{localStorage.setItem('galicia-tech-theme',next?'dark':'light');}catch{}};
   if(reducedMotion()||!document.startViewTransition){apply();document.documentElement.classList.remove('theme-changing');return;}
@@ -52,7 +53,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
  const favorites=state.user?state.favorites:guestFavorites;
  const publishedIds=new Set(state.catalog.events.map(event=>event.id));
  const pendingGuestFavorites=guestFavorites.filter(id=>publishedIds.has(id)&&!state.favorites.includes(id));
- const value={...state,favorites,guestFavorites,pendingGuestFavorites,role,ready,error,disabled:state.catalog.sources.filter(s=>!s.enabled).map(s=>s.id),refresh,notify:setToast,
+ const value={...state,favorites,guestFavorites,pendingGuestFavorites,role,ready,error,appearance:dark?'dark' as const:'light' as const,setAppearance:(value:'light'|'dark')=>theme(value==='dark'),disabled:state.catalog.sources.filter(s=>!s.enabled).map(s=>s.id),refresh,notify:setToast,
   logout:async()=>{await api('/_allauth/browser/v1/auth/session',{method:'DELETE'}).catch(e=>{if(e.status!==401)throw e;});await refresh();},
   toggleFavorite:async(id:string)=>{
    if(!state.user){
@@ -81,7 +82,7 @@ export function AppShell({children}:{children:React.ReactNode}) {const {t}=useI1
   <header className="site-header"><div className="header-inner">
    <div className="brand"><button className={'brand-symbol '+(motion?'shell-play':'')} onClick={()=>{setMotion(false);if(!reducedMotion())requestAnimationFrame(()=>setMotion(true));}} onAnimationEnd={e=>{if(e.target===e.currentTarget)setMotion(false);}} aria-label={t("Animar la vieira")} dangerouslySetInnerHTML={{__html:shellSvg}}/><Link href="/" className="brand-word">galicia<span>tech<span className="brand-period">.</span></span></Link></div>
    <BrowseNavigation/>
-   <div className="header-actions"><button className="icon-button" onClick={theme} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href={role==='visitor'?'/login':'/cuenta'} className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
+   <div className="header-actions"><button className="icon-button" onClick={()=>theme()} aria-label={dark?t("Activar modo claro"):t("Activar modo oscuro")}><span className="theme-glyph" key={dark?'sun':'moon'}>{dark?<Sun size={19}/>:<Moon size={19}/>}</span></button><LanguageSwitch/><Link href="/cuenta" className="account-button" aria-label={t("Mi cuenta")}><UserRound size={17}/><span>{role==='visitor'?t("Mi cuenta"):state.user?.name}</span></Link></div>
   </div></header>
   <main id="main" className="page-container">{error?<div className="empty-state" role="alert"><h1>{t('No se ha podido cargar la agenda')}</h1><p>{error}</p><button className="button primary" onClick={()=>refresh().catch(e=>setError(e.message))}>{t('Reintentar')}</button></div>:!ready?<div className="empty-state" role="status">{t('Cargando agenda…')}</div>:children}</main>
   <footer className="site-footer"><span>galicia tech<span className="brand-period">.</span><small>{t("Comunidades y encuentros")}</small></span><div><span>{t("Horarios de Galicia")}</span></div></footer>
@@ -93,7 +94,7 @@ export function AdminGate({children}:{children:React.ReactNode}) {const {t}=useI
  const {role,ready,user,requireAdminMfa}=useApp();
  if(!ready)return <div className="empty-state">{t('Cargando cuenta…')}</div>;
  if(role!=='admin')return <div className="center-card"><ShieldCheck size={32}/><h1>{t('Área de administración')}</h1><p>{t('Esta cuenta no tiene permisos de administración.')}</p><Link className="button primary" href={user?'/cuenta':'/login'}>{t('Ir a mi cuenta')}</Link></div>;
- if(requireAdminMfa&&!user?.mfaEnabled)return <div className="center-card"><ShieldCheck size={32}/><h1>{t('Activa la verificación en dos pasos')}</h1><p>{t('Configúrala en tu cuenta antes de acceder a la administración.')}</p><Link className="button primary" href="/cuenta">{t('Ir a mi cuenta')}</Link></div>;
+ if(requireAdminMfa&&!user?.mfaEnabled)return <div className="center-card"><ShieldCheck size={32}/><h1>{t('Activa la verificación en dos pasos')}</h1><p>{t('Este servidor exige verificación adicional para administrar.')}</p><Link className="button primary" href="/admin/acceso">{t('Configurar acceso')}</Link></div>;
  return <><div className="admin-heading"><div className="eyebrow"><ShieldCheck size={14}/>{t("Administración")}</div><Link href="/cuenta"><UserRound size={15}/>{t("Mi cuenta")}</Link></div><nav className="admin-tabs" aria-label={t("Administración")}>{[['/admin','Resumen'],['/admin/fuentes','Fuentes'],['/admin/revision','Revisión'],['/admin/ajustes','Configuración']].map(([href,label])=><AdminLink key={href} href={href} label={t(label)}/>)}</nav>{children}</>;
 }
 function AdminLink({href,label}:{href:string;label:string}){const {t}=useI18n();const path=usePathname();return <Link href={href} className={path===href?'active':''}>{t(label)}</Link>;}

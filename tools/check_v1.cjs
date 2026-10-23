@@ -33,7 +33,7 @@ function totp(secret){const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let bits
   await page.goto(base+'/admin/fuentes');await page.getByRole('heading',{name:'Área de administración'}).waitFor();assert.equal(await page.locator('.source-table-row').count(),0);
   manage("import json,sys; from core.models import User; from allauth.account.models import EmailAddress; d=json.loads(sys.stdin.read()); u=User.objects.create_user(d['email'],email=d['email'],password=d['password'],is_staff=True); EmailAddress.objects.create(user=u,email=u.email,verified=True,primary=True)",{email,password});userCreated=true;
   await page.goto(base+'/login');await page.getByLabel(/correo electrónico/i).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.waitForURL('**/cuenta');
-  await page.getByRole('button',{name:'Configurar verificación en dos pasos'}).click();await page.getByLabel('Confirma tu contraseña').fill(password);await page.getByRole('button',{name:'Continuar',exact:true}).click();await page.locator('.mfa-enrollment code').waitFor();
+  await page.goto(base+'/admin/acceso');await page.getByRole('button',{name:'Configurar verificación en dos pasos'}).click();await page.getByLabel('Confirma tu contraseña').fill(password);await page.getByRole('button',{name:'Continuar',exact:true}).click();await page.locator('.mfa-enrollment code').waitFor();
   const secret=await page.locator('.mfa-enrollment code').innerText();
   await page.locator('.mfa-enrollment img').waitFor();
   await page.getByLabel('Código de verificación').fill(totp(secret));await page.getByRole('button',{name:'Activar',exact:true}).click();

@@ -3,9 +3,13 @@ import {useI18n} from './i18n';
 import Link from 'next/link';
 import {useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {ArrowRight,Bookmark,Github,LockKeyhole,Mail,ShieldCheck,UserRound} from 'lucide-react';
+import {ArrowRight,ArrowUpRight,Bookmark,CalendarDays,Check,Cloud,CloudUpload,Github,Languages,LockKeyhole,Mail,MapPin,Monitor,Moon,ShieldCheck,Sun,UserRound} from 'lucide-react';
 import {SignOut,useApp} from './shell';
 import {api,ApiError} from '@/lib/api';
+import {eventDays} from '@/lib/calendar';
+import {type Event} from '@/lib/data';
+import {Poster} from './catalog';
+import {CommunityLogo} from './community-logo';
 
 export function Login(){
  const {t}=useI18n();const {refresh,csrfToken,providers,registrationEnabled,usernameLoginEnabled,user}=useApp();const router=useRouter();
@@ -53,25 +57,56 @@ export function Register(){
  </div></div>;
 }
 
-function Security(){
- const {t}=useI18n();const {user,refresh,providers,csrfToken}=useApp();const [reauth,setReauth]=useState<'setup'|'recovery'|null>(null);const [confirmation,setConfirmation]=useState('');const [secret,setSecret]=useState('');const [qr,setQr]=useState('');const [code,setCode]=useState('');const [codes,setCodes]=useState<string[]>([]);const [error,setError]=useState('');const [busy,setBusy]=useState(false);
- async function begin(){
-  setBusy(true);setError('');
-  try{await api('/_allauth/browser/v1/account/authenticators/totp');}
-  catch(error){const failure=error as ApiError;const meta=failure.payload?.meta as {secret?:string;totp_url?:string}|undefined;
-   if(failure.status===404&&meta?.secret&&meta.totp_url){setSecret(meta.secret);try{const result=await api<{image:string}>('/api/v1/account/mfa-qr/',{method:'POST',body:JSON.stringify({value:meta.totp_url})});setQr(result.image);}catch(e){setError((e as Error).message);}}
-   else setError(failure.message);
-  }finally{setBusy(false);}
- }
- async function activate(event:React.FormEvent){event.preventDefault();setBusy(true);setError('');try{await api('/_allauth/browser/v1/account/authenticators/totp',{method:'POST',body:JSON.stringify({code})});setSecret('');setQr('');setCode('');await refresh();await recovery();}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- async function recovery(){setError('');try{const response=await api<{data:{unused_codes?:string[]}}>('/_allauth/browser/v1/account/authenticators/recovery-codes');setCodes(response.data.unused_codes||[]);}catch(e){setError((e as Error).message);}}
- async function confirm(event:React.FormEvent){event.preventDefault();setBusy(true);setError('');try{await api('/_allauth/browser/v1/auth/reauthenticate',{method:'POST',body:JSON.stringify({password:confirmation})});setConfirmation('');const action=reauth;setReauth(null);if(action==='recovery')await recovery();else await begin();}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- return <section className="panel"><div className="panel-title"><ShieldCheck size={22}/><h2>{t('Seguridad de la cuenta')}</h2></div><p>{t(user?.mfaEnabled?'Verificación en dos pasos activada.':'Protege tu cuenta con una aplicación de autenticación.')}</p>{!user?.mfaEnabled&&!secret&&!reauth&&<button className="button primary mt-5" disabled={busy} onClick={()=>setReauth('setup')}>{t('Configurar verificación en dos pasos')}</button>}
-  {reauth&&<form onSubmit={confirm} className="mfa-enrollment"><label>{t('Confirma tu contraseña')}<input type="password" value={confirmation} onChange={e=>setConfirmation(e.target.value)} autoComplete="current-password" required/></label><button className="button primary" disabled={busy}>{t('Continuar')}</button></form>}
-  {secret&&<form onSubmit={activate} className="mfa-enrollment">{qr&&<img src={qr} width={180} height={180} alt={t('Código QR de configuración')}/>}<p>{t('Escanea el QR o añade esta clave manualmente a tu aplicación de autenticación.')}</p><code>{secret}</code><label>{t('Código de verificación')}<input value={code} onChange={e=>setCode(e.target.value)} autoComplete="one-time-code" inputMode="numeric" required pattern="[0-9]{6}"/></label><button className="button primary" disabled={busy}>{t('Activar')}</button></form>}
-  {user?.mfaEnabled&&!codes.length&&!reauth&&<button className="button secondary mt-5" onClick={()=>setReauth('recovery')}>{t('Ver códigos de recuperación')}</button>}
-  {codes.length>0&&<div className="recovery-codes"><p>{t('Guarda estos códigos en un lugar seguro. Cada uno se puede usar una vez.')}</p><pre>{codes.join('\n')}</pre><button className="button secondary" onClick={()=>setCodes([])}>{t('Ocultar códigos')}</button></div>}
-  {providers.length>0&&<div className="social-buttons mt-5"><p>{t('Vincula una cuenta externa para usarla al iniciar sesión.')}</p>{providers.map(provider=><form key={provider} method="post" action="/_allauth/browser/v1/auth/provider/redirect"><input type="hidden" name="csrfmiddlewaretoken" value={csrfToken}/><input type="hidden" name="provider" value={provider}/><input type="hidden" name="process" value="connect"/><input type="hidden" name="callback_url" value="/cuenta"/><button className="button secondary" type="submit">{t('Vincular')} {provider==='google'?'Google':'GitHub'}</button></form>)}</div>}{error&&<p className="error-message" role="alert">{error}</p>}</section>;
+function AccountPreferences(){
+ const {t,locale,setLocale}=useI18n();const {appearance,setAppearance}=useApp();
+ return <section className="personal-panel personal-preferences" aria-labelledby="personal-preferences-title">
+  <div className="personal-section-title"><h2 id="personal-preferences-title">{t('A tu manera')}</h2><span><Monitor size={13}/>{t('Este navegador')}</span></div>
+  <fieldset className="personal-preference"><legend><Languages size={16}/>{t('Idioma')}</legend><div className="personal-options">{(['gl','es'] as const).map(value=><label key={value}><input type="radio" name="account-language" value={value} checked={locale===value} onChange={()=>setLocale(value)}/><span><b aria-hidden="true">{value.toUpperCase()}</b>{value==='gl'?'Galego':'Castellano'}{locale===value&&<Check size={14} aria-hidden="true"/>}</span></label>)}</div></fieldset>
+  <fieldset className="personal-preference"><legend><Sun size={16}/>{t('Apariencia')}</legend><div className="personal-options appearance-options">{(['light','dark'] as const).map(value=><label key={value}><input type="radio" name="account-appearance" value={value} checked={appearance===value} onChange={()=>setAppearance(value)}/><span>{value==='light'?<Sun size={16}/>:<Moon size={16}/>}<i className={'appearance-sample '+value} aria-hidden="true"><i/><i/><i/></i>{t(value==='light'?'Claro':'Oscuro')}{appearance===value&&<Check size={14} aria-hidden="true"/>}</span></label>)}</div></fieldset>
+ </section>;
 }
 
-export function Account(){const {t}=useI18n();const {role,user,favorites}=useApp();return <><div className="page-heading"><div><div className="eyebrow">{t('Espacio personal')}</div><h1>{t('Mi cuenta')}<span className="heading-dot">.</span></h1><p>{t(user?'Tus preferencias y accesos, en un mismo sitio.':'Accede para gestionar tu cuenta.')}</p></div></div><div className="account-grid"><section className="panel account-profile"><div className="profile-avatar"><UserRound size={30}/></div><h2>{user?user.name:t('Te damos la bienvenida')}</h2><p>{user?user.email:t('Puedes explorar todos los eventos sin registrarte.')}</p>{user?<SignOut/>:<Link href="/login" className="button primary">{t('Iniciar sesión')}<ArrowRight size={16}/></Link>}<Link className="account-list-link" href="/guardados"><Bookmark size={19}/><span>{t('Eventos guardados')}</span><strong>{favorites.length}</strong></Link>{role==='admin'&&<Link href="/admin" className="admin-entry"><ShieldCheck size={23}/><div><strong>{t('Administración')}</strong><span>{t('Fuentes, revisión y configuración')}</span></div><ArrowRight size={19}/></Link>}</section>{user&&<Security/>}</div></>;}
+function AccountEvent({event,featured=false,past=false}:{event:Event;featured?:boolean;past?:boolean}){
+ const {t,eventText,formatDate}=useI18n();
+ return <Link href={'/evento/'+event.id} className={'personal-event '+(featured?'personal-event-featured':'')} data-account-event={event.id}>
+  {featured?<div className="personal-event-cover"><Poster event={event}/></div>:<time className="personal-event-date" dateTime={event.start}><strong>{formatDate(event.start,{day:'2-digit'})}</strong><span>{formatDate(event.start,{month:'short'}).replace('.','')}</span></time>}
+  <div className="personal-event-info"><span className="personal-event-community"><CommunityLogo identity={event.community} size={16}/>{event.community}</span><h3>{eventText(event.title)}</h3><div className="personal-event-facts">{featured&&<time dateTime={event.start}><CalendarDays size={13}/>{formatDate(event.start,{day:'numeric',month:'short'})}</time>}<span><MapPin size={13}/>{event.city}</span>{past&&<span className="personal-event-past">{t('Pasado')}</span>}</div></div><ArrowUpRight className="personal-event-arrow" size={19} aria-hidden="true"/>
+ </Link>;
+}
+
+function AccountCollection({today}:{today:string}){
+ const {t}=useI18n();const {user,catalog,favorites,pendingGuestFavorites,importGuestFavorites,notify}=useApp();
+ const [busy,setBusy]=useState(false);
+ const selection=catalog.events.filter(event=>favorites.includes(event.id));
+ const upcoming=selection.filter(event=>eventDays(event).end>=today).sort((a,b)=>new Date(a.start).getTime()-new Date(b.start).getTime());
+ const past=selection.filter(event=>eventDays(event).end<today).sort((a,b)=>new Date(b.start).getTime()-new Date(a.start).getTime());
+ const preview=(upcoming.length?upcoming:past).slice(0,3);
+ async function importSaved(){setBusy(true);try{await importGuestFavorites();notify(t('Guardados añadidos a tu cuenta.'));}catch(error){notify((error as Error).message);}finally{setBusy(false);}}
+ return <section className="personal-panel personal-collection" aria-labelledby="personal-collection-title">
+  <div className="personal-section-title"><div><span className="personal-kicker"><Bookmark size={13}/>{t(user?'Tu colección':'En este dispositivo')}</span><h2 id="personal-collection-title">{t(!selection.length?'Aquí empieza tu próxima quedada':upcoming.length?'Tus próximos encuentros':'De tu archivo')}</h2></div>{selection.length>0&&<Link href="/guardados" className="personal-all">{t('Ver todos')}<ArrowRight size={15}/></Link>}</div>
+  {preview.length>0?<div className="personal-events">{preview.map((event,index)=><AccountEvent key={event.id} event={event} featured={index===0} past={!upcoming.length}/>)}</div>:<div className="personal-empty"><div className="personal-empty-art" aria-hidden="true"><span/><span/><Bookmark size={33} strokeWidth={1.5}/></div><h3>{t('Encuentra algo que te apetezca')}</h3><p>{t('Guarda una charla, un taller o un encuentro. Tu selección aparecerá aquí.')}</p><Link href="/" className="button primary">{t('Explorar eventos')}<ArrowUpRight size={16}/></Link></div>}
+  {selection.length>0&&<div className="personal-collection-foot"><span>{user?<Cloud size={14}/>:<Monitor size={14}/>} {t(user?'Disponibles desde cualquier dispositivo.':'Guardados solo en este navegador.')}</span><Link href="/" className="text-action">{t('Seguir explorando')}<ArrowUpRight size={14}/></Link></div>}
+  {user&&pendingGuestFavorites.length>0&&<div className="personal-import"><CloudUpload size={20}/><div><strong>{t('Trae tus guardados del navegador')}</strong><p>{pendingGuestFavorites.length} {t('por añadir a tu cuenta. Tu colección actual se conserva.')}</p></div><button type="button" className="button secondary" disabled={busy} onClick={importSaved}>{t(busy?'Añadiendo…':'Añadir guardados del navegador')}</button></div>}
+ </section>;
+}
+
+function ConnectedProviders(){
+ const {t}=useI18n();const {providers,csrfToken}=useApp();
+ if(!providers.length)return null;
+ return <section className="personal-panel personal-connections"><div className="personal-section-title"><h2>{t('Formas de entrar')}</h2></div><p>{t('Vincula una cuenta externa para usarla al iniciar sesión.')}</p><div className="social-buttons">{providers.map(provider=><form key={provider} method="post" action="/_allauth/browser/v1/auth/provider/redirect"><input type="hidden" name="csrfmiddlewaretoken" value={csrfToken}/><input type="hidden" name="provider" value={provider}/><input type="hidden" name="process" value="connect"/><input type="hidden" name="callback_url" value="/cuenta"/><button className="button secondary w-full" type="submit">{provider==='github'?<Github size={17}/>:<img src="/assets/login/google.png" alt="" width={17} height={17}/>} {t('Vincular')} {provider==='google'?'Google':'GitHub'}</button></form>)}</div></section>;
+}
+
+export function Account({today}:{today:string}){
+ const {t}=useI18n();const {role,user,catalog,favorites,registrationEnabled,cases}=useApp();
+ const selection=catalog.events.filter(event=>favorites.includes(event.id));
+ const upcoming=selection.filter(event=>eventDays(event).end>=today);
+ const discovery=catalog.events.filter(event=>eventDays(event).end>=today).sort((a,b)=>new Date(a.start).getTime()-new Date(b.start).getTime()).slice(0,3);
+ const name=user?.name.includes('@')?user.name.split('@')[0]:user?.name;
+ const initials=Array.from(name||'').slice(0,2).join('').toUpperCase();
+ return <div className="personal-page" data-authenticated={!!user}>
+  {user?<header className="personal-heading"><div><div className="eyebrow">{t('Espacio personal')}</div><h1>{t('Mi cuenta')}<span className="heading-dot">.</span></h1></div><Link href="/" className="personal-back">{t('Volver a la agenda')}<ArrowUpRight size={15}/></Link></header>:null}
+  {user?<section className="personal-identity" aria-label={t('Tu perfil')}><div className="personal-avatar" aria-hidden="true">{initials}<img src="/icon.svg" alt="" width={24} height={24}/></div><div className="personal-identity-copy"><span className="personal-membership">{t(role==='admin'?'Administración':'Miembro de Galicia Tech')}</span><h2 title={name}>{name}</h2><p>{user.email}</p></div><dl className="personal-stats"><div><dt>{t('Guardados')}</dt><dd>{selection.length.toString().padStart(2,'0')}</dd></div><div><dt>{t('Por venir')}</dt><dd>{upcoming.length.toString().padStart(2,'0')}</dd></div></dl><div className="personal-signout"><SignOut/></div></section>:
+  <section className="personal-welcome"><div className="personal-welcome-copy"><div className="eyebrow"><img src="/icon.svg" alt="" width={23} height={23}/>{t('Tu cuenta en Galicia Tech')}</div><h1>{t('Tus guardados,')}<br/><span>{t('en cualquier dispositivo.')}</span></h1><p>{t('Reúne los encuentros que te interesan y recupera tu colección al iniciar sesión, estés donde estés.')}</p><div className="personal-welcome-actions">{registrationEnabled?<><Link href="/registro" className="button primary">{t('Crear cuenta')}<ArrowRight size={17}/></Link><Link href="/login" className="personal-login">{t('Iniciar sesión')}<ArrowUpRight size={15}/></Link></>:<Link href="/login" className="button primary">{t('Iniciar sesión')}<ArrowRight size={17}/></Link>}</div><span className="personal-welcome-note"><Bookmark size={13}/>{t('También puedes seguir guardando sin cuenta.')}</span></div><div className="personal-welcome-visual" aria-hidden="true"><div className="personal-orbit"/><div className="personal-preview-covers">{discovery.map(event=><div key={event.id}><Poster event={event}/></div>)}{!discovery.length&&<div className="personal-preview-placeholder"><Bookmark size={58} strokeWidth={1}/></div>}</div><div className="personal-sync-label"><Cloud size={17}/><span>{t('Tu colección, contigo')}</span><Check size={14}/></div></div></section>}
+  <div className="personal-layout"><div className="personal-main"><AccountCollection today={today}/>{!user&&<div className="personal-benefits"><div><Bookmark size={19}/><strong>{t('Una colección propia')}</strong><p>{t('Charlas, talleres y encuentros reunidos por ti.')}</p></div><div><Cloud size={19}/><strong>{t('De un dispositivo a otro')}</strong><p>{t('Entra con tu cuenta y encuentra tus guardados.')}</p></div><div><CloudUpload size={19}/><strong>{t('Con lo que ya tenías')}</strong><p>{t('Añade los guardados de este navegador cuando quieras.')}</p></div></div>}</div><aside className="personal-sidebar"><AccountPreferences/>{user&&<ConnectedProviders/>}{role==='admin'&&<Link href="/admin" className="admin-entry personal-admin"><span className="personal-admin-icon"><ShieldCheck size={22}/></span><div><strong>{t('Administración')}</strong><span>{t('Fuentes, revisión y configuración')}</span>{cases.some(item=>item.decision.status==='pending')&&<small>{cases.filter(item=>item.decision.status==='pending').length} {t('casos por revisar')}</small>}</div><ArrowUpRight size={18}/></Link>}</aside></div>
+ </div>;
+}

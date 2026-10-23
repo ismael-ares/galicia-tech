@@ -15,7 +15,7 @@ export function LocaleProvider({initialLocale,children}:{initialLocale:Locale;ch
  const pathname=usePathname();
  useEffect(()=>{
   document.documentElement.lang=locale;
-  const section=pathname==='/registro'?(locale==='gl'?'Crear conta':'Crear cuenta'):pathname==='/login'?'Iniciar sesión':pathname==='/calendario'?'Calendario':pathname==='/guardados'?(locale==='gl'?'Gardados':'Guardados'):(locale==='gl'?'Axenda':'Agenda');
+  const section=pathname==='/cuenta'?(locale==='gl'?'A miña conta':'Mi cuenta'):pathname==='/registro'?(locale==='gl'?'Crear conta':'Crear cuenta'):pathname==='/login'?'Iniciar sesión':pathname==='/calendario'?'Calendario':pathname==='/guardados'?(locale==='gl'?'Gardados':'Guardados'):(locale==='gl'?'Axenda':'Agenda');
   document.title='Galicia Tech · '+section;
  },[locale,pathname]);
  function select(value:Locale){
