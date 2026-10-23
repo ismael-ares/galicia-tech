@@ -6,7 +6,7 @@ from allauth.mfa.adapter import DefaultMFAAdapter
 
 class AccountAdapter(DefaultAccountAdapter):
     def is_open_for_signup(self, request):
-        return False
+        return settings.ALLOW_REGISTRATION
 
 class SocialAdapter(DefaultSocialAccountAdapter):
     def is_open_for_signup(self, request, sociallogin):

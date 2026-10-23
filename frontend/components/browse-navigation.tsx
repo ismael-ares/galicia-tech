@@ -17,6 +17,6 @@ export function BrowseNavigation({mobile=false}:{mobile?:boolean}){
   <Link href={browseHref('/',browseParams)} aria-current={pathname==='/'?'page':undefined} className={pathname==='/'?'active':''}><List size={mobile?20:18} strokeWidth={1.7} aria-hidden="true"/><span>{t('Agenda')}</span></Link>
   <Link href={browseHref('/calendario',browseParams)} aria-current={pathname==='/calendario'?'page':undefined} className={pathname==='/calendario'?'active':''}><CalendarDays size={mobile?20:18} strokeWidth={1.7} aria-hidden="true"/><span>{t('Calendario')}</span></Link>
   <Link href="/guardados" aria-current={pathname==='/guardados'?'page':undefined} className={pathname==='/guardados'?'active':''}><Bookmark size={mobile?20:18} strokeWidth={1.7} aria-hidden="true"/><span>{t('Guardados')}{mobile&&<small>{count}</small>}</span>{!mobile&&<small className="nav-count">{count}</small>}</Link>
-  {mobile&&<Link href="/cuenta" aria-current={pathname==='/cuenta'||pathname==='/login'||pathname.startsWith('/admin')?'page':undefined}><UserRound size={20}/><span>{t('Mi cuenta')}</span></Link>}
+  {mobile&&<Link href="/cuenta" aria-current={pathname==='/cuenta'||pathname==='/login'||pathname==='/registro'||pathname.startsWith('/admin')?'page':undefined}><UserRound size={20}/><span>{t('Mi cuenta')}</span></Link>}
  </nav>;
 }

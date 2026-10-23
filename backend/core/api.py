@@ -56,7 +56,8 @@ def session(request):
     authenticated = request.user.is_authenticated
     return JsonResponse({'csrfToken': token, 'user': user_data(request.user) if authenticated else None,
                          'favorites': list(Favorite.objects.filter(user=request.user).values_list('event_id', flat=True)) if authenticated else [],
-                         'providers': list(settings.SOCIALACCOUNT_PROVIDERS), 'requireAdminMfa': settings.REQUIRE_ADMIN_MFA})
+                         'providers': list(settings.SOCIALACCOUNT_PROVIDERS), 'requireAdminMfa': settings.REQUIRE_ADMIN_MFA,
+                         'registrationEnabled': settings.ALLOW_REGISTRATION})
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

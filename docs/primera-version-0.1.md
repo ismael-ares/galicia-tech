@@ -6,7 +6,7 @@ Implementación inicial para probar en el homelab. El mock aprobado se conserva 
 
 - Agenda como entrada principal; calendario mensual alternativo, fichas, fuentes originales, portadas automáticas y logos locales. Las cuatro hojas de estilo de las tarjetas aprobadas permanecen idénticas.
 - Catálogo en PostgreSQL, relaciones evento/fuentes, observaciones, revisiones y auditoría. Ningún selector del navegador concede privilegios.
-- Sesiones Django en base de datos; cookies HttpOnly, CSRF, permisos de servidor y registro público cerrado. Cuenta propietaria creada desde consola, sin credenciales por defecto.
+- Sesiones Django en base de datos; cookies HttpOnly, CSRF, permisos de servidor y registro público cerrado por defecto. Registro local configurable y cuenta administradora provisionada desde consola, sin credenciales predeterminadas.
 - django-allauth headless: contraseña, reautenticación antes de configurar TOTP, QR local, secretos MFA cifrados, códigos de recuperación y desafío TOTP en accesos posteriores. Administración exige TOTP por defecto. Sesión limitada a 30 minutos de inactividad y 8 horas de duración máxima.
 - Guardados sin cuenta en el navegador o asociados a una cuenta en el servidor, creación/pausa de fuentes desde la interfaz, revisión con comprobación de versión para evitar sobrescribir otra decisión, configuración persistente con autoridad web o YAML. Pausar una fuente conserva los eventos publicados.
 - Cola Q2 persistida en PostgreSQL; Redis dedicado a caché y límites de acceso. El limitador adicional usa incremento atómico con TTL y bloquea autenticaciones cuando Redis no está disponible.
@@ -87,7 +87,13 @@ El conector es deliberadamente conservador y limitado: hasta seis fichas enlazad
 
 ## Acceso social y recuperación
 
-Google/GitHub son opcionales: sin credenciales sus botones no aparecen. Configurar `GOOGLE_CLIENT_ID/SECRET` o `GITHUB_CLIENT_ID/SECRET`, registrar los callbacks oficiales `/accounts/google/login/callback/` y `/accounts/github/login/callback/` para el origen elegido y comprobar el flujo real. Una cuenta existente puede vincular su identidad desde Mi cuenta. No se enlazan cuentas automáticamente por coincidencia de email y el registro público permanece cerrado. Esta entrega no ha probado callbacks con aplicaciones reales ni ha contratado servicios externos.
+El registro por correo/contraseña está disponible en `/registro` únicamente cuando `ALLOW_REGISTRATION=true`; el valor predeterminado es `false`, y el servidor también rechaza las altas cuando está cerrado. Login enlaza al registro solo cuando está habilitado. Las altas crean usuarios normales, nunca administradores, e inician sesión al completarse. Se valida la contraseña en el servidor y se exige repetirla en la interfaz. Con la configuración actual de pruebas no se envían verificaciones por correo. La apertura de registro público con verificación de email sigue pendiente de configurar SMTP y validar ese flujo.
+
+Para las pruebas locales en este equipo se habilita expresamente `ALLOW_REGISTRATION=true` y `REQUIRE_ADMIN_MFA=false`, manteniendo `APP_BIND=127.0.0.1`. Esto permite recorrer la administración con una cuenta de pruebas sin configurar TOTP previamente; configurarlo desde Mi cuenta sigue siendo posible. `.env.example` conserva registro cerrado y MFA obligatorio para administración. Las credenciales de prueba se generan para la instalación y se entregan al propietario; no se incluyen en Git ni en las imágenes.
+
+`node tools/check_registration.cjs` prueba registro, confirmación, validación, sesión, logout/login, permisos de usuario normal y acceso de la cuenta administradora local, sin cambiar fuentes o revisiones. Solo crea y elimina sus propias cuentas QA. La suite Django cubre también CSRF, registro cerrado y rechazo de intentos de asignarse permisos administrativos.
+
+Google/GitHub son opcionales: sin credenciales sus botones no aparecen. Configurar `GOOGLE_CLIENT_ID/SECRET` o `GITHUB_CLIENT_ID/SECRET`, registrar los callbacks oficiales `/accounts/google/login/callback/` y `/accounts/github/login/callback/` para el origen elegido y comprobar el flujo real. Una cuenta existente puede vincular su identidad desde Mi cuenta. No se enlazan cuentas automáticamente por coincidencia de email y el registro social permanece cerrado. Esta entrega no ha probado callbacks con aplicaciones reales ni ha contratado servicios externos.
 
 No hay envío SMTP ni restablecimiento por correo anunciado. Recuperación de la persona propietaria desde el servidor:
 
@@ -112,7 +118,7 @@ Se restauró una copia `pg_dump` en otra base de datos temporal y se comprobó e
 
 Evidencias locales en `output/v1/`: resultados de navegador y operación, capturas y copia de la prueba de restauración. Las suites de navegador/operación modifican la muestra y reinician servicios de este proyecto: ejecutarlas únicamente en un despliegue de prueba.
 
-Verificado: construcción de imágenes, TypeScript, 28 pruebas Django sobre PostgreSQL real, cuenta/contraseña/TOTP, permisos, CSRF, guardados y fuentes persistentes, revisión, calendario, GL/ES y ambos temas. Guardados sin cuenta: reinicio real de Chrome, pestañas, detalle/calendario, importación expresa, separación entre cuenta y navegador, errores de almacenamiento y vista móvil de 320/390 px. Operación (validación inicial de 0.1): tarea encolada mientras worker estaba parado y ejecutada después; recreación de PostgreSQL conservando volumen; autenticación bloqueada y catálogo público disponible con Redis detenido; seis healthchecks.
+Verificado: construcción de imágenes, TypeScript, 33 pruebas Django sobre PostgreSQL real, cuenta/contraseña/TOTP, permisos, CSRF, guardados y fuentes persistentes, revisión, calendario, GL/ES y ambos temas. Guardados sin cuenta: reinicio real de Chrome, pestañas, detalle/calendario, importación expresa, separación entre cuenta y navegador, errores de almacenamiento y vista móvil de 320/390 px. Operación (validación inicial de 0.1): tarea encolada mientras worker estaba parado y ejecutada después; recreación de PostgreSQL conservando volumen; autenticación bloqueada y catálogo público disponible con Redis detenido; seis healthchecks.
 
 Pendiente de la siguiente fase: despliegue y medición en el LXC real, TLS, alta de la cuenta propietaria definitiva, pruebas OAuth reales, integración/evaluación LLM con reservas de presupuesto, traducciones nuevas, conectores completos, administración editorial ampliada, política de copias externa y validación de carga. Esta versión no se declara preparada para exposición pública.
 

@@ -181,6 +181,7 @@ class AuthSecurityTests(TestCase):
         with patch('core.middleware.redis.eval', side_effect=RedisError('unavailable')):
             response = self.client.post('/_allauth/browser/v1/auth/login', data=json.dumps({'email':'x@example.org','password':'secret'}), content_type='application/json')
         self.assertEqual(response.status_code, 503)
+    @override_settings(ALLOW_REGISTRATION=False)
     def test_public_signup_disabled(self):
         with patch('core.middleware.redis.eval', return_value=1):
             response = self.client.post('/_allauth/browser/v1/auth/signup', data=json.dumps({'email':'new@example.org','password':'long-enough-password'}), content_type='application/json')
@@ -191,6 +192,7 @@ class AuthSecurityTests(TestCase):
         self.assertEqual(response['Cache-Control'], 'no-store')
         self.assertNotIn('session', response.json())
 
+@override_settings(REQUIRE_ADMIN_MFA=True)
 class MFAFlowTests(TestCase):
     def test_password_login_enrollment_reauth_and_totp_challenge(self):
         from allauth.account.models import EmailAddress
