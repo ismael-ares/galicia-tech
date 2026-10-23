@@ -1,0 +1,42 @@
+.saved-page{max-width:1060px;margin:0 auto}
+.saved-page-heading{padding-bottom:28px}
+.saved-page-heading h1{display:flex;align-items:center}
+.saved-total{display:grid;place-items:center;min-width:36px;height:36px;margin:7px 0 0 17px;padding:0 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--muted);font-size:17px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums}
+.saved-explore{flex-shrink:0}
+.saved-page .saved-events-notice{border-left:1px solid var(--line);background:transparent;padding:15px 18px;margin-bottom:28px}
+.saved-tools{margin-bottom:30px}
+.saved-periods{display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:19px}
+.saved-periods button{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 15px;min-height:40px;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--muted);font-size:12px;font-weight:550;transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease}
+.saved-periods button>span{font-size:10px;font-variant-numeric:tabular-nums;min-width:18px}
+.saved-periods button:hover{background:var(--surface-2);color:var(--ink)}
+.saved-periods button.is-active{background:var(--accent-soft);color:var(--accent-ink)}
+.saved-results{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin-top:13px}
+.saved-results button{border:0;background:transparent;padding:4px 0;font-size:11px;color:var(--primary)}
+.saved-group{margin-bottom:36px}
+.saved-group-heading{display:flex;align-items:center;gap:9px;color:var(--muted);margin-bottom:21px}
+.saved-group-heading h2{font-size:16px;letter-spacing:-.3px;font-weight:600;color:var(--ink)}
+.saved-group-heading>span{font-size:11px;font-variant-numeric:tabular-nums}
+.saved-group-heading>i{height:1px;flex:1;background:var(--line);margin-left:6px}
+.saved-group-list{display:grid;gap:22px}
+.saved-entry{min-width:0}
+.saved-entry>time{display:block;font-size:11px;line-height:1.5;font-weight:550;color:var(--muted);margin:0 0 8px 14px}
+.saved-entry>time::first-letter{text-transform:uppercase}
+.saved-page .saved-empty h2{font-size:21px;letter-spacing:-.4px;color:var(--ink);margin-top:16px}
+@media(max-width:640px){
+ .saved-page-heading{align-items:flex-start;gap:14px;padding-bottom:23px}
+ .saved-page-heading h1{font-size:37px;letter-spacing:-1.7px}
+ .saved-page-heading p{font-size:12px;line-height:1.6}
+ .saved-total{min-width:29px;height:29px;margin:3px 0 0 10px;padding:0 8px;border-radius:10px;font-size:13px}
+ .saved-explore{min-width:36px;width:36px;height:36px;min-height:36px;padding:0;font-size:0;gap:0;margin-top:24px}
+ .saved-explore>svg{width:18px;height:18px}
+ .saved-page .saved-events-notice{padding:13px 14px;margin-bottom:23px}
+ .saved-tools{margin-bottom:25px}
+ .saved-periods{gap:2px;padding-bottom:12px;margin-bottom:15px}
+ .saved-periods button{padding:9px 11px;gap:5px;font-size:11px;min-height:40px}
+ .saved-periods button>span{font-size:9px;min-width:15px}
+ .saved-group-heading{margin-bottom:16px}.saved-group-heading h2{font-size:15px}
+ .saved-entry>time{font-size:10px;margin-left:6px}
+ .saved-group-list{gap:20px}
+}
+@media(prefers-reduced-motion:reduce){.saved-periods button{transition:none}}
+@media(forced-colors:active){.saved-periods button.is-active{border-color:Highlight}}

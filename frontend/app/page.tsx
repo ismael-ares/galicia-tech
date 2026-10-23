@@ -3,8 +3,8 @@ import { Agenda } from '@/components/agenda';
 import {redirect} from 'next/navigation';
 import {legacyCalendarHref,type PageSearchParams} from '@/lib/legacy-calendar';
 import {browseMetadata} from '@/lib/browse-metadata';
-export async function generateMetadata({searchParams}:{searchParams:Promise<PageSearchParams>}){
- return browseMetadata('agenda',await searchParams);
+export async function generateMetadata(){
+ return browseMetadata('agenda');
 }
 export default async function Page({searchParams}:{searchParams:Promise<PageSearchParams>}){
  const legacy=legacyCalendarHref(await searchParams);

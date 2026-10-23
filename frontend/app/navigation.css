@@ -1,4 +1,4 @@
-/* Agenda and calendar are views; saved events are one shared collection filter. */
+/* Browse views and the independent saved collection share the app navigation. */
 .site-header{position:sticky;top:0;z-index:50}
 @media(min-width:641px){.encounters-view .date-heading{top:115px}}
 /* A shared moving surface makes the two views read as one control. */
@@ -18,27 +18,26 @@
 .header-actions .account-button{max-width:170px;min-height:40px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-weight:550}
 .header-actions .account-button:hover{background:var(--surface-2);border-color:var(--control-line)}
 .account-button>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* Saved is a separate toggle, with the same track and inset surface as the view selector. */
-.saved-filter-button{--saved-thumb:var(--surface);position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;gap:9px;min-height:48px;padding:8px 14px;border:1px solid transparent;border-radius:999px;background:var(--surface-2);color:var(--muted);font-size:12px;font-weight:550;white-space:nowrap;transition:color var(--motion-fast) ease,transform var(--motion-fast) var(--ease-out)}
-.saved-filter-button::before{content:'';position:absolute;inset:4px;z-index:-1;border-radius:inherit;background:var(--saved-thumb);box-shadow:0 1px 4px #0000000d;opacity:0;transform:scale(.96);pointer-events:none;transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease-settle),background-color var(--motion-fast) ease}
-.saved-filter-button:hover{color:var(--ink)}
-.saved-filter-button:hover::before{opacity:.55;transform:none}
-.saved-filter-button small{display:grid;place-items:center;min-width:24px;height:24px;padding:0 5px;background:var(--surface);border-radius:999px;color:var(--muted);font-size:10px;font-weight:550;font-variant-numeric:tabular-nums;line-height:1;transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease}
-.saved-filter-button.is-active{color:var(--ink)}
-.saved-filter-button.is-active::before{opacity:1;transform:none}
-.saved-filter-button.is-active>svg{color:var(--primary);animation:saved-filter-check var(--motion-base) var(--ease-settle)}
-.saved-filter-button.is-active small{background:var(--accent-soft);color:var(--accent-ink)}
-.saved-filter-button:active{transform:scale(.98)}
-.saved-filter-button:focus-visible{outline-offset:2px}
-[data-theme=dark] .saved-filter-button{--saved-thumb:var(--accent-soft)}
-[data-theme=dark] .saved-filter-button.is-active{color:var(--accent-ink)}
-[data-theme=dark] .saved-filter-button.is-active small{background:var(--surface);color:var(--accent-ink)}
-@keyframes saved-filter-check{from{transform:scale(.8)}to{transform:scale(1)}}
+/* Saved opens its own collection, with the same surface as the view selector. */
+.saved-nav-link{--saved-thumb:var(--surface);position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;gap:9px;min-height:48px;padding:8px 14px;border:1px solid transparent;border-radius:999px;background:var(--surface-2);color:var(--muted);font-size:12px;font-weight:550;white-space:nowrap;transition:color var(--motion-fast) ease,transform var(--motion-fast) var(--ease-out)}
+.saved-nav-link::before{content:'';position:absolute;inset:4px;z-index:-1;border-radius:inherit;background:var(--saved-thumb);box-shadow:0 1px 4px #0000000d;opacity:0;transform:scale(.96);pointer-events:none;transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease-settle),background-color var(--motion-fast) ease}
+.saved-nav-link:hover{color:var(--ink)}
+.saved-nav-link:hover::before{opacity:.55;transform:none}
+.saved-nav-link small{display:grid;place-items:center;min-width:24px;height:24px;padding:0 5px;background:var(--surface);border-radius:999px;color:var(--muted);font-size:10px;font-weight:550;font-variant-numeric:tabular-nums;line-height:1;transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease}
+.saved-nav-link.is-active{color:var(--ink)}
+.saved-nav-link.is-active::before{opacity:1;transform:none}
+.saved-nav-link.is-active>svg{color:var(--primary);animation:saved-nav-check var(--motion-base) var(--ease-settle)}
+.saved-nav-link.is-active small{background:var(--accent-soft);color:var(--accent-ink)}
+.saved-nav-link:active{transform:scale(.98)}
+.saved-nav-link:focus-visible{outline-offset:2px}
+[data-theme=dark] .saved-nav-link{--saved-thumb:var(--accent-soft)}
+[data-theme=dark] .saved-nav-link.is-active{color:var(--accent-ink)}
+[data-theme=dark] .saved-nav-link.is-active small{background:var(--surface);color:var(--accent-ink)}
+@keyframes saved-nav-check{from{transform:scale(.8)}to{transform:scale(1)}}
 .section-context{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:10px}
 .section-context>span{width:5px;height:5px;background:var(--primary);border-radius:50%}
 .filter-active-dot{width:5px;height:5px;background:var(--primary);border-radius:50%}
 .saved-events-notice{border-left:3px solid var(--primary);background:var(--surface)}
-.saved-events-notice>.scope-exit{white-space:nowrap;gap:7px}
 .saved-empty{border:1px dashed var(--control-line);border-radius:22px;margin:10px 0;padding:65px 20px;background:var(--surface)}
 .calendar-page-heading{position:relative;padding-bottom:29px}
 .calendar-heading-mark{width:93px;height:93px;border:1px solid var(--line);border-radius:27px;display:grid;place-items:center;color:var(--primary);background:var(--accent-soft);position:relative;margin-right:15px}
@@ -49,27 +48,21 @@
 .calendar-day-event-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}
 .calendar-day-event-top .calendar-event-community{margin-bottom:0;min-width:0}.calendar-event-community small{overflow-wrap:anywhere}
 .calendar-day-event-top .save-button{width:31px;height:31px;min-width:31px;flex-shrink:0}.calendar-day-event-top .save-button>svg{width:16px;height:16px}
-.calendar-saved-empty,.calendar-saved-month-empty{display:flex;align-items:center;gap:14px;padding:17px 20px;margin:0 0 22px;border:1px dashed var(--control-line);border-radius:15px;background:var(--surface);color:var(--muted)}
-.calendar-saved-empty>div{flex:1}.calendar-saved-empty strong{font-size:12px;color:var(--ink)}.calendar-saved-empty p{font-size:11px;margin-top:4px}.calendar-saved-empty .text-action{font-size:11px}
-.calendar-saved-month-empty>p{flex:1;font-size:12px}.calendar-saved-month-empty>button{display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:0;border:0;background:transparent;color:var(--primary);font-size:11px}
-@media(min-width:901px) and (max-width:1120px){.header-inner{gap:15px}.desktop-nav{width:230px}.desktop-nav a{padding:9px 12px}.header-actions{gap:7px}.header-actions .account-button{max-width:100px;padding:9px 12px}.saved-filter-button{gap:7px;padding:8px 12px}}
+@media(min-width:901px) and (max-width:1120px){.header-inner{gap:15px}.desktop-nav{width:230px}.desktop-nav a{padding:9px 12px}.header-actions{gap:7px}.header-actions .account-button{max-width:100px;padding:9px 12px}.saved-nav-link{gap:7px;padding:8px 12px}}
 @media(max-width:900px){
  .desktop-nav{display:none}
- .mobile-nav{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:12px;right:12px;z-index:40;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;align-items:center;border:1px solid var(--line);border-radius:25px;background:var(--surface);padding:6px;box-shadow:0 8px 28px #00000014}
+ .mobile-nav{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:12px;right:12px;z-index:40;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;align-items:center;border:1px solid var(--line);border-radius:25px;background:var(--surface);padding:6px;box-shadow:0 8px 28px #00000014}
  .mobile-nav a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px 6px;border-radius:18px;font-size:10px;min-width:0;min-height:54px;color:var(--muted);transition:background-color var(--motion-fast) ease,color var(--motion-fast) ease}
  .mobile-nav a[aria-current=page]{background:var(--accent-soft);color:var(--accent-ink);font-weight:650}
  .mobile-nav a[aria-current=page]>svg{background:transparent;box-shadow:none;border-radius:0}
  .mobile-nav a::before{content:none}
  .mobile-nav a>span{display:inline-flex;align-items:center;gap:3px}
  .site-footer{padding-bottom:calc(108px + env(safe-area-inset-bottom))}.toast{bottom:calc(100px + env(safe-area-inset-bottom))}
- .saved-filter-button{min-height:44px}
+ .header-actions .saved-nav-link{display:none}
+ .mobile-nav small{display:grid;place-items:center;min-width:17px;height:17px;border-radius:50%;background:var(--surface-2);font-size:8px;font-variant-numeric:tabular-nums}
+ .mobile-nav a[aria-current=page] small{background:var(--surface);color:var(--accent-ink)}
 }
 @media(max-width:760px){
- .saved-filter-button>span{display:none}
- .saved-filter-button{width:60px;min-width:60px;height:40px;min-height:40px;padding:0 8px;gap:5px}
- .saved-filter-button::before{inset:3px}
- .saved-filter-button small{position:static;min-width:18px;height:20px;padding:0 2px;border:0;font-size:9px;background:transparent}
- .saved-filter-button.is-active small,[data-theme=dark] .saved-filter-button.is-active small{background:transparent;color:var(--accent-ink)}
  .header-actions{gap:9px}
  .header-actions .account-button{width:38px;min-width:38px;max-width:38px;height:38px;min-height:38px;padding:0;justify-content:center}
  .header-actions .account-button>span{display:none}
@@ -80,9 +73,7 @@
  .calendar-heading-mark{width:65px;height:65px;border-radius:19px;margin-right:4px;flex-shrink:0}.calendar-heading-mark>svg{width:33px;height:33px}
  .calendar-page-heading{gap:8px}.calendar-page-heading h1{font-size:37px;letter-spacing:-1.7px}.calendar-page-heading p{font-size:12px}.calendar-page-heading .eyebrow{font-size:8px;letter-spacing:1px;line-height:1.7}
  .calendar-filter-summary{margin:12px 0 21px;gap:10px;font-size:10px}.calendar-filter-summary>button{white-space:nowrap}
- .calendar-saved-empty{flex-wrap:wrap;padding:15px;gap:10px}.calendar-saved-empty>div{flex-basis:calc(100% - 34px)}.calendar-saved-empty .text-action{margin-left:29px}
- .calendar-saved-month-empty{flex-wrap:wrap;padding:15px;gap:10px}.calendar-saved-month-empty>p{flex-basis:calc(100% - 30px)}.calendar-saved-month-empty>button{margin-left:28px}
 }
-@media(max-width:360px){.calendar-heading-mark{display:none}.mobile-nav a{font-size:9px}.header-actions{gap:4px}.header-actions>.icon-button,.header-actions .account-button{width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px}.saved-filter-button{width:48px;min-width:48px;height:36px;min-height:36px;padding:0 5px;gap:2px}.saved-filter-button>svg{width:16px;height:16px}.saved-filter-button small{min-width:16px;padding:0;font-size:8px}}
-@media(prefers-reduced-motion:reduce){.saved-filter-button,.saved-filter-button::before,.saved-filter-button small,.desktop-nav::after,.mobile-nav a{transition:none}.saved-filter-button.is-active>svg{animation:none}.saved-filter-button:active{transform:none}}
-@media(forced-colors:active){.saved-filter-button.is-active{outline:2px solid Highlight;outline-offset:2px}.desktop-nav::after{background:Highlight}.desktop-nav a.active{color:HighlightText}.mobile-nav a[aria-current=page]{outline:2px solid Highlight;outline-offset:-2px}}
+@media(max-width:360px){.calendar-heading-mark{display:none}.mobile-nav a{font-size:9px}.header-actions{gap:4px}.header-actions>.icon-button,.header-actions .account-button{width:34px;min-width:34px;max-width:34px;height:34px;min-height:34px}}
+@media(prefers-reduced-motion:reduce){.saved-nav-link,.saved-nav-link::before,.saved-nav-link small,.desktop-nav::after,.mobile-nav a{transition:none}.saved-nav-link.is-active>svg{animation:none}.saved-nav-link:active{transform:none}}
+@media(forced-colors:active){.saved-nav-link.is-active{outline:2px solid Highlight;outline-offset:2px}.desktop-nav::after{background:Highlight}.desktop-nav a.active{color:HighlightText}.mobile-nav a[aria-current=page]{outline:2px solid Highlight;outline-offset:-2px}}

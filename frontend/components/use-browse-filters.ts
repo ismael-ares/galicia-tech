@@ -1,11 +1,9 @@
 'use client';
-import {usePathname,useSearchParams} from 'next/navigation';
-import {browseHref} from '@/lib/browse-navigation';
+import {useSearchParams} from 'next/navigation';
 import type {EventFiltersValue} from './event-filters';
 
 export function useBrowseFilters(){
- const pathname=usePathname(),params=useSearchParams();
- const savedOnly=params.get('guardados')==='1';
+ const params=useSearchParams();
  const filters={query:params.get('q')||'',city:params.get('ciudad')||'',community:params.get('comunidad')||''};
  function navigate(updates:Record<string,string|null>,replace=false){
   const url=new URL(window.location.href);
@@ -14,5 +12,5 @@ export function useBrowseFilters(){
   window.history[replace?'replaceState':'pushState'](null,'',url.pathname+url.search);
  }
  function changeFilters(value:EventFiltersValue){navigate({q:value.query,ciudad:value.city,comunidad:value.community},true);}
- return {params,savedOnly,filters,navigate,changeFilters,allEventsHref:browseHref(pathname==='/calendario'?'/calendario':'/',params,false)};
+ return {params,filters,navigate,changeFilters};
 }
