@@ -682,5 +682,16 @@
   "Las claves y contraseñas se mantienen fuera del YAML y del repositorio.": "As claves e contrasinais mantéñense fóra do YAML e do repositorio.",
   "Cargando configuración…": "Cargando configuración…",
   "Hay cambios válidos en YAML pendientes de reiniciar backend y worker.": "Hai cambios válidos en YAML pendentes de reiniciar backend e worker.",
-  "El YAML del disco no es válido. Esta ejecución conserva su configuración activa.": "O YAML do disco non é válido. Esta execución conserva a súa configuración activa."
+  "El YAML del disco no es válido. Esta ejecución conserva su configuración activa.": "O YAML do disco non é válido. Esta execución conserva a súa configuración activa.",
+  "Preferencias": "Preferencias",
+  "Ajustes personales": "Axustes persoais",
+  "Planes, asistencias y actividad": "Plans, asistencias e actividade",
+  "Apariencia e idioma": "Aparencia e idioma",
+  "Fuentes y revisión editorial": "Fontes e revisión editorial",
+  "Sin iniciar sesión": "Sen iniciar sesión",
+  "Preferencias en este navegador": "Preferencias neste navegador",
+  "Cerrando sesión…": "Pechando sesión…",
+  "Elige cómo quieres ver Galicia Tech.": "Escolle como queres ver Galicia Tech.",
+  "Los cambios se aplican al momento y se recuerdan en este navegador.": "Os cambios aplícanse ao momento e lémbranse neste navegador.",
+  "Ir a mis encuentros": "Ir aos meus encontros"
 }

@@ -20,6 +20,7 @@ import './collection-tools.css';
 import './account.css';
 import './account-settings.css';
 import './configuration.css';
+import './settings-menu.css';
 export async function generateMetadata():Promise<Metadata>{
  const locale=await getRequestLocale();
  return {title:locale==='gl'?'Galicia Tech · Axenda':'Galicia Tech · Agenda',description:locale==='gl'?'Axenda de encontros tecnolóxicos en Galicia. Comunidades e eventos de Galicia.':'Agenda de encuentros tecnológicos en Galicia. Comunidades e eventos de Galicia.',icons:{icon:'/icon.svg?v=pizarra-tinta-20261021'}};

@@ -16,7 +16,7 @@ async function tab(page,section){await page.locator('#portal-tab-'+section).clic
  const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',headless:true});const errors=[];let page;
  try{
   const context=await browser.newContext({locale:'es-ES',viewport:{width:1440,height:1050},reducedMotion:'reduce'});page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
-  await page.goto(base);await page.locator('.account-button').click();await page.waitForURL('**/cuenta');await page.locator('.event-portal').waitFor();
+  await page.goto(base);await page.locator('.settings-trigger').click();await page.getByRole('menuitem',{name:/Tu cuenta/}).click();await page.waitForURL('**/cuenta');await page.locator('.event-portal').waitFor();
   assert.equal(await page.title(),'Galicia Tech · Mis encuentros');assert.equal(await page.locator('.portal-account-settings').getAttribute('open'),null);assert.equal(await stat(page,'attended').innerText(),'—');assert.equal(await page.locator('.admin-entry').count(),0);
   await shot(page,'guest-desktop-light.png');await responsive(page);await page.setViewportSize({width:1440,height:1050});
   const catalog=await(await page.request.get(base+'/api/v1/catalog/')).json(),today=localDay(Date.now());
