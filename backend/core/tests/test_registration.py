@@ -34,6 +34,16 @@ class RegistrationTests(TestCase):
         self.assertEqual(self.signup(password='short').status_code, 400)
         self.assertFalse(User.objects.exists())
 
+    @override_settings(LOCAL_TEST_ACCOUNTS=True)
+    def test_local_registration_cannot_opt_out_of_temporary_lifecycle(self):
+        self.assertEqual(self.signup(is_ephemeral=False).status_code, 200)
+        self.assertTrue(User.objects.get(email='new-reader@example.org').is_ephemeral)
+
+    @override_settings(LOCAL_TEST_ACCOUNTS=False)
+    def test_regular_registration_remains_persistent(self):
+        self.assertEqual(self.signup(is_ephemeral=True).status_code, 200)
+        self.assertFalse(User.objects.get(email='new-reader@example.org').is_ephemeral)
+
     def test_missing_csrf_is_rejected(self):
         response = self.client.post('/_allauth/browser/v1/auth/signup',
                                     {'email': 'new-reader@example.org', 'password': 'Alborada-costa-2026!'}, format='json')

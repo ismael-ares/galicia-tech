@@ -7,6 +7,7 @@ from django.db.models.functions import Lower
 class User(AbstractUser):
     public_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     email = models.EmailField(unique=True)
+    is_ephemeral = models.BooleanField(default=False, db_index=True)
     class Meta:
         constraints = [models.UniqueConstraint(Lower('email'), name='unique_user_email_casefold')]
 

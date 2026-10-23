@@ -26,8 +26,10 @@ class Command(BaseCommand):
             user.username = user.first_name = name
             user.is_staff = staff
             user.is_superuser = False
+            user.is_ephemeral = False
             # Explicit local fixtures only; normal signup keeps its password validators.
-            user.set_password(name)
+            if not user.check_password(name):
+                user.set_password(name)
             user.save()
             EmailAddress.objects.update_or_create(user=user, email=email, defaults={'primary': True, 'verified': True})
         self.stdout.write(self.style.SUCCESS('Local accounts ready: admin/admin and user/user.'))
