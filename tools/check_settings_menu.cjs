@@ -37,7 +37,8 @@ async function login(page,name){
   assert.equal(await page.locator('.header-actions .account-button').count(),0);
   await open(page);
   assert.equal(await menu(page).getByRole('menuitem',{name:/Administración/}).count(),0);
-  assert.equal(await menu(page).getByRole('menuitem',{name:'Crear cuenta',exact:true}).count(),flags.registrationEnabled?1:0);
+  assert.equal(await menu(page).locator('a[href="/registro"]').count(),0);
+  assert.equal(await menu(page).getByRole('menuitem',{name:flags.registrationEnabled?'Iniciar sesión o registrarse':'Iniciar sesión',exact:true}).count(),1);
   assert(await menu(page).getByRole('menuitem',{name:/Tu cuenta/}).evaluate(el=>el===document.activeElement));
   await page.screenshot({path:path.join(out,'visitor-desktop-light.png')});
   await page.keyboard.press('End');
@@ -56,6 +57,10 @@ async function login(page,name){
   await open(page);assert.equal(await menu(page).getByRole('menuitem',{name:/Preferencias/}).getAttribute('aria-current'),'page');
   await page.getByRole('heading',{name:'Preferencias.',exact:true}).click();await closed(page);
   await open(page);await page.keyboard.press('Tab');await closed(page);
+  await open(page);await menu(page).getByRole('menuitem',{name:flags.registrationEnabled?'Iniciar sesión o registrarse':'Iniciar sesión',exact:true}).click();
+  await page.waitForURL('**/login');await page.locator('.login-card').waitFor();await closed(page);
+  if(flags.registrationEnabled){await page.getByRole('link',{name:'Crear cuenta',exact:true}).click();await page.waitForURL('**/registro');await page.locator('.register-card').waitFor();}
+  await page.goto(base+'/preferencias');await page.locator('.preferences-page').waitFor();
   await page.getByRole('radio',{name:'Oscuro',exact:true}).check();
   await page.getByRole('radio',{name:/Galego/}).check();
   await page.reload();await page.locator('.preferences-page').waitFor();
@@ -88,7 +93,7 @@ async function login(page,name){
    await menu(page).getByRole('menuitem',{name:'Cerrar sesión',exact:true}).click();
    await page.waitForURL(base+'/');await closed(page);
    assert.equal((await(await page.request.get(base+'/api/v1/session/')).json()).user,null);
-   await open(page);await menu(page).getByRole('menuitem',{name:'Iniciar sesión',exact:true}).waitFor();
+   await open(page);await menu(page).getByRole('menuitem',{name:flags.registrationEnabled?'Iniciar sesión o registrarse':'Iniciar sesión',exact:true}).waitFor();
    await context.close();
   }
   assert.deepEqual(errors,[]);
